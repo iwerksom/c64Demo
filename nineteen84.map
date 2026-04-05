@@ -1,0 +1,185 @@
+sections
+0880 - 0fa2 : DATA, code
+0fa2 - 127e : DATA, data
+127e - 12a6 : BSS, bss
+12a8 - 9000 : HEAP, heap
+9000 - a000 : STACK, stack
+00f7 - 00f7 : ZEROPAGE, zeropage
+0801 - 0853 : DATA, startup
+a000 - a000 : SSTACK, sstack
+a000 - a000 : SSTACK, cls@stack
+a000 - a000 : SSTACK, print_at@stack
+a000 - a000 : SSTACK, print_centered@stack
+a000 - a000 : SSTACK, hline@stack
+a000 - a000 : SSTACK, scroll_init@stack
+a000 - a000 : SSTACK, wait_frame@stack
+a000 - a000 : SSTACK, scroll_step@stack
+a000 - a000 : SSTACK, blink_row@stack
+a000 - a000 : SSTACK, fire_pressed@stack
+a000 - a000 : SSTACK, fade_to_black@stack
+a000 - a000 : SSTACK, wait_frames@stack
+a000 - a000 : SSTACK, scene1_run@stack
+a000 - a000 : SSTACK, glitch_row@stack
+a000 - a000 : SSTACK, scene2_run@stack
+a000 - a000 : SSTACK, draw_bars@stack
+a000 - a000 : SSTACK, rotate_bars_left@stack
+a000 - a000 : SSTACK, scene3_run@stack
+a000 - a000 : SSTACK, scene4_run@stack
+a000 - a000 : SSTACK, main@stack
+
+regions
+00f7 - 00ff : 0000, 0000, zeropage
+0801 - 0880 : 0853, 0052, startup
+0880 - 9000 : 127e, 0a26, main
+
+objects
+00f7 - 00f7 : ZeroStart, START:zeropage
+00f7 - 00f7 : ZeroEnd, END:zeropage
+0801 - 0853 : startup, NATIVE_CODE:startup
+0880 - 094e : main, NATIVE_CODE:code
+094e - 09d3 : scene1_run, NATIVE_CODE:code
+09d3 - 09d7 : wait_frames@proxy, NATIVE_CODE:code
+09d7 - 09e4 : wait_frames, NATIVE_CODE:code
+09e4 - 09e8 : cls@proxy, NATIVE_CODE:code
+09e8 - 0a21 : cls, NATIVE_CODE:code
+0a21 - 0a29 : print_centered@proxy, NATIVE_CODE:code
+0a29 - 0a55 : print_centered, NATIVE_CODE:code
+0a55 - 0ab1 : print_at, NATIVE_CODE:code
+0ab1 - 0ae8 : hline, NATIVE_CODE:code
+0ae8 - 0afe : scroll_init, NATIVE_CODE:code
+0afe - 0b0d : wait_frame, NATIVE_CODE:code
+0b0d - 0b6b : scroll_step, NATIVE_CODE:code
+0b6b - 0bab : blink_row, NATIVE_CODE:code
+0bab - 0bdd : fire_pressed, NATIVE_CODE:code
+0bdd - 0be1 : fade_to_black@proxy, NATIVE_CODE:code
+0be1 - 0c16 : fade_to_black, NATIVE_CODE:code
+0c16 - 0c7c : scene2_run, NATIVE_CODE:code
+0c7c - 0ca3 : glitch_row, NATIVE_CODE:code
+0ca3 - 0e3e : scene3_run, NATIVE_CODE:code
+0e3e - 0e75 : draw_bars, NATIVE_CODE:code
+0e75 - 0e89 : rotate_bars_left, NATIVE_CODE:code
+0e89 - 0f19 : scene4_run, NATIVE_CODE:code
+0f19 - 0f20 : wait_frames@proxy, NATIVE_CODE:code
+0f20 - 0f2f : __multab40L, DATA:code
+0f2f - 0f3e : __multab40H, DATA:code
+0f3e - 0f45 : print_at@proxy, NATIVE_CODE:code
+0f45 - 0f4c : print_at@proxy, NATIVE_CODE:code
+0f4c - 0f53 : wait_frames@proxy, NATIVE_CODE:code
+0f53 - 0f5a : wait_frames@proxy, NATIVE_CODE:code
+0f5a - 0f61 : fade_to_black@proxy, NATIVE_CODE:code
+0f61 - 0f68 : print_centered@proxy, NATIVE_CODE:code
+0f68 - 0f73 : print_centered@proxy, NATIVE_CODE:code
+0f73 - 0f7a : print_centered@proxy, NATIVE_CODE:code
+0f7a - 0f81 : print_centered@proxy, NATIVE_CODE:code
+0f81 - 0f88 : print_centered@proxy, NATIVE_CODE:code
+0f88 - 0f9b : print_centered@proxy, NATIVE_CODE:code
+0f9b - 0fa2 : cls@proxy, NATIVE_CODE:code
+0fa2 - 0fa3 : spentry, DATA:data
+0fa3 - 0fab : bar_pal, DATA:data
+0fab - 0fc0 : s_title, DATA:data
+0fc0 - 0fe0 : s_sub1, DATA:data
+0fe0 - 0ff1 : s_sub2, DATA:data
+0ff1 - 0ffb : eye, DATA:data
+0ffb - 0ffd : scroll_idx, DATA:data
+0ffd - 0ffe : scroll_tick, DATA:data
+0ffe - 0fff : blink_cnt, DATA:data
+0fff - 1000 : blink_phase, DATA:data
+1000 - 1014 : s_orwell, DATA:data
+1014 - 102c : s_bb, DATA:data
+102c - 1043 : s_press, DATA:data
+1043 - 114f : scroll_text, DATA:data
+114f - 115c : s_sl1, DATA:data
+115c - 1164 : glitch_pal, DATA:data
+1164 - 1177 : s_sl2, DATA:data
+1177 - 118d : s_sl3, DATA:data
+118d - 11b0 : s_tc, DATA:data
+11b0 - 11b5 : col_then, DATA:data
+11b5 - 11b9 : col_now, DATA:data
+11b9 - 11cf : s_ai3, DATA:data
+11cf - 11ec : s_ai2, DATA:data
+11ec - 11ff : s_ai1, DATA:data
+1200 - 1217 : s_ai4, DATA:data
+1217 - 1238 : s_q1, DATA:data
+1238 - 1258 : s_q2, DATA:data
+1258 - 1263 : s_c64, DATA:data
+1263 - 127e : s_end, DATA:data
+127e - 12a6 : scroll_buf, DATA:bss
+127e - 127e : BSSStart, START:bss
+12a6 - 12a6 : BSSEnd, END:bss
+a000 - a000 : StackEnd, END:stack
+
+objects by size
+0ca3 (019b) : scene3_run, NATIVE_CODE:code
+1043 (010c) : scroll_text, DATA:data
+0880 (00ce) : main, NATIVE_CODE:code
+0e89 (0090) : scene4_run, NATIVE_CODE:code
+094e (0085) : scene1_run, NATIVE_CODE:code
+0c16 (0066) : scene2_run, NATIVE_CODE:code
+0b0d (005e) : scroll_step, NATIVE_CODE:code
+0a55 (005c) : print_at, NATIVE_CODE:code
+0801 (0052) : startup, NATIVE_CODE:startup
+0b6b (0040) : blink_row, NATIVE_CODE:code
+09e8 (0039) : cls, NATIVE_CODE:code
+0ab1 (0037) : hline, NATIVE_CODE:code
+0e3e (0037) : draw_bars, NATIVE_CODE:code
+0be1 (0035) : fade_to_black, NATIVE_CODE:code
+0bab (0032) : fire_pressed, NATIVE_CODE:code
+0a29 (002c) : print_centered, NATIVE_CODE:code
+127e (0028) : scroll_buf, DATA:bss
+0c7c (0027) : glitch_row, NATIVE_CODE:code
+118d (0023) : s_tc, DATA:data
+1217 (0021) : s_q1, DATA:data
+0fc0 (0020) : s_sub1, DATA:data
+1238 (0020) : s_q2, DATA:data
+11cf (001d) : s_ai2, DATA:data
+1263 (001b) : s_end, DATA:data
+1014 (0018) : s_bb, DATA:data
+102c (0017) : s_press, DATA:data
+1200 (0017) : s_ai4, DATA:data
+0ae8 (0016) : scroll_init, NATIVE_CODE:code
+1177 (0016) : s_sl3, DATA:data
+11b9 (0016) : s_ai3, DATA:data
+0fab (0015) : s_title, DATA:data
+0e75 (0014) : rotate_bars_left, NATIVE_CODE:code
+1000 (0014) : s_orwell, DATA:data
+0f88 (0013) : print_centered@proxy, NATIVE_CODE:code
+1164 (0013) : s_sl2, DATA:data
+11ec (0013) : s_ai1, DATA:data
+0fe0 (0011) : s_sub2, DATA:data
+0afe (000f) : wait_frame, NATIVE_CODE:code
+0f20 (000f) : __multab40L, DATA:code
+0f2f (000f) : __multab40H, DATA:code
+09d7 (000d) : wait_frames, NATIVE_CODE:code
+114f (000d) : s_sl1, DATA:data
+0f68 (000b) : print_centered@proxy, NATIVE_CODE:code
+1258 (000b) : s_c64, DATA:data
+0ff1 (000a) : eye, DATA:data
+0a21 (0008) : print_centered@proxy, NATIVE_CODE:code
+0fa3 (0008) : bar_pal, DATA:data
+115c (0008) : glitch_pal, DATA:data
+0f19 (0007) : wait_frames@proxy, NATIVE_CODE:code
+0f3e (0007) : print_at@proxy, NATIVE_CODE:code
+0f45 (0007) : print_at@proxy, NATIVE_CODE:code
+0f4c (0007) : wait_frames@proxy, NATIVE_CODE:code
+0f53 (0007) : wait_frames@proxy, NATIVE_CODE:code
+0f5a (0007) : fade_to_black@proxy, NATIVE_CODE:code
+0f61 (0007) : print_centered@proxy, NATIVE_CODE:code
+0f73 (0007) : print_centered@proxy, NATIVE_CODE:code
+0f7a (0007) : print_centered@proxy, NATIVE_CODE:code
+0f81 (0007) : print_centered@proxy, NATIVE_CODE:code
+0f9b (0007) : cls@proxy, NATIVE_CODE:code
+11b0 (0005) : col_then, DATA:data
+09d3 (0004) : wait_frames@proxy, NATIVE_CODE:code
+09e4 (0004) : cls@proxy, NATIVE_CODE:code
+0bdd (0004) : fade_to_black@proxy, NATIVE_CODE:code
+11b5 (0004) : col_now, DATA:data
+0ffb (0002) : scroll_idx, DATA:data
+0fa2 (0001) : spentry, DATA:data
+0ffd (0001) : scroll_tick, DATA:data
+0ffe (0001) : blink_cnt, DATA:data
+0fff (0001) : blink_phase, DATA:data
+00f7 (0000) : ZeroStart, START:zeropage
+00f7 (0000) : ZeroEnd, END:zeropage
+127e (0000) : BSSStart, START:bss
+12a6 (0000) : BSSEnd, END:bss
+a000 (0000) : StackEnd, END:stack
