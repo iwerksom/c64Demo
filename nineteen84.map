@@ -1,9 +1,9 @@
 sections
-0880 - 171c : DATA, code
-171c - 226b : DATA, data
-226b - 2399 : BSS, bss
-23a0 - 9000 : HEAP, heap
-9000 - 9ff6 : STACK, stack
+0880 - 1902 : DATA, code
+1902 - 2987 : DATA, data
+2987 - 2a99 : BSS, bss
+2aa0 - 9000 : HEAP, heap
+9000 - 9ff4 : STACK, stack
 00f7 - 00f7 : ZEROPAGE, zeropage
 0801 - 0853 : DATA, startup
 a000 - a000 : SSTACK, sstack
@@ -28,391 +28,629 @@ a000 - a000 : SSTACK, scroller_crossflash@stack
 a000 - a000 : SSTACK, pch@stack
 a000 - a000 : SSTACK, reveal_word@stack
 a000 - a000 : SSTACK, glitch_transition@stack
+a000 - a000 : SSTACK, scene2_run@stack
 a000 - a000 : SSTACK, read_key@stack
 a000 - a000 : SSTACK, petscii_to_sc@stack
 a000 - a000 : SSTACK, input_line@stack
+a000 - a000 : SSTACK, find_theme@stack
+a000 - a000 : SSTACK, draw_art@stack
+a000 - a000 : SSTACK, pulse_art_color@stack
+9ffe - a000 : SSTACK, show_waiting@stack
 a000 - a000 : SSTACK, find_response@stack
 a000 - a000 : SSTACK, typeout@stack
-9ffc - a000 : SSTACK, scene2_run@stack
-9ff6 - 9ff6 : SSTACK, main@stack
+9ff4 - 9ffe : SSTACK, scene3_run@stack
+a000 - a000 : SSTACK, scene4_run@stack
+9ff4 - 9ff4 : SSTACK, main@stack
 
 regions
 00f7 - 00ff : 0000, 0000, zeropage
 0801 - 0880 : 0853, 0052, startup
-0880 - 9000 : 226b, 1b19, main
+0880 - 9000 : 2987, 2219, main
 
 objects
 00f7 - 00f7 : ZeroStart, START:zeropage
 00f7 - 00f7 : ZeroEnd, END:zeropage
 0801 - 0853 : startup, NATIVE_CODE:startup
-0880 - 08ee : main, NATIVE_CODE:code
-08ee - 09f3 : scene1_run, NATIVE_CODE:code
-09f3 - 09f7 : wait_frames@proxy, NATIVE_CODE:code
-09f7 - 0a05 : wait_frames, NATIVE_CODE:code
-0a05 - 0a9f : glitch_transition, NATIVE_CODE:code
-0a9f - 0ad8 : cls, NATIVE_CODE:code
-0ad8 - 0aea : sprite_load, NATIVE_CODE:code
-0aea - 0b81 : draw_year, NATIVE_CODE:code
-0b81 - 0bb8 : hline, NATIVE_CODE:code
-0bb8 - 0bbc : pcenter@proxy, NATIVE_CODE:code
-0bbc - 0be8 : pcenter, NATIVE_CODE:code
-0be8 - 0c44 : pat, NATIVE_CODE:code
-0c44 - 0c5a : scroll_init, NATIVE_CODE:code
-0c5a - 0c69 : wait_frame, NATIVE_CODE:code
-0c69 - 0cb1 : scroll_step, NATIVE_CODE:code
-0cb1 - 0cdf : blink_row, NATIVE_CODE:code
-0cdf - 0d0b : rowcol, NATIVE_CODE:code
-0d0b - 0d46 : any_key, NATIVE_CODE:code
-0d46 - 0d63 : fade_to_black, NATIVE_CODE:code
-0d63 - 1253 : scene2_run, NATIVE_CODE:code
-1253 - 1291 : scroller_init, NATIVE_CODE:code
-1291 - 1389 : scroller_step, NATIVE_CODE:code
-1389 - 13ed : scroller_crossflash, NATIVE_CODE:code
-13ed - 1401 : reveal_word@proxy, NATIVE_CODE:code
-1401 - 1430 : reveal_word, NATIVE_CODE:code
-1430 - 1434 : pch@proxy, NATIVE_CODE:code
-1434 - 146f : pch, NATIVE_CODE:code
-146f - 1529 : input_line, NATIVE_CODE:code
-1529 - 154c : read_key, NATIVE_CODE:code
-154c - 1577 : petscii_to_sc, NATIVE_CODE:code
-1577 - 1605 : find_response, NATIVE_CODE:code
-1605 - 1609 : typeout@proxy, NATIVE_CODE:code
-1609 - 1636 : typeout, NATIVE_CODE:code
-1636 - 16bb : divmod, NATIVE_CODE:code
-16bb - 16bf : __multab100L, DATA:code
-16bf - 16c6 : typeout@proxy, NATIVE_CODE:code
-16c6 - 16dd : reveal_word@proxy, NATIVE_CODE:code
-16dd - 16e4 : pat@proxy, NATIVE_CODE:code
-16e4 - 16eb : pch@proxy, NATIVE_CODE:code
-16eb - 16f2 : pch@proxy, NATIVE_CODE:code
-16f2 - 16f9 : pch@proxy, NATIVE_CODE:code
-16f9 - 1700 : pch@proxy, NATIVE_CODE:code
-1700 - 1707 : wait_frames@proxy, NATIVE_CODE:code
-1707 - 170e : wait_frames@proxy, NATIVE_CODE:code
-170e - 1715 : wait_frames@proxy, NATIVE_CODE:code
-1715 - 171c : wait_frames@proxy, NATIVE_CODE:code
-171c - 171d : spentry, DATA:data
-171d - 175c : eye_centre, DATA:data
-175c - 176e : year_row0, DATA:data
-176e - 1780 : year_row1, DATA:data
-1780 - 1792 : year_row2, DATA:data
-1792 - 17a4 : year_row3, DATA:data
-17a4 - 17b6 : year_row4, DATA:data
-17b6 - 17c4 : s1_orwell, DATA:data
-17c4 - 17db : s1_press, DATA:data
-17db - 17dd : scroll_idx, DATA:data
-17dd - 17de : scroll_tick, DATA:data
-17de - 17df : blink_cnt, DATA:data
-17df - 17e0 : blink_phase, DATA:data
-17e0 - 17e5 : seq_frame, DATA:data
-17e5 - 17ea : seq_hold, DATA:data
-17ea - 17f8 : s2_hdr, DATA:data
-17f8 - 17ff : s2_l1, DATA:data
-1800 - 18e4 : scroll_text, DATA:data
-18e4 - 18ee : s2_l2, DATA:data
-18ee - 18f7 : s2_l3, DATA:data
-18f7 - 18fb : sw_war, DATA:data
-18fb - 18ff : sw_dot, DATA:data
-1900 - 193f : eye_left, DATA:data
-193f - 197e : eye_right, DATA:data
-197e - 198e : wave_red, DATA:data
-198e - 19e8 : smsg1, DATA:data
-19e8 - 19f8 : wave_blue, DATA:data
-19f8 - 1a00 : sw_freedom, DATA:data
-1a00 - 1a61 : smsg2, DATA:data
-1a61 - 1a71 : wave_gray, DATA:data
-1a71 - 1aca : smsg3, DATA:data
-1aca - 1ad7 : sw_surveillance, DATA:data
-1ad7 - 1adc : sw_data, DATA:data
-1adc - 1ae5 : sw_strength, DATA:data
-1ae5 - 1ae8 : sw_ai, DATA:data
-1ae8 - 1af1 : sw_watching, DATA:data
-1af1 - 1afb : sw_listening, DATA:data
-1afb - 1afe : s2_pfx, DATA:data
-1b00 - 1b23 : s2_q, DATA:data
-1b23 - 1b47 : s2_hint, DATA:data
-1b47 - 1b9b : _kw_table, DATA:data
-1b9b - 1ba2 : _kw000, DATA:data
-1ba2 - 1ba8 : _kw001, DATA:data
-1ba8 - 1bae : _kw002, DATA:data
-1bae - 1bb6 : _kw003, DATA:data
-1bb6 - 1bbb : _kw005, DATA:data
-1bbb - 1bc3 : _kw006, DATA:data
-1bc3 - 1bce : _kw007, DATA:data
-1bce - 1bd4 : _kw008, DATA:data
-1bd4 - 1bde : _kw009, DATA:data
-1bde - 1be8 : _kw010, DATA:data
-1be8 - 1bef : _kw011, DATA:data
-1bef - 1bf3 : _kw012, DATA:data
-1bf3 - 1bf9 : _kw013, DATA:data
-1bf9 - 1bff : _kw014, DATA:data
-1bff - 1c05 : _kw015, DATA:data
-1c05 - 1c0e : _kw016, DATA:data
-1c0e - 1c13 : _kw017, DATA:data
-1c13 - 1c18 : _kw018, DATA:data
-1c18 - 1c21 : _kw019, DATA:data
-1c21 - 1c29 : _kw020, DATA:data
-1c29 - 1c2f : _kw021, DATA:data
-1c2f - 1c36 : _kw022, DATA:data
-1c36 - 1c3c : _kw023, DATA:data
-1c3c - 1c42 : _kw024, DATA:data
-1c42 - 1c4b : _kw025, DATA:data
-1c4b - 1c52 : _kw026, DATA:data
-1c52 - 1c59 : _kw027, DATA:data
-1c59 - 1c61 : _kw028, DATA:data
-1c61 - 1c6a : _kw029, DATA:data
-1c6a - 1c71 : _kw030, DATA:data
-1c71 - 1c7a : _kw031, DATA:data
-1c7a - 1c7f : _kw032, DATA:data
-1c7f - 1c84 : _kw033, DATA:data
-1c84 - 1c88 : _kw034, DATA:data
-1c88 - 1c8d : _kw035, DATA:data
-1c8d - 1c92 : _kw036, DATA:data
-1c92 - 1c99 : _kw037, DATA:data
-1c99 - 1ca2 : _kw038, DATA:data
-1ca2 - 1ca8 : _kw039, DATA:data
-1ca8 - 1cad : _kw040, DATA:data
-1cad - 1cb2 : _kw041, DATA:data
-1cb2 - 1cd5 : _r1_000, DATA:data
-1cd5 - 1cf7 : _r1_001, DATA:data
-1d00 - 1d54 : _r1_table, DATA:data
-1d54 - 1d73 : _r1_004, DATA:data
-1d73 - 1d97 : _r1_006, DATA:data
-1d97 - 1dbc : _r1_008, DATA:data
-1dbc - 1dd7 : _r1_011, DATA:data
-1dd7 - 1dfc : _r1_015, DATA:data
-1dfc - 1e1e : _r1_018, DATA:data
-1e1e - 1e3c : _r1_021, DATA:data
-1e3c - 1e58 : _r1_024, DATA:data
-1e58 - 1e78 : _r1_027, DATA:data
-1e78 - 1e98 : _r1_030, DATA:data
-1e98 - 1ebb : _r1_033, DATA:data
-1ebb - 1ed9 : _r1_036, DATA:data
-1ed9 - 1ef4 : _r1_039, DATA:data
-1f00 - 1f54 : _r2_table, DATA:data
-1f54 - 1f6b : _r2_000, DATA:data
-1f6b - 1f86 : _r2_001, DATA:data
-1f86 - 1fa1 : _r2_004, DATA:data
-1fa1 - 1fbf : _r2_006, DATA:data
-1fbf - 1fda : _r2_008, DATA:data
-1fda - 1ff9 : _r2_011, DATA:data
-1ff9 - 2013 : _r2_015, DATA:data
-2013 - 2031 : _r2_018, DATA:data
-2031 - 204f : _r2_021, DATA:data
-204f - 2069 : _r2_024, DATA:data
-2069 - 2084 : _r2_027, DATA:data
-2084 - 20a0 : _r2_030, DATA:data
-20a0 - 20bc : _r2_033, DATA:data
-20bc - 20da : _r2_036, DATA:data
-20da - 20fa : _r2_039, DATA:data
-2100 - 211e : _resp_default_1, DATA:data
-211e - 2138 : _resp_default_2, DATA:data
-2138 - 2147 : r_hdr, DATA:data
-2147 - 2158 : r_sys, DATA:data
-2158 - 2171 : r_end, DATA:data
-2171 - 218a : s2_by1, DATA:data
-218a - 21a6 : s2_by2, DATA:data
-21a6 - 21b9 : s2_by3, DATA:data
-21b9 - 21d3 : s2_m1, DATA:data
-21d3 - 21ef : s2_m2, DATA:data
-2200 - 2216 : s2_m3, DATA:data
-2216 - 2237 : s3_q1, DATA:data
-2237 - 2250 : s3_q2, DATA:data
-2250 - 226b : s3_end, DATA:data
-226b - 2293 : scroll_buf, DATA:bss
-226b - 226b : BSSStart, START:bss
-2293 - 22ba : input_buf, DATA:bss
-2300 - 2399 : scr, DATA:bss
-2399 - 2399 : BSSEnd, END:bss
-9ff6 - 9ff6 : StackEnd, END:stack
+0880 - 08f4 : main, NATIVE_CODE:code
+08f4 - 09f9 : scene1_run, NATIVE_CODE:code
+09f9 - 09fd : wait_frames@proxy, NATIVE_CODE:code
+09fd - 0a0b : wait_frames, NATIVE_CODE:code
+0a0b - 0aa5 : glitch_transition, NATIVE_CODE:code
+0aa5 - 0ade : cls, NATIVE_CODE:code
+0ade - 0af0 : sprite_load, NATIVE_CODE:code
+0af0 - 0b87 : draw_year, NATIVE_CODE:code
+0b87 - 0bbe : hline, NATIVE_CODE:code
+0bbe - 0bc2 : pcenter@proxy, NATIVE_CODE:code
+0bc2 - 0bee : pcenter, NATIVE_CODE:code
+0bee - 0c4a : pat, NATIVE_CODE:code
+0c4a - 0c60 : scroll_init, NATIVE_CODE:code
+0c60 - 0c6f : wait_frame, NATIVE_CODE:code
+0c6f - 0cb7 : scroll_step, NATIVE_CODE:code
+0cb7 - 0ce5 : blink_row, NATIVE_CODE:code
+0ce5 - 0d11 : rowcol, NATIVE_CODE:code
+0d11 - 0d4c : any_key, NATIVE_CODE:code
+0d4c - 0d69 : fade_to_black, NATIVE_CODE:code
+0d69 - 0f7c : scene2_run, NATIVE_CODE:code
+0f7c - 0fba : scroller_init, NATIVE_CODE:code
+0fba - 10b2 : scroller_step, NATIVE_CODE:code
+10b2 - 1116 : scroller_crossflash, NATIVE_CODE:code
+1116 - 112a : reveal_word@proxy, NATIVE_CODE:code
+112a - 1159 : reveal_word, NATIVE_CODE:code
+1159 - 115d : pch@proxy, NATIVE_CODE:code
+115d - 1198 : pch, NATIVE_CODE:code
+1198 - 132f : scene3_run, NATIVE_CODE:code
+132f - 13e9 : input_line, NATIVE_CODE:code
+13e9 - 140c : read_key, NATIVE_CODE:code
+140c - 1437 : petscii_to_sc, NATIVE_CODE:code
+1437 - 14a4 : find_theme, NATIVE_CODE:code
+14a4 - 15ef : show_waiting, NATIVE_CODE:code
+15ef - 165b : draw_art, NATIVE_CODE:code
+165b - 1679 : pulse_art_color, NATIVE_CODE:code
+1679 - 1707 : find_response, NATIVE_CODE:code
+1707 - 170b : typeout@proxy, NATIVE_CODE:code
+170b - 1738 : typeout, NATIVE_CODE:code
+1738 - 180a : scene4_run, NATIVE_CODE:code
+180a - 1811 : wait_frames@proxy, NATIVE_CODE:code
+1811 - 1896 : divmod, NATIVE_CODE:code
+1896 - 189a : __multab100L, DATA:code
+189a - 18aa : __multab10L, DATA:code
+18aa - 18ba : __multab6L, DATA:code
+18ba - 18c1 : typeout@proxy, NATIVE_CODE:code
+18c1 - 18c8 : pch@proxy, NATIVE_CODE:code
+18c8 - 18df : reveal_word@proxy, NATIVE_CODE:code
+18df - 18e6 : pat@proxy, NATIVE_CODE:code
+18e6 - 18ed : wait_frames@proxy, NATIVE_CODE:code
+18ed - 18f4 : wait_frames@proxy, NATIVE_CODE:code
+18f4 - 18fb : wait_frames@proxy, NATIVE_CODE:code
+18fb - 1902 : wait_frames@proxy, NATIVE_CODE:code
+1902 - 1903 : spentry, DATA:data
+1903 - 1942 : eye_centre, DATA:data
+1942 - 1954 : year_row0, DATA:data
+1954 - 1966 : year_row1, DATA:data
+1966 - 1978 : year_row2, DATA:data
+1978 - 198a : year_row3, DATA:data
+198a - 199c : year_row4, DATA:data
+199c - 19aa : s1_orwell, DATA:data
+19aa - 19c1 : s1_press, DATA:data
+19c1 - 19c3 : scroll_idx, DATA:data
+19c3 - 19c4 : scroll_tick, DATA:data
+19c4 - 19c5 : blink_cnt, DATA:data
+19c5 - 19c6 : blink_phase, DATA:data
+19c6 - 19cb : seq_frame, DATA:data
+19cb - 19d0 : seq_hold, DATA:data
+19d0 - 19de : s2_hdr, DATA:data
+19de - 19e5 : s2_l1, DATA:data
+19e5 - 19ef : s2_l2, DATA:data
+19ef - 19f8 : s2_l3, DATA:data
+19f8 - 19fc : sw_war, DATA:data
+19fc - 1a00 : sw_dot, DATA:data
+1a00 - 1ae4 : scroll_text, DATA:data
+1ae4 - 1af4 : wave_red, DATA:data
+1af4 - 1afc : sw_freedom, DATA:data
+1afc - 1aff : sw_ai, DATA:data
+1b00 - 1b3f : eye_left, DATA:data
+1b3f - 1b7e : eye_right, DATA:data
+1b7e - 1bd8 : smsg1, DATA:data
+1bd8 - 1be8 : wave_blue, DATA:data
+1be8 - 1bf8 : wave_gray, DATA:data
+1bf8 - 1bfd : sw_data, DATA:data
+1bfd - 1c00 : s3_pfx, DATA:data
+1c00 - 1c61 : smsg2, DATA:data
+1c61 - 1cba : smsg3, DATA:data
+1cba - 1cc7 : sw_surveillance, DATA:data
+1cc7 - 1cd0 : sw_strength, DATA:data
+1cd0 - 1cd9 : sw_watching, DATA:data
+1cd9 - 1ce3 : sw_listening, DATA:data
+1ce3 - 1cea : _tk_health, DATA:data
+1cea - 1cf0 : _tk_peace, DATA:data
+1cf0 - 1cf6 : _tk_quiet, DATA:data
+1cf6 - 1cfe : _tk_harmony, DATA:data
+1d00 - 1d23 : s3_q, DATA:data
+1d23 - 1d47 : s3_hint, DATA:data
+1d47 - 1dbc : _theme_table, DATA:data
+1dbc - 1dc1 : _tk_free, DATA:data
+1dc1 - 1dc9 : _tk_connect, DATA:data
+1dc9 - 1dcf : _tk_learn, DATA:data
+1dcf - 1dd9 : _tk_knowledge, DATA:data
+1dd9 - 1de3 : _tk_education, DATA:data
+1de3 - 1dea : _tk_create, DATA:data
+1dea - 1dee : _tk_art, DATA:data
+1dee - 1df4 : _tk_music, DATA:data
+1df4 - 1dfa : _tk_write, DATA:data
+1dfa - 1e00 : _tk_equal, DATA:data
+1e00 - 1e05 : _tk_fair, DATA:data
+1e05 - 1e0a : _tk_safe, DATA:data
+1e0a - 1e13 : _tk_security, DATA:data
+1e13 - 1e1b : _tk_protect, DATA:data
+1e1b - 1e21 : _tk_truth, DATA:data
+1e21 - 1e28 : _tk_honest, DATA:data
+1e28 - 1e2e : _tk_trust, DATA:data
+1e2e - 1e34 : _tk_human, DATA:data
+1e34 - 1e3b : _tk_people, DATA:data
+1e3b - 1e42 : _tk_better, DATA:data
+1e42 - 1e4a : _tk_improve, DATA:data
+1e4a - 1e53 : _tk_progress, DATA:data
+1e53 - 1e5a : _tk_future, DATA:data
+1e5a - 1e5f : _tk_hope, DATA:data
+1e5f - 1e68 : _tk_tomorrow, DATA:data
+1e68 - 1e6d : _tk_work, DATA:data
+1e6d - 1e71 : _tk_job, DATA:data
+1e71 - 1e76 : _tk_earn, DATA:data
+1e76 - 1e7b : _tk_love, DATA:data
+1e7b - 1e82 : _tk_family, DATA:data
+1e82 - 1e8b : _tk_together, DATA:data
+1e8b - 1e91 : _tk_think, DATA:data
+1e91 - 1e96 : _tk_mind, DATA:data
+1e96 - 1e9b : _tk_idea, DATA:data
+1e9b - 1eab : _art_color, DATA:data
+1eab - 1eb2 : _art_00_r0, DATA:data
+1eb2 - 1eb9 : _art_00_r2, DATA:data
+1eb9 - 1ec0 : _art_01_r0, DATA:data
+1ec0 - 1ec7 : _art_01_r1, DATA:data
+1ec7 - 1ece : _art_01_r2, DATA:data
+1ece - 1ed5 : _art_01_r3, DATA:data
+1ed5 - 1edc : _art_02_r0, DATA:data
+1edc - 1ee3 : _art_02_r1, DATA:data
+1ee3 - 1eea : _art_02_r2, DATA:data
+1eea - 1ef1 : _art_02_r4, DATA:data
+1ef1 - 1ef8 : _art_03_r0, DATA:data
+1ef8 - 1eff : _art_03_r1, DATA:data
+1f00 - 1fa0 : _art_table, DATA:data
+1fa0 - 1fa7 : _art_03_r2, DATA:data
+1fa7 - 1fae : _art_03_r4, DATA:data
+1fae - 1fb5 : _art_04_r0, DATA:data
+1fb5 - 1fbc : _art_04_r1, DATA:data
+1fbc - 1fc3 : _art_04_r4, DATA:data
+1fc3 - 1fca : _art_05_r0, DATA:data
+1fca - 1fd1 : _art_05_r2, DATA:data
+1fd1 - 1fd8 : _art_05_r3, DATA:data
+1fd8 - 1fdf : _art_05_r4, DATA:data
+1fdf - 1fe6 : _art_06_r1, DATA:data
+1fe6 - 1fed : _art_06_r2, DATA:data
+1fed - 1ff4 : _art_06_r3, DATA:data
+1ff4 - 1ffb : _art_07_r0, DATA:data
+1ffb - 2002 : _art_07_r1, DATA:data
+2002 - 2009 : _art_07_r2, DATA:data
+2009 - 2010 : _art_07_r3, DATA:data
+2010 - 2017 : _art_08_r1, DATA:data
+2017 - 201e : _art_08_r2, DATA:data
+201e - 2025 : _art_09_r4, DATA:data
+2025 - 202c : _art_10_r0, DATA:data
+202c - 2033 : _art_10_r1, DATA:data
+2033 - 203a : _art_10_r3, DATA:data
+203a - 2041 : _art_10_r4, DATA:data
+2041 - 2048 : _art_11_r1, DATA:data
+2048 - 204f : _art_11_r2, DATA:data
+204f - 2056 : _art_11_r3, DATA:data
+2056 - 205d : _art_11_r4, DATA:data
+205d - 2064 : _art_12_r0, DATA:data
+2064 - 206b : _art_12_r1, DATA:data
+206b - 2072 : _art_12_r2, DATA:data
+2072 - 2079 : _art_13_r0, DATA:data
+2079 - 2080 : _art_13_r1, DATA:data
+2080 - 2087 : _art_13_r3, DATA:data
+2087 - 208e : _art_13_r4, DATA:data
+208e - 2095 : _art_14_r1, DATA:data
+2095 - 209c : _art_14_r2, DATA:data
+209c - 20a3 : _art_14_r3, DATA:data
+20a3 - 20aa : _art_15_r1, DATA:data
+20aa - 20b1 : _art_15_r2, DATA:data
+20b1 - 20b8 : _art_15_r3, DATA:data
+20b8 - 20bf : _art_15_r4, DATA:data
+20bf - 20c4 : tw_h0, DATA:data
+20c4 - 20cd : tw_h1, DATA:data
+20cd - 20d8 : tw_h2, DATA:data
+20d8 - 20e0 : tw_p0, DATA:data
+20e0 - 20e6 : tw_p1, DATA:data
+20e6 - 20f1 : tw_p2, DATA:data
+20f1 - 20fc : tw_fr0, DATA:data
+2100 - 2160 : _theme_words, DATA:data
+2160 - 216b : tw_fr1, DATA:data
+216b - 2175 : tw_fr2, DATA:data
+2175 - 217d : tw_c0, DATA:data
+217d - 2184 : tw_c1, DATA:data
+2184 - 218e : tw_c2, DATA:data
+218e - 2199 : tw_l0, DATA:data
+2199 - 21a3 : tw_l1, DATA:data
+21a3 - 21ab : tw_l2, DATA:data
+21ab - 21b2 : tw_cr0, DATA:data
+21b2 - 21bb : tw_cr1, DATA:data
+21bb - 21c4 : tw_cr2, DATA:data
+21c4 - 21ca : tw_eq0, DATA:data
+21ca - 21d3 : tw_eq1, DATA:data
+21d3 - 21de : tw_eq2, DATA:data
+21de - 21e5 : tw_s0, DATA:data
+21e5 - 21f1 : tw_s1, DATA:data
+21f1 - 21fb : tw_s2, DATA:data
+21fb - 2203 : tw_t0, DATA:data
+2203 - 220b : tw_t1, DATA:data
+220b - 2213 : tw_t2, DATA:data
+2213 - 221d : tw_hu0, DATA:data
+221d - 2226 : tw_hu1, DATA:data
+2226 - 2230 : tw_hu2, DATA:data
+2230 - 2239 : tw_b0, DATA:data
+2239 - 2241 : tw_b1, DATA:data
+2241 - 2248 : tw_b2, DATA:data
+2248 - 2252 : tw_fu0, DATA:data
+2252 - 2257 : tw_fu1, DATA:data
+2257 - 2261 : tw_w0, DATA:data
+2261 - 226b : tw_w1, DATA:data
+226b - 2274 : tw_w2, DATA:data
+2274 - 227f : tw_lo0, DATA:data
+227f - 2287 : tw_lo1, DATA:data
+2287 - 2290 : tw_th0, DATA:data
+2290 - 2297 : tw_th1, DATA:data
+2297 - 22a2 : tw_d0, DATA:data
+22a2 - 22ac : tw_d1, DATA:data
+22ac - 22b8 : tw_d2, DATA:data
+22b8 - 22c0 : _generic_phrases, DATA:data
+22c0 - 22d8 : _gp0, DATA:data
+22d8 - 22f1 : _gp1, DATA:data
+22f1 - 2309 : _gp2, DATA:data
+2309 - 2320 : _gp3, DATA:data
+2320 - 2380 : _pulse_colors, DATA:data
+2380 - 23d4 : _kw_table, DATA:data
+23d4 - 23df : _kw007, DATA:data
+23df - 23e8 : _kw016, DATA:data
+23e8 - 23f1 : _kw025, DATA:data
+23f1 - 2400 : s3_hdr, DATA:data
+2400 - 2454 : _r1_table, DATA:data
+2454 - 2477 : _r1_000, DATA:data
+2477 - 2499 : _r1_001, DATA:data
+2499 - 24b8 : _r1_004, DATA:data
+24b8 - 24dc : _r1_006, DATA:data
+24dc - 2501 : _r1_008, DATA:data
+2501 - 251c : _r1_011, DATA:data
+251c - 2541 : _r1_015, DATA:data
+2541 - 2563 : _r1_018, DATA:data
+2563 - 2581 : _r1_021, DATA:data
+2581 - 259d : _r1_024, DATA:data
+259d - 25bd : _r1_027, DATA:data
+25bd - 25dd : _r1_030, DATA:data
+25dd - 2600 : _r1_033, DATA:data
+2600 - 261e : _r1_036, DATA:data
+261e - 2639 : _r1_039, DATA:data
+2639 - 268d : _r2_table, DATA:data
+268d - 26a4 : _r2_000, DATA:data
+26a4 - 26bf : _r2_001, DATA:data
+26bf - 26da : _r2_004, DATA:data
+26da - 26f8 : _r2_006, DATA:data
+26f8 - 2713 : _r2_008, DATA:data
+2713 - 2732 : _r2_011, DATA:data
+2732 - 274c : _r2_015, DATA:data
+274c - 276a : _r2_018, DATA:data
+276a - 2788 : _r2_021, DATA:data
+2788 - 27a2 : _r2_024, DATA:data
+27a2 - 27bd : _r2_027, DATA:data
+27bd - 27d9 : _r2_030, DATA:data
+27d9 - 27f5 : _r2_033, DATA:data
+27f5 - 2813 : _r2_036, DATA:data
+2813 - 2833 : _r2_039, DATA:data
+2833 - 2851 : _resp_default_1, DATA:data
+2851 - 286b : _resp_default_2, DATA:data
+286b - 287c : s3_sys, DATA:data
+287c - 2895 : s3_end, DATA:data
+2895 - 28ae : s4_by1, DATA:data
+28ae - 28d3 : s4_by2, DATA:data
+28d3 - 28e6 : s4_by3, DATA:data
+28e6 - 2900 : s4_m1, DATA:data
+2900 - 291c : s4_m2, DATA:data
+291c - 2932 : s4_m3, DATA:data
+2932 - 2953 : s5_q1, DATA:data
+2953 - 296c : s5_q2, DATA:data
+296c - 2987 : s5_end, DATA:data
+2987 - 29af : scroll_buf, DATA:bss
+2987 - 2987 : BSSStart, START:bss
+29af - 29d6 : input_buf, DATA:bss
+2a00 - 2a99 : scr, DATA:bss
+2a99 - 2a99 : BSSEnd, END:bss
+9ff4 - 9ffa : scene3_run@stack, BSS:scene3_run@stack
+9ff4 - 9ff4 : StackEnd, END:stack
 9ff6 - a000 : rows, BSS:draw_year@stack
-9ffc - 9ffe : match_l2, BSS:scene2_run@stack
-9ffe - a000 : match_l1, BSS:scene2_run@stack
+9ffa - 9ffc : match_l2, BSS:scene3_run@stack
+9ffc - 9ffe : match_l1, BSS:scene3_run@stack
+9ffe - a000 : show_waiting@stack, BSS:show_waiting@stack
 
 objects by size
-0d63 (04f0) : scene2_run, NATIVE_CODE:code
-08ee (0105) : scene1_run, NATIVE_CODE:code
-1291 (00f8) : scroller_step, NATIVE_CODE:code
-1800 (00e4) : scroll_text, DATA:data
-146f (00ba) : input_line, NATIVE_CODE:code
-0a05 (009a) : glitch_transition, NATIVE_CODE:code
-2300 (0099) : scr, DATA:bss
-0aea (0097) : draw_year, NATIVE_CODE:code
-1577 (008e) : find_response, NATIVE_CODE:code
-1636 (0085) : divmod, NATIVE_CODE:code
-0880 (006e) : main, NATIVE_CODE:code
-1389 (0064) : scroller_crossflash, NATIVE_CODE:code
-1a00 (0061) : smsg2, DATA:data
-0be8 (005c) : pat, NATIVE_CODE:code
-198e (005a) : smsg1, DATA:data
-1a71 (0059) : smsg3, DATA:data
-1b47 (0054) : _kw_table, DATA:data
-1d00 (0054) : _r1_table, DATA:data
-1f00 (0054) : _r2_table, DATA:data
+0d69 (0213) : scene2_run, NATIVE_CODE:code
+1198 (0197) : scene3_run, NATIVE_CODE:code
+14a4 (014b) : show_waiting, NATIVE_CODE:code
+08f4 (0105) : scene1_run, NATIVE_CODE:code
+0fba (00f8) : scroller_step, NATIVE_CODE:code
+1a00 (00e4) : scroll_text, DATA:data
+1738 (00d2) : scene4_run, NATIVE_CODE:code
+132f (00ba) : input_line, NATIVE_CODE:code
+1f00 (00a0) : _art_table, DATA:data
+0a0b (009a) : glitch_transition, NATIVE_CODE:code
+2a00 (0099) : scr, DATA:bss
+0af0 (0097) : draw_year, NATIVE_CODE:code
+1679 (008e) : find_response, NATIVE_CODE:code
+1811 (0085) : divmod, NATIVE_CODE:code
+1d47 (0075) : _theme_table, DATA:data
+0880 (0074) : main, NATIVE_CODE:code
+1437 (006d) : find_theme, NATIVE_CODE:code
+15ef (006c) : draw_art, NATIVE_CODE:code
+10b2 (0064) : scroller_crossflash, NATIVE_CODE:code
+1c00 (0061) : smsg2, DATA:data
+2100 (0060) : _theme_words, DATA:data
+2320 (0060) : _pulse_colors, DATA:data
+0bee (005c) : pat, NATIVE_CODE:code
+1b7e (005a) : smsg1, DATA:data
+1c61 (0059) : smsg3, DATA:data
+2380 (0054) : _kw_table, DATA:data
+2400 (0054) : _r1_table, DATA:data
+2639 (0054) : _r2_table, DATA:data
 0801 (0052) : startup, NATIVE_CODE:startup
-0c69 (0048) : scroll_step, NATIVE_CODE:code
-171d (003f) : eye_centre, DATA:data
-1900 (003f) : eye_left, DATA:data
-193f (003f) : eye_right, DATA:data
-1253 (003e) : scroller_init, NATIVE_CODE:code
-0d0b (003b) : any_key, NATIVE_CODE:code
-1434 (003b) : pch, NATIVE_CODE:code
-0a9f (0039) : cls, NATIVE_CODE:code
-0b81 (0037) : hline, NATIVE_CODE:code
-1401 (002f) : reveal_word, NATIVE_CODE:code
-0cb1 (002e) : blink_row, NATIVE_CODE:code
-1609 (002d) : typeout, NATIVE_CODE:code
-0bbc (002c) : pcenter, NATIVE_CODE:code
-0cdf (002c) : rowcol, NATIVE_CODE:code
-154c (002b) : petscii_to_sc, NATIVE_CODE:code
-226b (0028) : scroll_buf, DATA:bss
-2293 (0027) : input_buf, DATA:bss
-1d97 (0025) : _r1_008, DATA:data
-1dd7 (0025) : _r1_015, DATA:data
-1b23 (0024) : s2_hint, DATA:data
-1d73 (0024) : _r1_006, DATA:data
-1529 (0023) : read_key, NATIVE_CODE:code
-1b00 (0023) : s2_q, DATA:data
-1cb2 (0023) : _r1_000, DATA:data
-1e98 (0023) : _r1_033, DATA:data
-1cd5 (0022) : _r1_001, DATA:data
-1dfc (0022) : _r1_018, DATA:data
-2216 (0021) : s3_q1, DATA:data
-1e58 (0020) : _r1_027, DATA:data
-1e78 (0020) : _r1_030, DATA:data
-20da (0020) : _r2_039, DATA:data
-1d54 (001f) : _r1_004, DATA:data
-1fda (001f) : _r2_011, DATA:data
-1e1e (001e) : _r1_021, DATA:data
-1ebb (001e) : _r1_036, DATA:data
-1fa1 (001e) : _r2_006, DATA:data
-2013 (001e) : _r2_018, DATA:data
-2031 (001e) : _r2_021, DATA:data
-20bc (001e) : _r2_036, DATA:data
-2100 (001e) : _resp_default_1, DATA:data
-0d46 (001d) : fade_to_black, NATIVE_CODE:code
-1e3c (001c) : _r1_024, DATA:data
-2084 (001c) : _r2_030, DATA:data
-20a0 (001c) : _r2_033, DATA:data
-218a (001c) : s2_by2, DATA:data
-21d3 (001c) : s2_m2, DATA:data
-1dbc (001b) : _r1_011, DATA:data
-1ed9 (001b) : _r1_039, DATA:data
-1f6b (001b) : _r2_001, DATA:data
-1f86 (001b) : _r2_004, DATA:data
-1fbf (001b) : _r2_008, DATA:data
-2069 (001b) : _r2_027, DATA:data
-2250 (001b) : s3_end, DATA:data
-1ff9 (001a) : _r2_015, DATA:data
-204f (001a) : _r2_024, DATA:data
-211e (001a) : _resp_default_2, DATA:data
-21b9 (001a) : s2_m1, DATA:data
-2158 (0019) : r_end, DATA:data
-2171 (0019) : s2_by1, DATA:data
-2237 (0019) : s3_q2, DATA:data
-16c6 (0017) : reveal_word@proxy, NATIVE_CODE:code
-17c4 (0017) : s1_press, DATA:data
-1f54 (0017) : _r2_000, DATA:data
-0c44 (0016) : scroll_init, NATIVE_CODE:code
-2200 (0016) : s2_m3, DATA:data
-13ed (0014) : reveal_word@proxy, NATIVE_CODE:code
-21a6 (0013) : s2_by3, DATA:data
-0ad8 (0012) : sprite_load, NATIVE_CODE:code
-175c (0012) : year_row0, DATA:data
-176e (0012) : year_row1, DATA:data
-1780 (0012) : year_row2, DATA:data
-1792 (0012) : year_row3, DATA:data
-17a4 (0012) : year_row4, DATA:data
-2147 (0011) : r_sys, DATA:data
-197e (0010) : wave_red, DATA:data
-19e8 (0010) : wave_blue, DATA:data
-1a61 (0010) : wave_gray, DATA:data
-0c5a (000f) : wait_frame, NATIVE_CODE:code
-2138 (000f) : r_hdr, DATA:data
-09f7 (000e) : wait_frames, NATIVE_CODE:code
-17b6 (000e) : s1_orwell, DATA:data
-17ea (000e) : s2_hdr, DATA:data
-1aca (000d) : sw_surveillance, DATA:data
-1bc3 (000b) : _kw007, DATA:data
-18e4 (000a) : s2_l2, DATA:data
-1af1 (000a) : sw_listening, DATA:data
-1bd4 (000a) : _kw009, DATA:data
-1bde (000a) : _kw010, DATA:data
+0c6f (0048) : scroll_step, NATIVE_CODE:code
+1903 (003f) : eye_centre, DATA:data
+1b00 (003f) : eye_left, DATA:data
+1b3f (003f) : eye_right, DATA:data
+0f7c (003e) : scroller_init, NATIVE_CODE:code
+0d11 (003b) : any_key, NATIVE_CODE:code
+115d (003b) : pch, NATIVE_CODE:code
+0aa5 (0039) : cls, NATIVE_CODE:code
+0b87 (0037) : hline, NATIVE_CODE:code
+112a (002f) : reveal_word, NATIVE_CODE:code
+0cb7 (002e) : blink_row, NATIVE_CODE:code
+170b (002d) : typeout, NATIVE_CODE:code
+0bc2 (002c) : pcenter, NATIVE_CODE:code
+0ce5 (002c) : rowcol, NATIVE_CODE:code
+140c (002b) : petscii_to_sc, NATIVE_CODE:code
+2987 (0028) : scroll_buf, DATA:bss
+29af (0027) : input_buf, DATA:bss
+24dc (0025) : _r1_008, DATA:data
+251c (0025) : _r1_015, DATA:data
+28ae (0025) : s4_by2, DATA:data
+1d23 (0024) : s3_hint, DATA:data
+24b8 (0024) : _r1_006, DATA:data
+13e9 (0023) : read_key, NATIVE_CODE:code
+1d00 (0023) : s3_q, DATA:data
+2454 (0023) : _r1_000, DATA:data
+25dd (0023) : _r1_033, DATA:data
+2477 (0022) : _r1_001, DATA:data
+2541 (0022) : _r1_018, DATA:data
+2932 (0021) : s5_q1, DATA:data
+259d (0020) : _r1_027, DATA:data
+25bd (0020) : _r1_030, DATA:data
+2813 (0020) : _r2_039, DATA:data
+2499 (001f) : _r1_004, DATA:data
+2713 (001f) : _r2_011, DATA:data
+165b (001e) : pulse_art_color, NATIVE_CODE:code
+2563 (001e) : _r1_021, DATA:data
+2600 (001e) : _r1_036, DATA:data
+26da (001e) : _r2_006, DATA:data
+274c (001e) : _r2_018, DATA:data
+276a (001e) : _r2_021, DATA:data
+27f5 (001e) : _r2_036, DATA:data
+2833 (001e) : _resp_default_1, DATA:data
+0d4c (001d) : fade_to_black, NATIVE_CODE:code
+2581 (001c) : _r1_024, DATA:data
+27bd (001c) : _r2_030, DATA:data
+27d9 (001c) : _r2_033, DATA:data
+2900 (001c) : s4_m2, DATA:data
+2501 (001b) : _r1_011, DATA:data
+261e (001b) : _r1_039, DATA:data
+26a4 (001b) : _r2_001, DATA:data
+26bf (001b) : _r2_004, DATA:data
+26f8 (001b) : _r2_008, DATA:data
+27a2 (001b) : _r2_027, DATA:data
+296c (001b) : s5_end, DATA:data
+2732 (001a) : _r2_015, DATA:data
+2788 (001a) : _r2_024, DATA:data
+2851 (001a) : _resp_default_2, DATA:data
+28e6 (001a) : s4_m1, DATA:data
+22d8 (0019) : _gp1, DATA:data
+287c (0019) : s3_end, DATA:data
+2895 (0019) : s4_by1, DATA:data
+2953 (0019) : s5_q2, DATA:data
+22c0 (0018) : _gp0, DATA:data
+22f1 (0018) : _gp2, DATA:data
+18c8 (0017) : reveal_word@proxy, NATIVE_CODE:code
+19aa (0017) : s1_press, DATA:data
+2309 (0017) : _gp3, DATA:data
+268d (0017) : _r2_000, DATA:data
+0c4a (0016) : scroll_init, NATIVE_CODE:code
+291c (0016) : s4_m3, DATA:data
+1116 (0014) : reveal_word@proxy, NATIVE_CODE:code
+28d3 (0013) : s4_by3, DATA:data
+0ade (0012) : sprite_load, NATIVE_CODE:code
+1942 (0012) : year_row0, DATA:data
+1954 (0012) : year_row1, DATA:data
+1966 (0012) : year_row2, DATA:data
+1978 (0012) : year_row3, DATA:data
+198a (0012) : year_row4, DATA:data
+286b (0011) : s3_sys, DATA:data
+189a (0010) : __multab10L, DATA:code
+18aa (0010) : __multab6L, DATA:code
+1ae4 (0010) : wave_red, DATA:data
+1bd8 (0010) : wave_blue, DATA:data
+1be8 (0010) : wave_gray, DATA:data
+1e9b (0010) : _art_color, DATA:data
+0c60 (000f) : wait_frame, NATIVE_CODE:code
+23f1 (000f) : s3_hdr, DATA:data
+09fd (000e) : wait_frames, NATIVE_CODE:code
+199c (000e) : s1_orwell, DATA:data
+19d0 (000e) : s2_hdr, DATA:data
+1cba (000d) : sw_surveillance, DATA:data
+21e5 (000c) : tw_s1, DATA:data
+22ac (000c) : tw_d2, DATA:data
+20cd (000b) : tw_h2, DATA:data
+20e6 (000b) : tw_p2, DATA:data
+20f1 (000b) : tw_fr0, DATA:data
+2160 (000b) : tw_fr1, DATA:data
+218e (000b) : tw_l0, DATA:data
+21d3 (000b) : tw_eq2, DATA:data
+2274 (000b) : tw_lo0, DATA:data
+2297 (000b) : tw_d0, DATA:data
+23d4 (000b) : _kw007, DATA:data
+19e5 (000a) : s2_l2, DATA:data
+1cd9 (000a) : sw_listening, DATA:data
+1dcf (000a) : _tk_knowledge, DATA:data
+1dd9 (000a) : _tk_education, DATA:data
+216b (000a) : tw_fr2, DATA:data
+2184 (000a) : tw_c2, DATA:data
+2199 (000a) : tw_l1, DATA:data
+21f1 (000a) : tw_s2, DATA:data
+2213 (000a) : tw_hu0, DATA:data
+2226 (000a) : tw_hu2, DATA:data
+2248 (000a) : tw_fu0, DATA:data
+2257 (000a) : tw_w0, DATA:data
+2261 (000a) : tw_w1, DATA:data
+22a2 (000a) : tw_d1, DATA:data
 9ff6 (000a) : rows, BSS:draw_year@stack
-18ee (0009) : s2_l3, DATA:data
-1adc (0009) : sw_strength, DATA:data
-1ae8 (0009) : sw_watching, DATA:data
-1c05 (0009) : _kw016, DATA:data
-1c18 (0009) : _kw019, DATA:data
-1c42 (0009) : _kw025, DATA:data
-1c61 (0009) : _kw029, DATA:data
-1c71 (0009) : _kw031, DATA:data
-1c99 (0009) : _kw038, DATA:data
-19f8 (0008) : sw_freedom, DATA:data
-1bae (0008) : _kw003, DATA:data
-1bbb (0008) : _kw006, DATA:data
-1c21 (0008) : _kw020, DATA:data
-1c59 (0008) : _kw028, DATA:data
-16bf (0007) : typeout@proxy, NATIVE_CODE:code
-16dd (0007) : pat@proxy, NATIVE_CODE:code
-16e4 (0007) : pch@proxy, NATIVE_CODE:code
-16eb (0007) : pch@proxy, NATIVE_CODE:code
-16f2 (0007) : pch@proxy, NATIVE_CODE:code
-16f9 (0007) : pch@proxy, NATIVE_CODE:code
-1700 (0007) : wait_frames@proxy, NATIVE_CODE:code
-1707 (0007) : wait_frames@proxy, NATIVE_CODE:code
-170e (0007) : wait_frames@proxy, NATIVE_CODE:code
-1715 (0007) : wait_frames@proxy, NATIVE_CODE:code
-17f8 (0007) : s2_l1, DATA:data
-1b9b (0007) : _kw000, DATA:data
-1be8 (0007) : _kw011, DATA:data
-1c2f (0007) : _kw022, DATA:data
-1c4b (0007) : _kw026, DATA:data
-1c52 (0007) : _kw027, DATA:data
-1c6a (0007) : _kw030, DATA:data
-1c92 (0007) : _kw037, DATA:data
-1ba2 (0006) : _kw001, DATA:data
-1ba8 (0006) : _kw002, DATA:data
-1bce (0006) : _kw008, DATA:data
-1bf3 (0006) : _kw013, DATA:data
-1bf9 (0006) : _kw014, DATA:data
-1bff (0006) : _kw015, DATA:data
-1c29 (0006) : _kw021, DATA:data
-1c36 (0006) : _kw023, DATA:data
-1c3c (0006) : _kw024, DATA:data
-1ca2 (0006) : _kw039, DATA:data
-17e0 (0005) : seq_frame, DATA:data
-17e5 (0005) : seq_hold, DATA:data
-1ad7 (0005) : sw_data, DATA:data
-1bb6 (0005) : _kw005, DATA:data
-1c0e (0005) : _kw017, DATA:data
-1c13 (0005) : _kw018, DATA:data
-1c7a (0005) : _kw032, DATA:data
-1c7f (0005) : _kw033, DATA:data
-1c88 (0005) : _kw035, DATA:data
-1c8d (0005) : _kw036, DATA:data
-1ca8 (0005) : _kw040, DATA:data
-1cad (0005) : _kw041, DATA:data
-09f3 (0004) : wait_frames@proxy, NATIVE_CODE:code
-0bb8 (0004) : pcenter@proxy, NATIVE_CODE:code
-1430 (0004) : pch@proxy, NATIVE_CODE:code
-1605 (0004) : typeout@proxy, NATIVE_CODE:code
-16bb (0004) : __multab100L, DATA:code
-18f7 (0004) : sw_war, DATA:data
-18fb (0004) : sw_dot, DATA:data
-1bef (0004) : _kw012, DATA:data
-1c84 (0004) : _kw034, DATA:data
-1ae5 (0003) : sw_ai, DATA:data
-1afb (0003) : s2_pfx, DATA:data
-17db (0002) : scroll_idx, DATA:data
-9ffc (0002) : match_l2, BSS:scene2_run@stack
-9ffe (0002) : match_l1, BSS:scene2_run@stack
-171c (0001) : spentry, DATA:data
-17dd (0001) : scroll_tick, DATA:data
-17de (0001) : blink_cnt, DATA:data
-17df (0001) : blink_phase, DATA:data
+19ef (0009) : s2_l3, DATA:data
+1cc7 (0009) : sw_strength, DATA:data
+1cd0 (0009) : sw_watching, DATA:data
+1e0a (0009) : _tk_security, DATA:data
+1e4a (0009) : _tk_progress, DATA:data
+1e5f (0009) : _tk_tomorrow, DATA:data
+1e82 (0009) : _tk_together, DATA:data
+20c4 (0009) : tw_h1, DATA:data
+21b2 (0009) : tw_cr1, DATA:data
+21bb (0009) : tw_cr2, DATA:data
+21ca (0009) : tw_eq1, DATA:data
+221d (0009) : tw_hu1, DATA:data
+2230 (0009) : tw_b0, DATA:data
+226b (0009) : tw_w2, DATA:data
+2287 (0009) : tw_th0, DATA:data
+23df (0009) : _kw016, DATA:data
+23e8 (0009) : _kw025, DATA:data
+1af4 (0008) : sw_freedom, DATA:data
+1cf6 (0008) : _tk_harmony, DATA:data
+1dc1 (0008) : _tk_connect, DATA:data
+1e13 (0008) : _tk_protect, DATA:data
+1e42 (0008) : _tk_improve, DATA:data
+20d8 (0008) : tw_p0, DATA:data
+2175 (0008) : tw_c0, DATA:data
+21a3 (0008) : tw_l2, DATA:data
+21fb (0008) : tw_t0, DATA:data
+2203 (0008) : tw_t1, DATA:data
+220b (0008) : tw_t2, DATA:data
+2239 (0008) : tw_b1, DATA:data
+227f (0008) : tw_lo1, DATA:data
+22b8 (0008) : _generic_phrases, DATA:data
+180a (0007) : wait_frames@proxy, NATIVE_CODE:code
+18ba (0007) : typeout@proxy, NATIVE_CODE:code
+18c1 (0007) : pch@proxy, NATIVE_CODE:code
+18df (0007) : pat@proxy, NATIVE_CODE:code
+18e6 (0007) : wait_frames@proxy, NATIVE_CODE:code
+18ed (0007) : wait_frames@proxy, NATIVE_CODE:code
+18f4 (0007) : wait_frames@proxy, NATIVE_CODE:code
+18fb (0007) : wait_frames@proxy, NATIVE_CODE:code
+19de (0007) : s2_l1, DATA:data
+1ce3 (0007) : _tk_health, DATA:data
+1de3 (0007) : _tk_create, DATA:data
+1e21 (0007) : _tk_honest, DATA:data
+1e34 (0007) : _tk_people, DATA:data
+1e3b (0007) : _tk_better, DATA:data
+1e53 (0007) : _tk_future, DATA:data
+1e7b (0007) : _tk_family, DATA:data
+1eab (0007) : _art_00_r0, DATA:data
+1eb2 (0007) : _art_00_r2, DATA:data
+1eb9 (0007) : _art_01_r0, DATA:data
+1ec0 (0007) : _art_01_r1, DATA:data
+1ec7 (0007) : _art_01_r2, DATA:data
+1ece (0007) : _art_01_r3, DATA:data
+1ed5 (0007) : _art_02_r0, DATA:data
+1edc (0007) : _art_02_r1, DATA:data
+1ee3 (0007) : _art_02_r2, DATA:data
+1eea (0007) : _art_02_r4, DATA:data
+1ef1 (0007) : _art_03_r0, DATA:data
+1ef8 (0007) : _art_03_r1, DATA:data
+1fa0 (0007) : _art_03_r2, DATA:data
+1fa7 (0007) : _art_03_r4, DATA:data
+1fae (0007) : _art_04_r0, DATA:data
+1fb5 (0007) : _art_04_r1, DATA:data
+1fbc (0007) : _art_04_r4, DATA:data
+1fc3 (0007) : _art_05_r0, DATA:data
+1fca (0007) : _art_05_r2, DATA:data
+1fd1 (0007) : _art_05_r3, DATA:data
+1fd8 (0007) : _art_05_r4, DATA:data
+1fdf (0007) : _art_06_r1, DATA:data
+1fe6 (0007) : _art_06_r2, DATA:data
+1fed (0007) : _art_06_r3, DATA:data
+1ff4 (0007) : _art_07_r0, DATA:data
+1ffb (0007) : _art_07_r1, DATA:data
+2002 (0007) : _art_07_r2, DATA:data
+2009 (0007) : _art_07_r3, DATA:data
+2010 (0007) : _art_08_r1, DATA:data
+2017 (0007) : _art_08_r2, DATA:data
+201e (0007) : _art_09_r4, DATA:data
+2025 (0007) : _art_10_r0, DATA:data
+202c (0007) : _art_10_r1, DATA:data
+2033 (0007) : _art_10_r3, DATA:data
+203a (0007) : _art_10_r4, DATA:data
+2041 (0007) : _art_11_r1, DATA:data
+2048 (0007) : _art_11_r2, DATA:data
+204f (0007) : _art_11_r3, DATA:data
+2056 (0007) : _art_11_r4, DATA:data
+205d (0007) : _art_12_r0, DATA:data
+2064 (0007) : _art_12_r1, DATA:data
+206b (0007) : _art_12_r2, DATA:data
+2072 (0007) : _art_13_r0, DATA:data
+2079 (0007) : _art_13_r1, DATA:data
+2080 (0007) : _art_13_r3, DATA:data
+2087 (0007) : _art_13_r4, DATA:data
+208e (0007) : _art_14_r1, DATA:data
+2095 (0007) : _art_14_r2, DATA:data
+209c (0007) : _art_14_r3, DATA:data
+20a3 (0007) : _art_15_r1, DATA:data
+20aa (0007) : _art_15_r2, DATA:data
+20b1 (0007) : _art_15_r3, DATA:data
+20b8 (0007) : _art_15_r4, DATA:data
+217d (0007) : tw_c1, DATA:data
+21ab (0007) : tw_cr0, DATA:data
+21de (0007) : tw_s0, DATA:data
+2241 (0007) : tw_b2, DATA:data
+2290 (0007) : tw_th1, DATA:data
+1cea (0006) : _tk_peace, DATA:data
+1cf0 (0006) : _tk_quiet, DATA:data
+1dc9 (0006) : _tk_learn, DATA:data
+1dee (0006) : _tk_music, DATA:data
+1df4 (0006) : _tk_write, DATA:data
+1dfa (0006) : _tk_equal, DATA:data
+1e1b (0006) : _tk_truth, DATA:data
+1e28 (0006) : _tk_trust, DATA:data
+1e2e (0006) : _tk_human, DATA:data
+1e8b (0006) : _tk_think, DATA:data
+20e0 (0006) : tw_p1, DATA:data
+21c4 (0006) : tw_eq0, DATA:data
+9ff4 (0006) : scene3_run@stack, BSS:scene3_run@stack
+19c6 (0005) : seq_frame, DATA:data
+19cb (0005) : seq_hold, DATA:data
+1bf8 (0005) : sw_data, DATA:data
+1dbc (0005) : _tk_free, DATA:data
+1e00 (0005) : _tk_fair, DATA:data
+1e05 (0005) : _tk_safe, DATA:data
+1e5a (0005) : _tk_hope, DATA:data
+1e68 (0005) : _tk_work, DATA:data
+1e71 (0005) : _tk_earn, DATA:data
+1e76 (0005) : _tk_love, DATA:data
+1e91 (0005) : _tk_mind, DATA:data
+1e96 (0005) : _tk_idea, DATA:data
+20bf (0005) : tw_h0, DATA:data
+2252 (0005) : tw_fu1, DATA:data
+09f9 (0004) : wait_frames@proxy, NATIVE_CODE:code
+0bbe (0004) : pcenter@proxy, NATIVE_CODE:code
+1159 (0004) : pch@proxy, NATIVE_CODE:code
+1707 (0004) : typeout@proxy, NATIVE_CODE:code
+1896 (0004) : __multab100L, DATA:code
+19f8 (0004) : sw_war, DATA:data
+19fc (0004) : sw_dot, DATA:data
+1dea (0004) : _tk_art, DATA:data
+1e6d (0004) : _tk_job, DATA:data
+1afc (0003) : sw_ai, DATA:data
+1bfd (0003) : s3_pfx, DATA:data
+19c1 (0002) : scroll_idx, DATA:data
+9ffa (0002) : match_l2, BSS:scene3_run@stack
+9ffc (0002) : match_l1, BSS:scene3_run@stack
+9ffe (0002) : show_waiting@stack, BSS:show_waiting@stack
+1902 (0001) : spentry, DATA:data
+19c3 (0001) : scroll_tick, DATA:data
+19c4 (0001) : blink_cnt, DATA:data
+19c5 (0001) : blink_phase, DATA:data
 00f7 (0000) : ZeroStart, START:zeropage
 00f7 (0000) : ZeroEnd, END:zeropage
-226b (0000) : BSSStart, START:bss
-2399 (0000) : BSSEnd, END:bss
-9ff6 (0000) : StackEnd, END:stack
+2987 (0000) : BSSStart, START:bss
+2a99 (0000) : BSSEnd, END:bss
+9ff4 (0000) : StackEnd, END:stack

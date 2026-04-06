@@ -6,6 +6,13 @@
 //
 //  Build:   oscar64 -tm=c64 -O2 nineteen84.c
 //  Run:     x64sc.exe -autostart nineteen84.prg
+//
+//  Scene structure:
+//    Scene 1 — The Eye       (title screen, sprite eye, block "1984")
+//    Scene 2 — Doublethink   (three colour scrollers, word reveal, glitch)
+//    Scene 3 — The Question  (user input, waiting display, AI response)
+//    Scene 4 — Authorship    ("written by the future", blinking cursor)
+//    Scene 5 — The Promise   (loops forever — THE END IS NOT YET WRITTEN)
 // =============================================================
 
 #include <c64/vic.h>
@@ -37,15 +44,12 @@
 #define LTBLUE 14
 #define LTGRAY 15
 
-// ---------------------------------------------------------------------------
-// Screen positions
-// ---------------------------------------------------------------------------
 #define COLS 40
 #define ROWS 25
 
-// ---------------------------------------------------------------------------
-// Core screen utilities
-// ---------------------------------------------------------------------------
+// ===========================================================================
+//  CORE UTILITIES
+// ===========================================================================
 
 void cls(void)
 {
@@ -58,7 +62,6 @@ void cls(void)
     }
 }
 
-// Write zero-terminated screen-code string at absolute screen position
 void pat(char row, char col, const char *s, char fg)
 {
     int base = (int)row * COLS + col;
@@ -70,7 +73,6 @@ void pat(char row, char col, const char *s, char fg)
     }
 }
 
-// Center a screen-code string on a row
 void pcenter(char row, const char *s, char fg)
 {
     char len = 0;
@@ -80,7 +82,6 @@ void pcenter(char row, const char *s, char fg)
     pat(row, (COLS - len) >> 1, s, fg);
 }
 
-// Set color of an entire row without changing characters
 void rowcol(char row, char fg)
 {
     char *clr = COLORRAM + (int)row * COLS;
@@ -88,7 +89,6 @@ void rowcol(char row, char fg)
         clr[i] = fg;
 }
 
-// Draw a horizontal line of one char across full width
 void hline(char row, char ch, char fg)
 {
     int base = (int)row * COLS + 2;
@@ -99,7 +99,6 @@ void hline(char row, char ch, char fg)
     }
 }
 
-// Put a single character at screen position
 void pch(char row, char col, char ch, char fg)
 {
     int pos = (int)row * COLS + col;
@@ -107,7 +106,6 @@ void pch(char row, char col, char ch, char fg)
     COLORRAM[pos] = fg;
 }
 
-// Read a single screen char
 char gch(char row, char col)
 {
     return SCREEN[(int)row * COLS + col];
@@ -134,59 +132,48 @@ void wait_frames(char n)
 // ---------------------------------------------------------------------------
 // Input — Space, Return, F1, or Joystick 2 fire
 // C64 keyboard matrix: PRA = column drive (active low), PRB = row read
-//   Space:  col 7 (PRA=0x7F), row 4 (PRB bit 4)
-//   Return: col 1 (PRA=0xFD), row 0 (PRB bit 0)
-//   F1:     col 0 (PRA=0xFE), row 4 (PRB bit 4)
+//   Space:    col 7 (PRA=0x7F), row 4 (PRB bit 4)
+//   Return:   col 1 (PRA=0xFD), row 0 (PRB bit 0)
+//   F1:       col 0 (PRA=0xFE), row 4 (PRB bit 4)
 //   Joy2 fire: PRA bit 4 active low (with PRA=0xFF)
 // ---------------------------------------------------------------------------
 
 char any_key(void)
 {
-    // Space: col 7, row 4
     cia1.pra = 0x7F;
     if (!(cia1.prb & 0x10))
     {
         cia1.pra = 0xFF;
         return 1;
     }
-
-    // Return: col 1, row 0
     cia1.pra = 0xFD;
     if (!(cia1.prb & 0x01))
     {
         cia1.pra = 0xFF;
         return 1;
     }
-
-    // F1: col 0, row 4
     cia1.pra = 0xFE;
     if (!(cia1.prb & 0x10))
     {
         cia1.pra = 0xFF;
         return 1;
     }
-
-    // Joystick 2 fire: PRA bit 4
     cia1.pra = 0xFF;
     if (!(cia1.pra & 0x10))
         return 1;
-
     return 0;
 }
 
-// Wait for key, debounced (wait for release then press)
 void wait_key(void)
 {
-    // Wait for any previous press to be released
     while (any_key())
         wait_frame();
-    // Now wait for a new press
     while (!any_key())
         wait_frame();
 }
 
 // ---------------------------------------------------------------------------
-// Blink helper — call once per frame, returns 1 on the ON phase
+// Blink helper
 // ---------------------------------------------------------------------------
 
 static char blink_cnt = 0;
@@ -229,45 +216,7 @@ void fade_to_black(void)
 }
 
 // ---------------------------------------------------------------------------
-// Raster color bars (used in scenes 2, 3, 4)
-// ---------------------------------------------------------------------------
-
-#define NUM_BARS 8
-#define BAR_HEIGHT 8
-
-static char bar_pal[NUM_BARS] = {
-    RED, ORANGE, YELLOW, WHITE, LTBLUE, BLUE, PURPLE, BLACK};
-
-void bars_rotate(void)
-{
-    char tmp = bar_pal[0];
-    for (char i = 0; i < NUM_BARS - 1; i++)
-        bar_pal[i] = bar_pal[i + 1];
-    bar_pal[NUM_BARS - 1] = tmp;
-}
-
-void bars_draw(char start_line)
-{
-    vic.color_border = BLACK;
-    vic.color_back = BLACK;
-    for (char b = 0; b < NUM_BARS; b++)
-    {
-        char target = start_line + (char)(b * BAR_HEIGHT);
-        while (vic.raster != target)
-            ;
-        vic.color_border = bar_pal[b];
-        vic.color_back = bar_pal[b];
-    }
-    char restore = start_line + (char)(NUM_BARS * BAR_HEIGHT);
-    while (vic.raster != restore)
-        ;
-    vic.color_border = BLACK;
-    vic.color_back = BLACK;
-}
-
-// ---------------------------------------------------------------------------
-// Scrolling marquee — row 24
-// 1 char every SCROLL_SPEED frames
+// Scrolling marquee — row 24, 1 char every SCROLL_SPEED frames
 // ---------------------------------------------------------------------------
 
 #define SCROLL_SPEED 12
@@ -329,411 +278,10 @@ void scroll_step(void)
     }
 }
 
-// ===========================================================================
-//
-//  SCENE 1 — THE EYE
-//
-//  A hardware sprite eye, centered on screen.
-//  Pupil animates: centre → right → centre → left → centre
-//
-//  Below: large block-letter "1984" (5 rows tall, screen code 160 = solid block)
-//  Then: GEORGE ORWELL  and  PRESS FIRE TO CONTINUE
-//
-//  Sprite 0 is placed at screen centre, colour WHITE.
-//  Sprite data is stored at $2000 (just above default screen area).
-//
-// ===========================================================================
-
-// --- Sprite bitmaps (24x21 pixels, 63 bytes each) ---
-// Generated from circular eye with hollow iris ring and solid pupil.
-
-static const char eye_left[63] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 255, 0, 3, 255, 192, 15, 0, 240,
-    30, 0, 120, 28, 0, 56,
-    59, 192, 28, 63, 224, 28, 63, 224, 28, 63, 224, 28, 59, 192, 28,
-    28, 0, 56, 30, 0, 120, 15, 0, 240, 3, 255, 192, 0, 255, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-static const char eye_centre[63] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 255, 0, 3, 255, 192, 15, 0, 240,
-    30, 0, 120, 28, 0, 56,
-    56, 60, 28, 56, 126, 28, 56, 126, 28, 56, 126, 28, 56, 60, 28,
-    28, 0, 56, 30, 0, 120, 15, 0, 240, 3, 255, 192, 0, 255, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-static const char eye_right[63] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 255, 0, 3, 255, 192, 15, 0, 240,
-    30, 0, 120, 28, 0, 56,
-    56, 3, 220, 56, 7, 252, 56, 7, 252, 56, 7, 252, 56, 3, 220,
-    28, 0, 56, 30, 0, 120, 15, 0, 240, 3, 255, 192, 0, 255, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0};
-
 // ---------------------------------------------------------------------------
-// Sprite hardware — raw VIC-II register writes
-// VIC-II base: $D000
-// $D000/$D001 = sprite 0 X/Y
-// $D010       = sprite X MSBs
-// $D015       = sprite enable
-// $D01C       = sprite multicolor (0=single colour)
-// $D01B       = sprite priority (0=in front of background)
-// $D027       = sprite 0 colour
-// Sprite pointer for sprite 0: screen_base + $3F8 = $07F8
-// ---------------------------------------------------------------------------
-
-#define VIC_SPR0_X (*((volatile char *)0xD000))
-#define VIC_SPR0_Y (*((volatile char *)0xD001))
-#define VIC_SPR_MSBX (*((volatile char *)0xD010))
-#define VIC_SPR_ENA (*((volatile char *)0xD015))
-#define VIC_SPR_MCOLOR (*((volatile char *)0xD01C))
-#define VIC_SPR_PRIOR (*((volatile char *)0xD01B))
-#define VIC_SPR_EXPX (*((volatile char *)0xD01D)) // X double size
-#define VIC_SPR_EXPY (*((volatile char *)0xD017)) // Y double size
-#define VIC_SPR0_COLOR (*((volatile char *)0xD027))
-#define SPR_PTR0 (*((volatile char *)0x07F8))
-
-// Sprite data at $2000 — block index = $2000/64 = 128
-#define SPRITE_MEM ((char *)0x2000)
-#define SPRITE_BLOCK 128
-
-void sprite_load(const char *data)
-{
-    char *dst = SPRITE_MEM;
-    for (char i = 0; i < 63; i++)
-        dst[i] = data[i];
-    dst[63] = 0;
-}
-
-void sprite_show(char x, char y, char color)
-{
-    SPR_PTR0 = SPRITE_BLOCK;
-    VIC_SPR0_X = x;
-    VIC_SPR0_Y = y;
-    VIC_SPR_MSBX &= ~1;
-    VIC_SPR0_COLOR = color;
-    VIC_SPR_MCOLOR &= ~1; // single colour
-    VIC_SPR_PRIOR &= ~1;  // in front of background
-    VIC_SPR_EXPX |= 1;    // 2x width
-    VIC_SPR_EXPY |= 1;    // 2x height
-    VIC_SPR_ENA |= 1;     // enable
-}
-
-void sprite_hide(void)
-{
-    VIC_SPR_ENA &= ~1;
-    VIC_SPR_EXPX &= ~1;
-    VIC_SPR_EXPY &= ~1;
-}
-
-// --- Big block digit "1984" ---
-// Screen code 160 = solid block, 32 = space
-// Each digit is 3 wide x 5 tall, 2-space gap between digits
-// Centered: start col 11, 5 rows starting at given screen row
-
-#define BLK 160
-#define SPC 32
-
-// 5 rows of screen codes for "1984" (18 chars wide)
-static const char year_row0[18] = {SPC, BLK, SPC, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, SPC, BLK};
-static const char year_row1[18] = {BLK, BLK, SPC, SPC, SPC, BLK, SPC, BLK, SPC, SPC, BLK, SPC, BLK, SPC, SPC, BLK, SPC, BLK};
-static const char year_row2[18] = {SPC, BLK, SPC, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK};
-static const char year_row3[18] = {SPC, BLK, SPC, SPC, SPC, SPC, SPC, BLK, SPC, SPC, BLK, SPC, BLK, SPC, SPC, SPC, SPC, BLK};
-static const char year_row4[18] = {BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, SPC, SPC, BLK};
-
-void draw_year(char start_row, char color)
-{
-    const char *rows[5] = {year_row0, year_row1, year_row2, year_row3, year_row4};
-    for (char r = 0; r < 5; r++)
-    {
-        int base = (int)(start_row + r) * COLS + 11;
-        for (char c = 0; c < 18; c++)
-        {
-            SCREEN[base + c] = rows[r][c];
-            COLORRAM[base + c] = color;
-        }
-    }
-}
-
-// Screen code strings
-static const char s1_orwell[] = {7, 5, 15, 18, 7, 5, 32, 15, 18, 23, 5, 12, 12, 0}; // GEORGE ORWELL
-static const char s1_press[] = {16, 18, 5, 19, 19, 32, 6, 9, 18, 5, 32, 20, 15, 32, 3, 15, 14, 20, 9, 14, 21, 5, 0};
-
-void scene1_run(void)
-{
-    cls();
-    cls();
-
-    // --- Sprite eye, 2x expanded = 48x42 pixels ---
-    // VIC sprite X: screen centre = pixel 160, plus VIC left border offset 24 = 184
-    // At 2x, sprite is 48px wide so to centre: X = 184 - 24 = 160
-    // VIC sprite Y: top of screen area = 50. We want eye in top quarter.
-    // Y=50 puts the top of the 42px eye at the very top of the screen area.
-    // Y=56 gives a small top margin — eye occupies roughly rows 1-6 of text.
-    // Year is at row 12 (pixel 146) so there is plenty of gap.
-    sprite_load(eye_centre);
-    sprite_show(160, 56, WHITE);
-
-    // --- Big year ---
-    draw_year(12, WHITE);
-
-    // --- Text ---
-    hline(18, 45, DKGRAY);
-    pcenter(20, s1_orwell, DKGRAY);
-    pcenter(22, s1_press, MDGRAY);
-
-    scroll_init();
-    blink_reset();
-
-    // Pupil sequence: centre(0) right(2) centre(0) left(1) centre(0)
-    // Using 3 sprite frames: eye_left, eye_centre, eye_right
-    // Sequence indices into that array, plus hold time in frames
-    static const char seq_frame[5] = {1, 2, 1, 0, 1}; // 0=left 1=centre 2=right
-    static const char seq_hold[5] = {60, 35, 25, 35, 60};
-    char seq_idx = 0;
-    char hold_cnt = 0;
-
-    for (;;)
-    {
-        wait_frame();
-        scroll_step();
-        blink_row(22, MDGRAY);
-
-        hold_cnt++;
-        if (hold_cnt >= seq_hold[seq_idx])
-        {
-            hold_cnt = 0;
-            seq_idx++;
-            if (seq_idx >= 5)
-                seq_idx = 0;
-
-            // Load the right sprite frame
-            char f = seq_frame[seq_idx];
-            if (f == 0)
-                sprite_load(eye_left);
-            else if (f == 1)
-                sprite_load(eye_centre);
-            else
-                sprite_load(eye_right);
-        }
-
-        if (any_key())
-            break;
-    }
-
-    sprite_hide();
-    wait_frames(5);
-    fade_to_black();
-    wait_frames(15);
-}
-
-// ===========================================================================
-//
-//  SCENE 2 — DOUBLETHINK / RASTER BANDS
-//
-//  Five colored raster bands paint the background behind each slogan pair.
-//  The bands pulse via a sine-driven color table — alive, not static.
-//
-//  Structure:
-//    Part 1 — Orwell's slogans appear one by one on colored bands (1984)
-//    Part 2 — TV static glitch transition (crossing between worlds)
-//    Part 3 — AI equivalents revealed on the same bands (NOW)
-//    Part 4 — User input: "WHAT IS YOUR DREAM FOR TECHNOLOGY?"
-//    Part 5 — Authorship statement typed out
-//
-//  Raster bands (PAL, raster line 51 = top of screen, 8 lines per text row):
-//    Band 0: rows 2-3  -> rasters 67-83   (header)
-//    Band 1: rows 5-6  -> rasters 91-107  (slogan pair 1)
-//    Band 2: rows 8-9  -> rasters 115-131 (slogan pair 2)
-//    Band 3: rows 11-12-> rasters 139-155 (slogan pair 3)
-//    Band 4: rows 14-15-> rasters 163-179 (context label)
-//
-//  Keyboard input uses the KERNAL buffer ($C6 = count, $0277 = first key).
-//  The KERNAL IRQ fills the buffer automatically — no matrix scanning needed.
-//
-// ===========================================================================
-
-// Type out a string letter by letter at speed frames/char
-
-// ===========================================================================
-//
-//  SCENE 2 — DOUBLETHINK
-//
-//  Three simultaneous sine-wave color scrollers:
-//    Row 10: Orwell slogans      — red wave, right-to-left
-//    Row 12: AI equivalents      — blue wave, left-to-right
-//    Row 14: Timeline / context  — gray wave, right-to-left, slower
-//
-//  Color wave travels OPPOSITE to scroll direction on each row.
-//  When the two main scrollers cross at centre, columns 16-23 flash white.
-//
-//  Structure:
-//    Part 1 — Three scrollers run simultaneously. Fire to continue.
-//    Part 2 — TV static glitch transition
-//    Part 3 — User input: "WHAT IS YOUR DREAM FOR TECHNOLOGY?"
-//    Part 4 — Authorship statement, ending on "WRITTEN BY THE FUTURE"
-//
-// ===========================================================================
-
-// Color wave tables (16 entries, brightness cycles)
-static const char wave_red[16] = {2, 2, 10, 10, 8, 8, 7, 1, 7, 7, 8, 8, 10, 2, 2, 11};
-static const char wave_blue[16] = {6, 6, 14, 14, 3, 3, 1, 3, 3, 14, 14, 6, 4, 4, 6, 11};
-static const char wave_gray[16] = {11, 11, 12, 12, 15, 15, 1, 15, 15, 12, 12, 11, 11, 0, 0, 11};
-
-// Row 10: Orwell slogans, right-to-left
-static const char smsg1[] = {
-    32, 32, 32,
-    23, 1, 18, 32, 9, 19, 32, 16, 5, 1, 3, 5, // WAR IS PEACE
-    32, 32, 32,
-    6, 18, 5, 5, 4, 15, 13, 32, 9, 19, 32, 19, 12, 1, 22, 5, 18, 25, // FREEDOM IS SLAVERY
-    32, 32, 32,
-    9, 7, 14, 15, 18, 1, 14, 3, 5, 32, 9, 19, 32, 19, 20, 18, 5, 14, 7, 20, 8, // IGNORANCE IS STRENGTH
-    32, 32, 32,
-    2, 9, 7, 32, 2, 18, 15, 20, 8, 5, 18, 32, 9, 19, 32, 23, 1, 20, 3, 8, 9, 14, 7, // BIG BROTHER IS WATCHING
-    32, 32, 32,
-    0xFF};
-
-// Row 12: AI equivalents, left-to-right
-// Message stored REVERSED so shift-right + feed-at-0 produces correct LTR display
-static const char smsg2[] = {
-    32, 32, 32,
-    7, 14, 9, 14, 5, 20, 19, 9, 12, 32, 19, 9, 32, 1, 24, 5, 12, 1, // ALEXA IS LISTENING (reversed)
-    32, 32, 32,
-    20, 19, 5, 2, 32, 19, 23, 15, 14, 11, 32, 9, 1, // AI KNOWS BEST (reversed)
-    32, 32, 32,
-    25, 3, 14, 5, 18, 18, 21, 3, 32, 23, 5, 14, 32, 5, 8, 20, 32, 19, 9, 32, 1, 20, 1, 4, 32, 18, 21, 15, 25, // YOUR DATA... (reversed)
-    32, 32, 32,
-    5, 3, 1, 5, 16, 32, 19, 9, 32, 5, 3, 14, 1, 12, 12, 9, 5, 22, 18, 21, 19, // SURVEILLANCE IS PEACE (reversed)
-    32, 32, 32,
-    0xFF};
-
-// Row 14: Timeline, right-to-left, slower
-static const char smsg3[] = {
-    32, 32, 32,
-    49, 57, 52, 57, 32, 32,                                                             // 1949
-    7, 5, 15, 18, 7, 5, 32, 15, 18, 23, 5, 12, 12, 32, 23, 1, 18, 14, 5, 4, 32, 21, 19, // GEORGE ORWELL WARNED US
-    32, 32, 32,
-    49, 57, 56, 52, 32, 32,                       // 1984
-    4, 9, 4, 32, 23, 5, 32, 12, 9, 19, 20, 5, 14, // DID WE LISTEN
-    32, 32, 32,
-    50, 48, 50, 54, 32, 32,                                                         // 2026
-    1, 18, 5, 32, 23, 5, 32, 19, 20, 9, 12, 12, 32, 12, 9, 19, 20, 5, 14, 9, 14, 7, // ARE WE STILL LISTENING
-    32, 32, 32,
-    0xFF};
-
-// Scroller state struct
-typedef struct
-{
-    char buf[40];
-    unsigned msg_idx;
-    char tick;
-    char speed;
-    char wave_phase;
-    char direction; // 0=RTL  1=LTR
-    char row;
-    const char *wave;
-    const char *msg;
-} Scroller;
-
-static Scroller scr[3];
-
-void scroller_init(Scroller *s, char row, char speed, char dir,
-                   const char *wave, const char *msg)
-{
-    s->row = row;
-    s->speed = speed;
-    s->direction = dir;
-    s->wave = wave;
-    s->msg = msg;
-    s->msg_idx = 0;
-    s->tick = 0;
-    s->wave_phase = 0;
-    for (char i = 0; i < 40; i++)
-        s->buf[i] = 32;
-}
-
-void scroller_step(Scroller *s)
-{
-    s->tick++;
-    if (s->tick >= s->speed)
-    {
-        s->tick = 0;
-        char c = s->msg[s->msg_idx++];
-        if (c == 0xFF)
-        {
-            s->msg_idx = 0;
-            c = s->msg[0];
-        }
-        if (s->direction == 0)
-        {
-            // RTL: shift left, feed at right
-            for (char i = 0; i < 39; i++)
-                s->buf[i] = s->buf[i + 1];
-            s->buf[39] = c;
-        }
-        else
-        {
-            // LTR: shift right, feed at left (message stored reversed)
-            for (char i = 39; i > 0; i--)
-                s->buf[i] = s->buf[i - 1];
-            s->buf[0] = c;
-        }
-    }
-    s->wave_phase = (s->wave_phase + 1) & 15;
-    int base = (int)s->row * 40;
-    // Both directions: buf maps directly to screen columns
-    // Wave direction opposes scroll direction
-    for (char i = 0; i < 40; i++)
-    {
-        SCREEN[base + i] = s->buf[i];
-        char wi = (s->direction == 0) ? (s->wave_phase + i) & 15 : (s->wave_phase + (39 - i)) & 15;
-        COLORRAM[base + i] = s->wave[wi];
-    }
-}
-
-// Flash centre columns white when both main scrollers have content crossing
-void scroller_crossflash(void)
-{
-    if (scr[0].buf[20] != 32 && scr[1].buf[19] != 32)
-    {
-        char *c0 = COLORRAM + (int)scr[0].row * 40;
-        char *c1 = COLORRAM + (int)scr[1].row * 40;
-        for (char i = 16; i < 24; i++)
-        {
-            c0[i] = WHITE;
-            c1[i] = WHITE;
-        }
-    }
-}
-
-// TV static glitch
-void glitch_transition(void)
-{
-    char lfsr = 0xACu;
-    for (char pass = 0; pass < 18; pass++)
-    {
-        for (int i = 0; i < 1000; i++)
-        {
-            char bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
-            lfsr = (lfsr << 1) | bit;
-            SCREEN[i] = lfsr & 0x3F;
-            COLORRAM[i] = (lfsr >> 4) & 0x0F;
-        }
-        wait_frame();
-        wait_frame();
-    }
-    for (char row = 0; row < 25; row++)
-    {
-        char *c = COLORRAM + (int)row * 40;
-        for (char i = 0; i < 40; i++)
-            c[i] = BLACK;
-        wait_frame();
-    }
-    cls();
-}
-
 // KERNAL keyboard buffer
+// ---------------------------------------------------------------------------
+
 #define KBUF_COUNT (*((volatile char *)0x00C6))
 #define KBUF_START ((volatile char *)0x0277)
 
@@ -817,27 +365,331 @@ void typeout(char row, char col, const char *s, char fg, char speed)
     }
 }
 
-// Static strings
+// ===========================================================================
+//
+//  SCENE 1 — THE EYE
+//
+//  Hardware sprite eye, centered on screen.
+//  Pupil animates: centre -> right -> centre -> left -> centre
+//  Block-letter "1984" below. GEORGE ORWELL. PRESS FIRE TO CONTINUE.
+//  Scrolling marquee on row 24.
+//
+// ===========================================================================
+
+static const char eye_left[63] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 255, 0, 3, 255, 192, 15, 0, 240, 30, 0, 120, 28, 0, 56,
+    59, 192, 28, 63, 224, 28, 63, 224, 28, 63, 224, 28, 59, 192, 28,
+    28, 0, 56, 30, 0, 120, 15, 0, 240, 3, 255, 192, 0, 255, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+static const char eye_centre[63] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 255, 0, 3, 255, 192, 15, 0, 240, 30, 0, 120, 28, 0, 56,
+    56, 60, 28, 56, 126, 28, 56, 126, 28, 56, 126, 28, 56, 60, 28,
+    28, 0, 56, 30, 0, 120, 15, 0, 240, 3, 255, 192, 0, 255, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+static const char eye_right[63] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 255, 0, 3, 255, 192, 15, 0, 240, 30, 0, 120, 28, 0, 56,
+    56, 3, 220, 56, 7, 252, 56, 7, 252, 56, 7, 252, 56, 3, 220,
+    28, 0, 56, 30, 0, 120, 15, 0, 240, 3, 255, 192, 0, 255, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+#define VIC_SPR0_X (*((volatile char *)0xD000))
+#define VIC_SPR0_Y (*((volatile char *)0xD001))
+#define VIC_SPR_MSBX (*((volatile char *)0xD010))
+#define VIC_SPR_ENA (*((volatile char *)0xD015))
+#define VIC_SPR_MCOLOR (*((volatile char *)0xD01C))
+#define VIC_SPR_PRIOR (*((volatile char *)0xD01B))
+#define VIC_SPR_EXPX (*((volatile char *)0xD01D))
+#define VIC_SPR_EXPY (*((volatile char *)0xD017))
+#define VIC_SPR0_COLOR (*((volatile char *)0xD027))
+#define SPR_PTR0 (*((volatile char *)0x07F8))
+#define SPRITE_MEM ((char *)0x2000)
+#define SPRITE_BLOCK 128
+
+void sprite_load(const char *data)
+{
+    char *dst = SPRITE_MEM;
+    for (char i = 0; i < 63; i++)
+        dst[i] = data[i];
+    dst[63] = 0;
+}
+
+void sprite_show(char x, char y, char color)
+{
+    SPR_PTR0 = SPRITE_BLOCK;
+    VIC_SPR0_X = x;
+    VIC_SPR0_Y = y;
+    VIC_SPR_MSBX &= ~1;
+    VIC_SPR0_COLOR = color;
+    VIC_SPR_MCOLOR &= ~1;
+    VIC_SPR_PRIOR &= ~1;
+    VIC_SPR_EXPX |= 1;
+    VIC_SPR_EXPY |= 1;
+    VIC_SPR_ENA |= 1;
+}
+
+void sprite_hide(void)
+{
+    VIC_SPR_ENA &= ~1;
+    VIC_SPR_EXPX &= ~1;
+    VIC_SPR_EXPY &= ~1;
+}
+
+#define BLK 160
+#define SPC 32
+
+static const char year_row0[18] = {SPC, BLK, SPC, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, SPC, BLK};
+static const char year_row1[18] = {BLK, BLK, SPC, SPC, SPC, BLK, SPC, BLK, SPC, SPC, BLK, SPC, BLK, SPC, SPC, BLK, SPC, BLK};
+static const char year_row2[18] = {SPC, BLK, SPC, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK};
+static const char year_row3[18] = {SPC, BLK, SPC, SPC, SPC, SPC, SPC, BLK, SPC, SPC, BLK, SPC, BLK, SPC, SPC, SPC, SPC, BLK};
+static const char year_row4[18] = {BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, BLK, BLK, BLK, SPC, SPC, SPC, SPC, BLK};
+
+void draw_year(char start_row, char color)
+{
+    const char *rows[5] = {year_row0, year_row1, year_row2, year_row3, year_row4};
+    for (char r = 0; r < 5; r++)
+    {
+        int base = (int)(start_row + r) * COLS + 11;
+        for (char c = 0; c < 18; c++)
+        {
+            SCREEN[base + c] = rows[r][c];
+            COLORRAM[base + c] = color;
+        }
+    }
+}
+
+static const char s1_orwell[] = {7, 5, 15, 18, 7, 5, 32, 15, 18, 23, 5, 12, 12, 0};                                  // GEORGE ORWELL
+static const char s1_press[] = {16, 18, 5, 19, 19, 32, 6, 9, 18, 5, 32, 20, 15, 32, 3, 15, 14, 20, 9, 14, 21, 5, 0}; // PRESS FIRE TO CONTINUE
+
+void scene1_run(void)
+{
+    cls();
+    cls();
+
+    sprite_load(eye_centre);
+    sprite_show(160, 56, WHITE);
+    draw_year(12, WHITE);
+
+    hline(18, 45, DKGRAY);
+    pcenter(20, s1_orwell, DKGRAY);
+    pcenter(22, s1_press, MDGRAY);
+
+    scroll_init();
+    blink_reset();
+
+    // Pupil sequence: 0=left 1=centre 2=right
+    static const char seq_frame[5] = {1, 2, 1, 0, 1};
+    static const char seq_hold[5] = {60, 35, 25, 35, 60};
+    char seq_idx = 0;
+    char hold_cnt = 0;
+
+    for (;;)
+    {
+        wait_frame();
+        scroll_step();
+        blink_row(22, MDGRAY);
+
+        hold_cnt++;
+        if (hold_cnt >= seq_hold[seq_idx])
+        {
+            hold_cnt = 0;
+            seq_idx++;
+            if (seq_idx >= 5)
+                seq_idx = 0;
+            char f = seq_frame[seq_idx];
+            if (f == 0)
+                sprite_load(eye_left);
+            else if (f == 1)
+                sprite_load(eye_centre);
+            else
+                sprite_load(eye_right);
+        }
+
+        if (any_key())
+            break;
+    }
+
+    sprite_hide();
+    wait_frames(5);
+    fade_to_black();
+    wait_frames(15);
+}
+
+// ===========================================================================
+//
+//  SCENE 2 — DOUBLETHINK
+//
+//  Three simultaneous sine-wave colour scrollers:
+//    Row 10: Orwell slogans     — red wave,  right-to-left
+//    Row 12: AI equivalents     — blue wave, left-to-right (stored reversed)
+//    Row 14: Timeline/context   — gray wave, right-to-left, slower
+//
+//  Colour wave travels OPPOSITE to scroll direction on each row.
+//  When the two main scrollers cross at centre, cols 16-23 flash white.
+//  Word pairs build up below the separator as the scrollers run.
+//  Scene auto-advances ~3 sec after all 4 word pairs revealed,
+//  then TV static glitch transition.
+//
+// ===========================================================================
+
+static const char wave_red[16] = {2, 2, 10, 10, 8, 8, 7, 1, 7, 7, 8, 8, 10, 2, 2, 11};
+static const char wave_blue[16] = {6, 6, 14, 14, 3, 3, 1, 3, 3, 14, 14, 6, 4, 4, 6, 11};
+static const char wave_gray[16] = {11, 11, 12, 12, 15, 15, 1, 15, 15, 12, 12, 11, 11, 0, 0, 11};
+
+// Row 10: Orwell slogans, right-to-left
+static const char smsg1[] = {
+    32, 32, 32,
+    23, 1, 18, 32, 9, 19, 32, 16, 5, 1, 3, 5, // WAR IS PEACE
+    32, 32, 32,
+    6, 18, 5, 5, 4, 15, 13, 32, 9, 19, 32, 19, 12, 1, 22, 5, 18, 25, // FREEDOM IS SLAVERY
+    32, 32, 32,
+    9, 7, 14, 15, 18, 1, 14, 3, 5, 32, 9, 19, 32, 19, 20, 18, 5, 14, 7, 20, 8, // IGNORANCE IS STRENGTH
+    32, 32, 32,
+    2, 9, 7, 32, 2, 18, 15, 20, 8, 5, 18, 32, 9, 19, 32, 23, 1, 20, 3, 8, 9, 14, 7, // BIG BROTHER IS WATCHING
+    32, 32, 32,
+    0xFF};
+
+// Row 12: AI equivalents, left-to-right (stored reversed)
+static const char smsg2[] = {
+    32, 32, 32,
+    7, 14, 9, 14, 5, 20, 19, 9, 12, 32, 19, 9, 32, 1, 24, 5, 12, 1, // ALEXA IS LISTENING (reversed)
+    32, 32, 32,
+    20, 19, 5, 2, 32, 19, 23, 15, 14, 11, 32, 9, 1, // AI KNOWS BEST (reversed)
+    32, 32, 32,
+    25, 3, 14, 5, 18, 18, 21, 3, 32, 23, 5, 14, 32, 5, 8, 20, 32, 19, 9, 32, 1, 20, 1, 4, 32, 18, 21, 15, 25, // YOUR DATA... (reversed)
+    32, 32, 32,
+    5, 3, 1, 5, 16, 32, 19, 9, 32, 5, 3, 14, 1, 12, 12, 9, 5, 22, 18, 21, 19, // SURVEILLANCE IS PEACE (reversed)
+    32, 32, 32,
+    0xFF};
+
+// Row 14: Timeline, right-to-left, slower
+static const char smsg3[] = {
+    32, 32, 32,
+    49, 57, 52, 57, 32, 32,                                                             // 1949
+    7, 5, 15, 18, 7, 5, 32, 15, 18, 23, 5, 12, 12, 32, 23, 1, 18, 14, 5, 4, 32, 21, 19, // GEORGE ORWELL WARNED US
+    32, 32, 32,
+    49, 57, 56, 52, 32, 32,                       // 1984
+    4, 9, 4, 32, 23, 5, 32, 12, 9, 19, 20, 5, 14, // DID WE LISTEN
+    32, 32, 32,
+    50, 48, 50, 54, 32, 32,                                                         // 2026
+    1, 18, 5, 32, 23, 5, 32, 19, 20, 9, 12, 12, 32, 12, 9, 19, 20, 5, 14, 9, 14, 7, // ARE WE STILL LISTENING
+    32, 32, 32,
+    0xFF};
+
+typedef struct
+{
+    char buf[40];
+    unsigned msg_idx;
+    char tick;
+    char speed;
+    char wave_phase;
+    char direction; // 0=RTL  1=LTR
+    char row;
+    const char *wave;
+    const char *msg;
+} Scroller;
+
+static Scroller scr[3];
+
+void scroller_init(Scroller *s, char row, char speed, char dir,
+                   const char *wave, const char *msg)
+{
+    s->row = row;
+    s->speed = speed;
+    s->direction = dir;
+    s->wave = wave;
+    s->msg = msg;
+    s->msg_idx = 0;
+    s->tick = 0;
+    s->wave_phase = 0;
+    for (char i = 0; i < 40; i++)
+        s->buf[i] = 32;
+}
+
+void scroller_step(Scroller *s)
+{
+    s->tick++;
+    if (s->tick >= s->speed)
+    {
+        s->tick = 0;
+        char c = s->msg[s->msg_idx++];
+        if (c == 0xFF)
+        {
+            s->msg_idx = 0;
+            c = s->msg[0];
+        }
+        if (s->direction == 0)
+        {
+            for (char i = 0; i < 39; i++)
+                s->buf[i] = s->buf[i + 1];
+            s->buf[39] = c;
+        }
+        else
+        {
+            for (char i = 39; i > 0; i--)
+                s->buf[i] = s->buf[i - 1];
+            s->buf[0] = c;
+        }
+    }
+    s->wave_phase = (s->wave_phase + 1) & 15;
+    int base = (int)s->row * 40;
+    for (char i = 0; i < 40; i++)
+    {
+        SCREEN[base + i] = s->buf[i];
+        char wi = (s->direction == 0) ? (s->wave_phase + i) & 15
+                                      : (s->wave_phase + (39 - i)) & 15;
+        COLORRAM[base + i] = s->wave[wi];
+    }
+}
+
+void scroller_crossflash(void)
+{
+    if (scr[0].buf[20] != 32 && scr[1].buf[19] != 32)
+    {
+        char *c0 = COLORRAM + (int)scr[0].row * 40;
+        char *c1 = COLORRAM + (int)scr[1].row * 40;
+        for (char i = 16; i < 24; i++)
+        {
+            c0[i] = WHITE;
+            c1[i] = WHITE;
+        }
+    }
+}
+
+void glitch_transition(void)
+{
+    char lfsr = 0xACu;
+    for (char pass = 0; pass < 18; pass++)
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            char bit = ((lfsr >> 7) ^ (lfsr >> 5) ^ (lfsr >> 4) ^ (lfsr >> 3)) & 1;
+            lfsr = (lfsr << 1) | bit;
+            SCREEN[i] = lfsr & 0x3F;
+            COLORRAM[i] = (lfsr >> 4) & 0x0F;
+        }
+        wait_frame();
+        wait_frame();
+    }
+    for (char row = 0; row < 25; row++)
+    {
+        char *c = COLORRAM + (int)row * 40;
+        for (char i = 0; i < 40; i++)
+            c[i] = BLACK;
+        wait_frame();
+    }
+    cls();
+}
+
 static const char s2_hdr[] = {49, 57, 56, 52, 32, 32, 22, 19, 32, 32, 14, 15, 23, 0}; // 1984  VS  NOW
 static const char s2_l1[] = {15, 18, 23, 5, 12, 12, 0};                               // ORWELL
 static const char s2_l2[] = {1, 9, 32, 13, 9, 18, 18, 15, 18, 0};                     // AI MIRROR
 static const char s2_l3[] = {20, 9, 13, 5, 12, 9, 14, 5, 0};                          // TIMELINE
-static const char s2_press[] = {16, 18, 5, 19, 19, 32, 6, 9, 18, 5, 32, 20, 15, 32, 3, 15, 14, 20, 9, 14, 21, 5, 0};
-static const char s2_q[] = {23, 8, 1, 20, 32, 9, 19, 32, 25, 15, 21, 18, 32, 4, 18, 5, 1, 13, 32, 6, 15, 18, 32, 20, 5, 3, 8, 14, 15, 12, 15, 7, 25, 63, 0};
-static const char s2_hint[] = {20, 25, 16, 5, 32, 25, 15, 21, 18, 32, 1, 14, 19, 23, 5, 18, 32, 32, 18, 5, 20, 21, 18, 14, 32, 20, 15, 32, 3, 15, 14, 6, 9, 18, 13, 0};
-static const char s2_pfx[] = {62, 32, 0};
-static const char s2_echo[] = {25, 15, 21, 18, 32, 4, 18, 5, 1, 13, 58, 0}; // YOUR DREAM:
-// Authorship
-static const char s2_by1[] = {20, 8, 9, 19, 32, 4, 5, 13, 15, 32, 23, 1, 19, 32, 13, 1, 4, 5, 32, 2, 25, 32, 1, 9, 0};
-static const char s2_by2[] = {4, 9, 18, 5, 3, 20, 5, 4, 32, 2, 25, 32, 10, 15, 14, 1, 19, 32, 11, 10, 5, 12, 4, 13, 1, 14, 4, 0};
-static const char s2_by3[] = {3, 15, 13, 13, 15, 4, 15, 18, 5, 32, 54, 52, 32, 32, 50, 48, 50, 54, 0};
-static const char s2_m1[] = {20, 8, 5, 32, 13, 1, 3, 8, 9, 14, 5, 32, 20, 8, 1, 20, 32, 8, 5, 12, 4, 32, 20, 8, 5, 0};
-static const char s2_m2[] = {6, 9, 18, 19, 20, 32, 16, 18, 15, 13, 9, 19, 5, 32, 14, 15, 23, 32, 18, 21, 14, 19, 32, 3, 15, 4, 5, 0};
-static const char s2_m3[] = {23, 18, 9, 20, 20, 5, 14, 32, 2, 25, 32, 20, 8, 5, 32, 6, 21, 20, 21, 18, 5, 0};
 
-// Building sentence words below separator
-// Row 18: 1984 words  col 2: WAR . FREEDOM . STRENGTH . WATCHING
-// Row 20: AI words    col 2: SURVEILLANCE . DATA . AI . LISTENING
 static const char sw_war[] = {23, 1, 18, 0};
 static const char sw_freedom[] = {6, 18, 5, 5, 4, 15, 13, 0};
 static const char sw_strength[] = {19, 20, 18, 5, 14, 7, 20, 8, 0};
@@ -846,9 +698,8 @@ static const char sw_surveillance[] = {19, 21, 18, 22, 5, 9, 12, 12, 1, 14, 3, 5
 static const char sw_data[] = {4, 1, 20, 1, 0};
 static const char sw_ai[] = {1, 9, 0};
 static const char sw_listening[] = {12, 9, 19, 20, 5, 14, 9, 14, 7, 0};
-static const char sw_dot[] = {32, 46, 32, 0}; // " . "
+static const char sw_dot[] = {32, 46, 32, 0};
 
-// Print word+dot at position, return new column
 char reveal_word(char row, char col, const char *word, char fg)
 {
     while (*word)
@@ -862,23 +713,16 @@ char reveal_word(char row, char col, const char *word, char fg)
 
 void scene2_run(void)
 {
-    // -----------------------------------------------------------------------
-    // PART 1 — THREE SCROLLERS + BUILDING SENTENCE
-    // -----------------------------------------------------------------------
     cls();
     cls();
 
     pcenter(1, s2_hdr, DKGRAY);
     hline(2, 45, DKGRAY);
-
     pat(10, 1, s2_l1, DKGRAY);
     pat(12, 1, s2_l2, DKGRAY);
     pat(14, 1, s2_l3, DKGRAY);
-
     hline(16, 45, DKGRAY);
-    // No "press fire" — scene advances automatically after words are revealed
 
-    // Slow speeds: 6 frames/char for main scrollers, 10 for timeline
     scroller_init(&scr[0], 10, 6, 0, wave_red, smsg1);
     scroller_init(&scr[1], 12, 6, 1, wave_blue, smsg2);
     scroller_init(&scr[2], 14, 10, 0, wave_gray, smsg3);
@@ -889,7 +733,7 @@ void scene2_run(void)
     char words = 0;
     char col1 = 2;
     char col2 = 2;
-    char hold_after_words = 0; // counts frames after all words revealed
+    char hold_after_words = 0;
 
     for (;;)
     {
@@ -900,7 +744,6 @@ void scene2_run(void)
         scroller_crossflash();
         timer++;
 
-        // Reveal word pairs below separator, staggered every 100 frames
         if (words < 4 && timer >= (char)(words * 100 + 80))
         {
             if (words == 0)
@@ -932,7 +775,6 @@ void scene2_run(void)
             words++;
         }
 
-        // After all words revealed, hold for 150 frames (~3 sec) then auto-advance
         if (words >= 4)
         {
             hold_after_words++;
@@ -942,93 +784,632 @@ void scene2_run(void)
     }
 
     wait_frames(5);
-
-    // -----------------------------------------------------------------------
-    // PART 2 — GLITCH TRANSITION
-    // -----------------------------------------------------------------------
     vic.color_border = BLACK;
     vic.color_back = BLACK;
     glitch_transition();
     wait_frames(10);
+}
 
-    // -----------------------------------------------------------------------
-    // -----------------------------------------------------------------------
-    // PART 3 — USER INPUT + DOUBLETHINK RESPONSE
-    // User types their dream. Screen clears immediately to dots.
-    // Column dissolve masks the "thinking" time.
-    // Response comes back using their input — the magic moment.
-    // -----------------------------------------------------------------------
+// ===========================================================================
+//
+//  WAITING DISPLAY — used by scene 3
+//
+//  Runs while the cartridge handles the HTTPS request.
+//  Zero per-frame computation — only pch/pcenter + wait_frames + rowcol.
+//
+//  Screen layout:
+//    Row  4      theme word    (LTBLUE, fades each cycle)
+//    Row  6-10   ASCII art     (theme color, dissolves row-by-row)
+//    Row 18      "..."         (DKGRAY, static)
+//    Row 24      1984 phrase   (DKGRAY, fades each cycle)
+//
+//  To use: call find_theme() BEFORE cls(), then show_waiting() after.
+//  To adjust timing: change WAIT_NUM_CYCLES (each cycle ~1.5 sec).
+//
+// ===========================================================================
+
+#define THEME_HEALTH 0
+#define THEME_PEACE 1
+#define THEME_FREEDOM 2
+#define THEME_CONNECT 3
+#define THEME_LEARN 4
+#define THEME_CREATE 5
+#define THEME_EQUAL 6
+#define THEME_SAFE 7
+#define THEME_TRUTH 8
+#define THEME_HUMAN 9
+#define THEME_BETTER 10
+#define THEME_FUTURE 11
+#define THEME_WORK 12
+#define THEME_LOVE 13
+#define THEME_THINK 14
+#define THEME_DEFAULT 15
+
+// ---------------------------------------------------------------------------
+//  ASCII art glyphs — 5 rows x 7 cols, screen codes, centered col 16
+//
+//  Screen code key:
+//    space=32  *=42  +=43  -=45  .=46  /=47  (=40  )=41
+//    |=93      ==61  [=27  ]=29  '=39  #=160(solid block)
+//    O=15  Y=25
+//
+//   0 HEALTH        1 PEACE         2 FREEDOM       3 CONNECT
+//     |  ***  |       |  /+/  |       |+-----+|       |(O)-(O)|
+//     |  ***  |       | / | / |       || | | ||       | |   | |
+//     |*******|       |(--+--)| ------|| |   ||       | +-+-+ |
+//     |  ***  |       |   |   |       || | | ||       |   |   |
+//     |  ***  |       |   |   |       |+--   +|       |  (O)  |
+//
+//   4 LEARN         5 CREATE        6 EQUAL         7 SAFE
+//     | .---. |       | |**** |       |   |   |       |  .--. |
+//     | |===| |       | |**** |       | --+-- |       | (    )|
+//     | |===| |       | |     |       |[*] [*]|       | +----+|
+//     | |===| |       |(O)    |       |       |       | |(O) ||
+//     | +---+ |       | *     |       |+-----+|       | +----+|
+//
+//   8 TRUTH         9 HUMAN        10 BETTER       11 FUTURE
+//     |       |       |  (O)  |       |     ##|       | .---. |
+//     | (---) |       |   |   |       |  #  ##|       |(  |  )|
+//     |( (*) )|       | --+-- |       |  #  ##|       |( -+  )|
+//     | (---) |       |   |   |       |# #  ##|       |(     )|
+//     |       |       |  /Y/  |       |+------|       | '---' |
+//
+//  12 WORK         13 LOVE         14 THINK        15 DEFAULT
+//     | *-*-* |       | ** ** |       | (---) |       |+-----+|
+//     |*(   )*|       |*     *|       |(  *  )|       ||(***)||
+//     |-( + )-|       |*     *|       |( *** )|       || * * ||
+//     |*(   )*|       | *   * |       | |-+-| |       ||     ||
+//     | *-*-* |       |  * *  |       | +---+ |       |+-| |-+|
+// ---------------------------------------------------------------------------
+
+static const char _art_00_r0[] = {32, 32, 42, 42, 42, 32, 32}; // HEALTH
+static const char _art_00_r1[] = {32, 32, 42, 42, 42, 32, 32};
+static const char _art_00_r2[] = {42, 42, 42, 42, 42, 42, 42};
+static const char _art_00_r3[] = {32, 32, 42, 42, 42, 32, 32};
+static const char _art_00_r4[] = {32, 32, 42, 42, 42, 32, 32};
+
+static const char _art_01_r0[] = {32, 32, 47, 43, 47, 32, 32}; // PEACE
+static const char _art_01_r1[] = {32, 47, 32, 93, 32, 47, 32};
+static const char _art_01_r2[] = {40, 45, 45, 43, 45, 45, 41};
+static const char _art_01_r3[] = {32, 32, 32, 93, 32, 32, 32};
+static const char _art_01_r4[] = {32, 32, 32, 93, 32, 32, 32};
+
+static const char _art_02_r0[] = {43, 45, 45, 45, 45, 45, 43}; // FREEDOM
+static const char _art_02_r1[] = {93, 32, 93, 32, 93, 32, 93};
+static const char _art_02_r2[] = {93, 32, 93, 32, 32, 32, 93};
+static const char _art_02_r3[] = {93, 32, 93, 32, 93, 32, 93};
+static const char _art_02_r4[] = {43, 45, 45, 32, 32, 32, 43};
+
+static const char _art_03_r0[] = {40, 15, 41, 45, 40, 15, 41}; // CONNECT
+static const char _art_03_r1[] = {32, 93, 32, 32, 32, 93, 32};
+static const char _art_03_r2[] = {32, 43, 45, 43, 45, 43, 32};
+static const char _art_03_r3[] = {32, 32, 32, 93, 32, 32, 32};
+static const char _art_03_r4[] = {32, 32, 40, 15, 41, 32, 32};
+
+static const char _art_04_r0[] = {32, 46, 45, 45, 45, 46, 32}; // LEARN
+static const char _art_04_r1[] = {32, 93, 61, 61, 61, 93, 32};
+static const char _art_04_r2[] = {32, 93, 61, 61, 61, 93, 32};
+static const char _art_04_r3[] = {32, 93, 61, 61, 61, 93, 32};
+static const char _art_04_r4[] = {32, 43, 45, 45, 45, 43, 32};
+
+static const char _art_05_r0[] = {32, 93, 42, 42, 42, 42, 32}; // CREATE
+static const char _art_05_r1[] = {32, 93, 42, 42, 42, 42, 32};
+static const char _art_05_r2[] = {32, 93, 32, 32, 32, 32, 32};
+static const char _art_05_r3[] = {40, 15, 41, 32, 32, 32, 32};
+static const char _art_05_r4[] = {32, 42, 32, 32, 32, 32, 32};
+
+static const char _art_06_r0[] = {32, 32, 32, 93, 32, 32, 32}; // EQUAL
+static const char _art_06_r1[] = {32, 45, 45, 43, 45, 45, 32};
+static const char _art_06_r2[] = {27, 42, 29, 32, 27, 42, 29};
+static const char _art_06_r3[] = {32, 32, 32, 32, 32, 32, 32};
+static const char _art_06_r4[] = {43, 45, 45, 45, 45, 45, 43};
+
+static const char _art_07_r0[] = {32, 32, 46, 45, 45, 46, 32}; // SAFE
+static const char _art_07_r1[] = {32, 40, 32, 32, 32, 32, 41};
+static const char _art_07_r2[] = {32, 43, 45, 45, 45, 45, 43};
+static const char _art_07_r3[] = {32, 93, 40, 15, 41, 32, 93};
+static const char _art_07_r4[] = {32, 43, 45, 45, 45, 45, 43};
+
+static const char _art_08_r0[] = {32, 32, 32, 32, 32, 32, 32}; // TRUTH — eye
+static const char _art_08_r1[] = {32, 40, 45, 45, 45, 41, 32};
+static const char _art_08_r2[] = {40, 32, 40, 42, 41, 32, 41};
+static const char _art_08_r3[] = {32, 40, 45, 45, 45, 41, 32};
+static const char _art_08_r4[] = {32, 32, 32, 32, 32, 32, 32};
+
+static const char _art_09_r0[] = {32, 32, 40, 15, 41, 32, 32}; // HUMAN
+static const char _art_09_r1[] = {32, 32, 32, 93, 32, 32, 32};
+static const char _art_09_r2[] = {32, 45, 45, 43, 45, 45, 32};
+static const char _art_09_r3[] = {32, 32, 32, 93, 32, 32, 32};
+static const char _art_09_r4[] = {32, 32, 47, 25, 47, 32, 32};
+
+static const char _art_10_r0[] = {32, 32, 32, 32, 32, 160, 160}; // BETTER
+static const char _art_10_r1[] = {32, 32, 160, 32, 32, 160, 160};
+static const char _art_10_r2[] = {32, 32, 160, 32, 32, 160, 160};
+static const char _art_10_r3[] = {160, 32, 160, 32, 32, 160, 160};
+static const char _art_10_r4[] = {43, 45, 45, 45, 45, 45, 45};
+
+static const char _art_11_r0[] = {32, 46, 45, 45, 45, 46, 32}; // FUTURE
+static const char _art_11_r1[] = {40, 32, 32, 93, 32, 32, 41};
+static const char _art_11_r2[] = {40, 32, 45, 43, 32, 32, 41};
+static const char _art_11_r3[] = {40, 32, 32, 32, 32, 32, 41};
+static const char _art_11_r4[] = {32, 39, 45, 45, 45, 39, 32};
+
+static const char _art_12_r0[] = {32, 42, 45, 42, 45, 42, 32}; // WORK
+static const char _art_12_r1[] = {42, 40, 32, 32, 32, 41, 42};
+static const char _art_12_r2[] = {45, 40, 32, 43, 32, 41, 45};
+static const char _art_12_r3[] = {42, 40, 32, 32, 32, 41, 42};
+static const char _art_12_r4[] = {32, 42, 45, 42, 45, 42, 32};
+
+static const char _art_13_r0[] = {32, 42, 42, 32, 42, 42, 32}; // LOVE
+static const char _art_13_r1[] = {42, 32, 32, 32, 32, 32, 42};
+static const char _art_13_r2[] = {42, 32, 32, 32, 32, 32, 42};
+static const char _art_13_r3[] = {32, 42, 32, 32, 32, 42, 32};
+static const char _art_13_r4[] = {32, 32, 42, 32, 42, 32, 32};
+
+static const char _art_14_r0[] = {32, 40, 45, 45, 45, 41, 32}; // THINK
+static const char _art_14_r1[] = {40, 32, 32, 42, 32, 32, 41};
+static const char _art_14_r2[] = {40, 32, 42, 42, 42, 32, 41};
+static const char _art_14_r3[] = {32, 93, 45, 43, 45, 93, 32};
+static const char _art_14_r4[] = {32, 43, 45, 45, 45, 43, 32};
+
+static const char _art_15_r0[] = {43, 45, 45, 45, 45, 45, 43}; // DEFAULT
+static const char _art_15_r1[] = {93, 40, 42, 42, 42, 41, 93};
+static const char _art_15_r2[] = {93, 32, 42, 32, 42, 32, 93};
+static const char _art_15_r3[] = {93, 32, 32, 32, 32, 32, 93};
+static const char _art_15_r4[] = {43, 45, 93, 32, 93, 45, 43};
+
+static const char *const _art_table[16][5] = {
+    {_art_00_r0, _art_00_r1, _art_00_r2, _art_00_r3, _art_00_r4},
+    {_art_01_r0, _art_01_r1, _art_01_r2, _art_01_r3, _art_01_r4},
+    {_art_02_r0, _art_02_r1, _art_02_r2, _art_02_r3, _art_02_r4},
+    {_art_03_r0, _art_03_r1, _art_03_r2, _art_03_r3, _art_03_r4},
+    {_art_04_r0, _art_04_r1, _art_04_r2, _art_04_r3, _art_04_r4},
+    {_art_05_r0, _art_05_r1, _art_05_r2, _art_05_r3, _art_05_r4},
+    {_art_06_r0, _art_06_r1, _art_06_r2, _art_06_r3, _art_06_r4},
+    {_art_07_r0, _art_07_r1, _art_07_r2, _art_07_r3, _art_07_r4},
+    {_art_08_r0, _art_08_r1, _art_08_r2, _art_08_r3, _art_08_r4},
+    {_art_09_r0, _art_09_r1, _art_09_r2, _art_09_r3, _art_09_r4},
+    {_art_10_r0, _art_10_r1, _art_10_r2, _art_10_r3, _art_10_r4},
+    {_art_11_r0, _art_11_r1, _art_11_r2, _art_11_r3, _art_11_r4},
+    {_art_12_r0, _art_12_r1, _art_12_r2, _art_12_r3, _art_12_r4},
+    {_art_13_r0, _art_13_r1, _art_13_r2, _art_13_r3, _art_13_r4},
+    {_art_14_r0, _art_14_r1, _art_14_r2, _art_14_r3, _art_14_r4},
+    {_art_15_r0, _art_15_r1, _art_15_r2, _art_15_r3, _art_15_r4},
+};
+
+// One color per theme — reinforces the irony
+static const char _art_color[16] = {
+    RED,     //  0 HEALTH   — red cross becomes red data
+    LTGREEN, //  1 PEACE    — false green calm
+    CYAN,    //  2 FREEDOM  — cold cyan cage
+    LTBLUE,  //  3 CONNECT  — network blue
+    YELLOW,  //  4 LEARN    — warm curiosity, owned
+    PURPLE,  //  5 CREATE   — creative purple, permitted
+    ORANGE,  //  6 EQUAL    — warm scales, rigged
+    LTGREEN, //  7 SAFE     — green padlock, ironic
+    WHITE,   //  8 TRUTH    — white eye, blinding
+    LTGRAY,  //  9 HUMAN    — gray figure, optimised
+    LTGREEN, // 10 BETTER   — green bars, rising
+    LTBLUE,  // 11 FUTURE   — blue clock, allocated
+    ORANGE,  // 12 WORK     — orange cog, automated
+    RED,     // 13 LOVE     — red heart, scored
+    YELLOW,  // 14 THINK    — yellow bulb, assisted
+    MDGRAY,  // 15 DEFAULT  — gray telescreen
+};
+
+#define ART_START_ROW 6
+#define ART_START_COL 16
+#define ART_COLS 7
+
+void draw_art(char theme)
+{
+    char color = _art_color[theme];
+    for (char r = 0; r < 5; r++)
+    {
+        const char *row = _art_table[theme][r];
+        int base = (int)(ART_START_ROW + r) * COLS + ART_START_COL;
+        for (char c = 0; c < ART_COLS; c++)
+        {
+            SCREEN[base + c] = row[c];
+            COLORRAM[base + c] = color;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+//  find_theme() — local keyword scan, returns THEME_* constant
+//  Call BEFORE cls() while input_buf is still valid.
+// ---------------------------------------------------------------------------
+
+typedef struct
+{
+    const char *kw;
+    char theme;
+} ThemeEntry;
+
+static const char _tk_health[] = {8, 5, 1, 12, 20, 8, 0};
+static const char _tk_peace[] = {16, 5, 1, 3, 5, 0};
+static const char _tk_quiet[] = {17, 21, 9, 5, 20, 0};
+static const char _tk_harmony[] = {8, 1, 18, 13, 15, 14, 25, 0};
+static const char _tk_freedom[] = {6, 18, 5, 5, 4, 15, 13, 0};
+static const char _tk_free[] = {6, 18, 5, 5, 0};
+static const char _tk_connect[] = {3, 15, 14, 14, 5, 3, 20, 0};
+static const char _tk_learn[] = {12, 5, 1, 18, 14, 0};
+static const char _tk_knowledge[] = {11, 14, 15, 23, 12, 5, 4, 7, 5, 0};
+static const char _tk_education[] = {5, 4, 21, 3, 1, 20, 9, 15, 14, 0};
+static const char _tk_create[] = {3, 18, 5, 1, 20, 5, 0};
+static const char _tk_art[] = {1, 18, 20, 0};
+static const char _tk_music[] = {13, 21, 19, 9, 3, 0};
+static const char _tk_write[] = {23, 18, 9, 20, 5, 0};
+static const char _tk_equal[] = {5, 17, 21, 1, 12, 0};
+static const char _tk_fair[] = {6, 1, 9, 18, 0};
+static const char _tk_safe[] = {19, 1, 6, 5, 0};
+static const char _tk_security[] = {19, 5, 3, 21, 18, 9, 20, 25, 0};
+static const char _tk_protect[] = {16, 18, 15, 20, 5, 3, 20, 0};
+static const char _tk_truth[] = {20, 18, 21, 20, 8, 0};
+static const char _tk_honest[] = {8, 15, 14, 5, 19, 20, 0};
+static const char _tk_trust[] = {20, 18, 21, 19, 20, 0};
+static const char _tk_human[] = {8, 21, 13, 1, 14, 0};
+static const char _tk_people[] = {16, 5, 15, 16, 12, 5, 0};
+static const char _tk_better[] = {2, 5, 20, 20, 5, 18, 0};
+static const char _tk_improve[] = {9, 13, 16, 18, 15, 22, 5, 0};
+static const char _tk_progress[] = {16, 18, 15, 7, 18, 5, 19, 19, 0};
+static const char _tk_future[] = {6, 21, 20, 21, 18, 5, 0};
+static const char _tk_hope[] = {8, 15, 16, 5, 0};
+static const char _tk_tomorrow[] = {20, 15, 13, 15, 18, 18, 15, 23, 0};
+static const char _tk_work[] = {23, 15, 18, 11, 0};
+static const char _tk_job[] = {10, 15, 2, 0};
+static const char _tk_earn[] = {5, 1, 18, 14, 0};
+static const char _tk_love[] = {12, 15, 22, 5, 0};
+static const char _tk_family[] = {6, 1, 13, 9, 12, 25, 0};
+static const char _tk_together[] = {20, 15, 7, 5, 20, 8, 5, 18, 0};
+static const char _tk_think[] = {20, 8, 9, 14, 11, 0};
+static const char _tk_mind[] = {13, 9, 14, 4, 0};
+static const char _tk_idea[] = {9, 4, 5, 1, 0};
+
+static const ThemeEntry _theme_table[] = {
+    {_tk_health, THEME_HEALTH},
+    {_tk_peace, THEME_PEACE},
+    {_tk_quiet, THEME_PEACE},
+    {_tk_harmony, THEME_PEACE},
+    {_tk_freedom, THEME_FREEDOM},
+    {_tk_free, THEME_FREEDOM},
+    {_tk_connect, THEME_CONNECT},
+    {_tk_learn, THEME_LEARN},
+    {_tk_knowledge, THEME_LEARN},
+    {_tk_education, THEME_LEARN},
+    {_tk_create, THEME_CREATE},
+    {_tk_art, THEME_CREATE},
+    {_tk_music, THEME_CREATE},
+    {_tk_write, THEME_CREATE},
+    {_tk_equal, THEME_EQUAL},
+    {_tk_fair, THEME_EQUAL},
+    {_tk_safe, THEME_SAFE},
+    {_tk_security, THEME_SAFE},
+    {_tk_protect, THEME_SAFE},
+    {_tk_truth, THEME_TRUTH},
+    {_tk_honest, THEME_TRUTH},
+    {_tk_trust, THEME_TRUTH},
+    {_tk_human, THEME_HUMAN},
+    {_tk_people, THEME_HUMAN},
+    {_tk_better, THEME_BETTER},
+    {_tk_improve, THEME_BETTER},
+    {_tk_progress, THEME_BETTER},
+    {_tk_future, THEME_FUTURE},
+    {_tk_hope, THEME_FUTURE},
+    {_tk_tomorrow, THEME_FUTURE},
+    {_tk_work, THEME_WORK},
+    {_tk_job, THEME_WORK},
+    {_tk_earn, THEME_WORK},
+    {_tk_love, THEME_LOVE},
+    {_tk_family, THEME_LOVE},
+    {_tk_together, THEME_LOVE},
+    {_tk_think, THEME_THINK},
+    {_tk_mind, THEME_THINK},
+    {_tk_idea, THEME_THINK},
+};
+#define THEME_TABLE_COUNT 39
+
+char find_theme(const char *input, char ilen)
+{
+    for (char t = 0; t < THEME_TABLE_COUNT; t++)
+    {
+        const char *kw = _theme_table[t].kw;
+        char kwlen = 0;
+        while (kw[kwlen])
+            kwlen++;
+        if (kwlen > ilen)
+            continue;
+        for (char i = 0; i + kwlen <= ilen; i++)
+        {
+            char match = 1;
+            for (char j = 0; j < kwlen; j++)
+                if (input[i + j] != kw[j])
+                {
+                    match = 0;
+                    break;
+                }
+            if (match)
+                return _theme_table[t].theme;
+        }
+    }
+    return THEME_DEFAULT;
+}
+
+// ---------------------------------------------------------------------------
+//  Theme word arrays — 3 words per theme, shown on row 4
+// ---------------------------------------------------------------------------
+
+static const char tw_h0[] = {2, 15, 4, 25, 0};                            // BODY
+static const char tw_h1[] = {23, 5, 12, 12, 14, 5, 19, 19, 0};            // WELLNESS
+static const char tw_h2[] = {3, 15, 13, 16, 12, 9, 1, 14, 3, 5, 0};       // COMPLIANCE
+static const char tw_p0[] = {19, 9, 12, 5, 14, 3, 5, 0};                  // SILENCE
+static const char tw_p1[] = {15, 18, 4, 5, 18, 0};                        // ORDER
+static const char tw_p2[] = {3, 15, 14, 20, 18, 15, 12, 12, 5, 4, 0};     // CONTROLLED
+static const char tw_fr0[] = {16, 1, 18, 1, 13, 5, 20, 5, 18, 19, 0};     // PARAMETERS
+static const char tw_fr1[] = {2, 15, 21, 14, 4, 1, 18, 9, 5, 19, 0};      // BOUNDARIES
+static const char tw_fr2[] = {16, 5, 18, 13, 9, 20, 20, 5, 4, 0};         // PERMITTED
+static const char tw_c0[] = {14, 5, 20, 23, 15, 18, 11, 0};               // NETWORK
+static const char tw_c1[] = {19, 9, 7, 14, 1, 12, 0};                     // SIGNAL
+static const char tw_c2[] = {13, 15, 14, 9, 20, 15, 18, 5, 4, 0};         // MONITORED
+static const char tw_l0[] = {3, 21, 18, 18, 9, 3, 21, 12, 21, 13, 0};     // CURRICULUM
+static const char tw_l1[] = {1, 12, 7, 15, 18, 9, 20, 8, 13, 0};          // ALGORITHM
+static const char tw_l2[] = {3, 21, 18, 1, 20, 5, 4, 0};                  // CURATED
+static const char tw_cr0[] = {16, 5, 18, 13, 9, 20, 0};                   // PERMIT
+static const char tw_cr1[] = {1, 16, 16, 18, 15, 22, 5, 4, 0};            // APPROVED
+static const char tw_cr2[] = {1, 18, 3, 8, 9, 22, 5, 4, 0};               // ARCHIVED
+static const char tw_eq0[] = {19, 3, 15, 18, 5, 0};                       // SCORE
+static const char tw_eq1[] = {1, 19, 19, 9, 7, 14, 5, 4, 0};              // ASSIGNED
+static const char tw_eq2[] = {3, 1, 12, 9, 2, 18, 1, 20, 5, 4, 0};        // CALIBRATED
+static const char tw_s0[] = {12, 15, 7, 7, 5, 4, 0};                      // LOGGED
+static const char tw_s1[] = {20, 18, 1, 14, 19, 16, 1, 18, 5, 14, 20, 0}; // TRANSPARENT
+static const char tw_s2[] = {16, 18, 15, 20, 5, 3, 20, 5, 4, 0};          // PROTECTED
+static const char tw_t0[] = {22, 5, 18, 19, 9, 15, 14, 0};                // VERSION
+static const char tw_t1[] = {21, 16, 4, 1, 20, 5, 4, 0};                  // UPDATED
+static const char tw_t2[] = {4, 5, 12, 5, 20, 5, 4, 0};                   // DELETED
+static const char tw_hu0[] = {15, 16, 20, 9, 13, 9, 19, 5, 4, 0};         // OPTIMISED
+static const char tw_hu1[] = {21, 16, 7, 18, 1, 4, 5, 4, 0};              // UPGRADED
+static const char tw_hu2[] = {19, 3, 8, 5, 4, 21, 12, 5, 4, 0};           // SCHEDULED
+static const char tw_b0[] = {2, 1, 19, 5, 12, 9, 14, 5, 0};               // BASELINE
+static const char tw_b1[] = {13, 5, 20, 18, 9, 3, 19, 0};                 // METRICS
+static const char tw_b2[] = {19, 25, 19, 20, 5, 13, 0};                   // SYSTEM
+static const char tw_fu0[] = {1, 12, 12, 15, 3, 1, 20, 5, 4, 0};          // ALLOCATED
+static const char tw_fu1[] = {18, 15, 12, 5, 0};                          // ROLE
+static const char tw_fu2[] = {1, 19, 19, 9, 7, 14, 5, 4, 0};              // ASSIGNED
+static const char tw_w0[] = {1, 21, 20, 15, 13, 1, 20, 5, 4, 0};          // AUTOMATED
+static const char tw_w1[] = {18, 5, 4, 21, 14, 4, 1, 14, 20, 0};          // REDUNDANT
+static const char tw_w2[] = {18, 5, 16, 12, 1, 3, 5, 4, 0};               // REPLACED
+static const char tw_lo0[] = {3, 15, 13, 16, 1, 20, 9, 2, 12, 5, 0};      // COMPATIBLE
+static const char tw_lo1[] = {13, 1, 20, 3, 8, 5, 4, 0};                  // MATCHED
+static const char tw_lo2[] = {15, 16, 20, 9, 13, 9, 19, 5, 4, 0};         // OPTIMISED
+static const char tw_th0[] = {1, 19, 19, 9, 19, 20, 5, 4, 0};             // ASSISTED
+static const char tw_th1[] = {7, 21, 9, 4, 5, 4, 0};                      // GUIDED
+static const char tw_th2[] = {1, 16, 16, 18, 15, 22, 5, 4, 0};            // APPROVED
+static const char tw_d0[] = {16, 18, 15, 3, 5, 19, 19, 9, 14, 7, 0};      // PROCESSING
+static const char tw_d1[] = {1, 14, 1, 12, 25, 19, 9, 14, 7, 0};          // ANALYSING
+static const char tw_d2[] = {3, 1, 12, 3, 21, 12, 1, 20, 9, 14, 7, 0};    // CALCULATING
+
+static const char *const _theme_words[16][3] = {
+    {tw_h0, tw_h1, tw_h2},    //  0 HEALTH
+    {tw_p0, tw_p1, tw_p2},    //  1 PEACE
+    {tw_fr0, tw_fr1, tw_fr2}, //  2 FREEDOM
+    {tw_c0, tw_c1, tw_c2},    //  3 CONNECT
+    {tw_l0, tw_l1, tw_l2},    //  4 LEARN
+    {tw_cr0, tw_cr1, tw_cr2}, //  5 CREATE
+    {tw_eq0, tw_eq1, tw_eq2}, //  6 EQUAL
+    {tw_s0, tw_s1, tw_s2},    //  7 SAFE
+    {tw_t0, tw_t1, tw_t2},    //  8 TRUTH
+    {tw_hu0, tw_hu1, tw_hu2}, //  9 HUMAN
+    {tw_b0, tw_b1, tw_b2},    // 10 BETTER
+    {tw_fu0, tw_fu1, tw_fu2}, // 11 FUTURE
+    {tw_w0, tw_w1, tw_w2},    // 12 WORK
+    {tw_lo0, tw_lo1, tw_lo2}, // 13 LOVE
+    {tw_th0, tw_th1, tw_th2}, // 14 THINK
+    {tw_d0, tw_d1, tw_d2},    // 15 DEFAULT
+};
+
+// Generic 1984 phrases — row 24
+static const char _gp0[] = {20, 8, 5, 32, 19, 25, 19, 20, 5, 13, 32, 9, 19, 32, 12, 9, 19, 20, 5, 14, 9, 14, 7, 0}; // THE SYSTEM IS LISTENING
+static const char _gp1[] = {25, 15, 21, 18, 32, 4, 1, 20, 1, 32, 9, 19, 32, 2, 5, 9, 14, 7, 32, 6, 9, 12, 5, 4, 0}; // YOUR DATA IS BEING FILED
+static const char _gp2[] = {2, 9, 7, 32, 2, 18, 15, 20, 8, 5, 18, 32, 9, 19, 32, 23, 1, 20, 3, 8, 9, 14, 7, 0};     // BIG BROTHER IS WATCHING
+static const char _gp3[] = {20, 8, 15, 21, 7, 8, 20, 32, 3, 18, 9, 13, 5, 32, 4, 5, 20, 5, 3, 20, 5, 4, 0};         // THOUGHT CRIME DETECTED
+
+static const char *const _generic_phrases[4] = {_gp0, _gp1, _gp2, _gp3};
+#define WAIT_NUM_CYCLES 5 // ~7.5 sec — increase for slower SML
+
+// Dot columns on row 18 — centered: col 18, 20, 22 (3 dots with 1-space gaps)
+#define DOT_ROW 18
+
+// Pulse the art color brighter/dimmer using a small brightness table.
+// Each entry is a VIC-II color index stepping from dim to bright and back.
+// We use 6 steps per direction, call once per frame-group during the hold.
+static const char _pulse_colors[16][6] = {
+    {DKGRAY, MDGRAY, LTGRAY, RED, LTRED, RED},        //  0 HEALTH
+    {DKGRAY, MDGRAY, GREEN, LTGREEN, GREEN, LTGREEN}, //  1 PEACE
+    {DKGRAY, BLUE, CYAN, LTBLUE, CYAN, LTBLUE},       //  2 FREEDOM
+    {DKGRAY, BLUE, LTBLUE, WHITE, LTBLUE, WHITE},     //  3 CONNECT
+    {DKGRAY, BROWN, ORANGE, YELLOW, ORANGE, YELLOW},  //  4 LEARN
+    {DKGRAY, BLUE, PURPLE, LTBLUE, PURPLE, LTBLUE},   //  5 CREATE
+    {DKGRAY, BROWN, ORANGE, YELLOW, ORANGE, YELLOW},  //  6 EQUAL
+    {DKGRAY, MDGRAY, GREEN, LTGREEN, GREEN, LTGREEN}, //  7 SAFE
+    {DKGRAY, MDGRAY, LTGRAY, WHITE, LTGRAY, WHITE},   //  8 TRUTH
+    {DKGRAY, MDGRAY, LTGRAY, WHITE, LTGRAY, WHITE},   //  9 HUMAN
+    {DKGRAY, MDGRAY, GREEN, LTGREEN, GREEN, LTGREEN}, // 10 BETTER
+    {DKGRAY, BLUE, LTBLUE, WHITE, LTBLUE, WHITE},     // 11 FUTURE
+    {DKGRAY, BROWN, ORANGE, YELLOW, ORANGE, YELLOW},  // 12 WORK
+    {DKGRAY, MDGRAY, LTRED, RED, LTRED, RED},         // 13 LOVE
+    {DKGRAY, BROWN, ORANGE, YELLOW, ORANGE, YELLOW},  // 14 THINK
+    {DKGRAY, MDGRAY, MDGRAY, LTGRAY, MDGRAY, LTGRAY}, // 15 DEFAULT
+};
+
+// Apply one pulse step — recolor all art rows to the given color
+void pulse_art_color(char theme, char step)
+{
+    char color = _pulse_colors[theme][step];
+    for (char r = 0; r < 5; r++)
+        rowcol(ART_START_ROW + r, color);
+}
+
+void show_waiting(char theme)
+{
+    char word_idx = 0;
+    char phrase_idx = 0;
+
+    // Dot sweep state — persists across cycles so the sweep runs continuously
+    char dot_col = 0;  // next column to light (0-39)
+    char dot_full = 0; // 1 = row fully lit, holding before clear
+    char dot_hold = 0; // frames held at full
+    char dot_tick = 0; // frame counter for column advance speed
+
+    for (char cycle = 0; cycle < WAIT_NUM_CYCLES; cycle++)
+    {
+        // Draw art, word, phrase for this cycle
+        draw_art(theme);
+        pcenter(4, _theme_words[theme][word_idx], LTBLUE);
+        word_idx++;
+        if (word_idx >= 3)
+            word_idx = 0;
+
+        pcenter(24, _generic_phrases[phrase_idx], DKGRAY);
+        phrase_idx++;
+        if (phrase_idx >= 4)
+            phrase_idx = 0;
+
+        // Hold phase — dot sweep + art pulse run simultaneously
+        // 75 frames per cycle (~1.5 sec). Art pulse steps every 12 frames.
+        for (char hold = 0; hold < 75; hold++)
+        {
+            wait_frame();
+
+            // --- Dot sweep across row 18 ---
+            dot_tick++;
+            if (!dot_full)
+            {
+                // One new dot column every 2 frames
+                if (dot_tick >= 2)
+                {
+                    dot_tick = 0;
+                    if (dot_col < 40)
+                    {
+                        SCREEN[DOT_ROW * 40 + dot_col] = 46; // '.'
+                        COLORRAM[DOT_ROW * 40 + dot_col] = DKGRAY;
+                        dot_col++;
+                    }
+                    if (dot_col >= 40)
+                        dot_full = 1;
+                }
+            }
+            else
+            {
+                // Hold full row ~18 frames then clear and restart
+                dot_hold++;
+                if (dot_hold >= 18)
+                {
+                    for (char dc = 0; dc < 40; dc++)
+                    {
+                        SCREEN[DOT_ROW * 40 + dc] = 32;
+                        COLORRAM[DOT_ROW * 40 + dc] = BLACK;
+                    }
+                    dot_col = 0;
+                    dot_full = 0;
+                    dot_hold = 0;
+                    dot_tick = 0;
+                }
+            }
+
+            // --- Art pulse — 6 brightness steps over the hold period ---
+            char pulse_step = hold / 12;
+            if (pulse_step > 5)
+                pulse_step = 5;
+            pulse_art_color(theme, pulse_step);
+        }
+
+        // Fade word and phrase
+        rowcol(4, BLACK);
+        rowcol(24, BLACK);
+        wait_frames(6);
+
+        // Dissolve art row by row downward
+        for (char r = 0; r < 5; r++)
+        {
+            rowcol(ART_START_ROW + r, BLACK);
+            wait_frames(4);
+        }
+
+        wait_frames(6);
+    }
+
+    // Clear dot row before returning
+    for (char dc = 0; dc < 40; dc++)
+    {
+        SCREEN[DOT_ROW * 40 + dc] = 32;
+        COLORRAM[DOT_ROW * 40 + dc] = BLACK;
+    }
+    cls();
+    cls();
+}
+
+// ===========================================================================
+//
+//  SCENE 3 — THE QUESTION
+//
+//  User is asked: WHAT IS YOUR DREAM FOR TECHNOLOGY?
+//  They type their answer. The machine processes it.
+//  While waiting, themed ASCII art and 1984 phrases cycle on screen.
+//  The response echoes their exact words back, then reframes them.
+//  Ends on: YOUR DREAM IS THE SYSTEM
+//
+// ===========================================================================
+
+static const char s3_q[] = {23, 8, 1, 20, 32, 9, 19, 32, 25, 15, 21, 18, 32, 4, 18, 5, 1, 13, 32, 6, 15, 18, 32, 20, 5, 3, 8, 14, 15, 12, 15, 7, 25, 63, 0};            // WHAT IS YOUR DREAM FOR TECHNOLOGY?
+static const char s3_hint[] = {20, 25, 16, 5, 32, 25, 15, 21, 18, 32, 1, 14, 19, 23, 5, 18, 32, 32, 18, 5, 20, 21, 18, 14, 32, 20, 15, 32, 3, 15, 14, 6, 9, 18, 13, 0}; // TYPE YOUR ANSWER  RETURN TO CONFIRM
+static const char s3_pfx[] = {62, 32, 0};                                                                                                                               // "> "
+static const char s3_hdr[] = {25, 15, 21, 32, 4, 18, 5, 1, 13, 5, 4, 32, 15, 6, 0};                                                                                     // YOU DREAMED OF
+static const char s3_sys[] = {20, 8, 5, 32, 19, 25, 19, 20, 5, 13, 32, 8, 5, 1, 18, 4, 0};                                                                              // THE SYSTEM HEARD
+static const char s3_end[] = {25, 15, 21, 18, 32, 4, 18, 5, 1, 13, 32, 9, 19, 32, 20, 8, 5, 32, 19, 25, 19, 20, 5, 13, 0};                                              // YOUR DREAM IS THE SYSTEM
+
+void scene3_run(void)
+{
     cls();
     cls();
 
-    pcenter(8, s2_q, YELLOW);
+    pcenter(8, s3_q, YELLOW);
     hline(10, 45, DKGRAY);
-    pat(12, 1, s2_pfx, LTGRAY);
-    pcenter(22, s2_hint, DKGRAY);
+    pat(12, 1, s3_pfx, LTGRAY);
+    pcenter(22, s3_hint, DKGRAY);
 
     static char input_buf[39];
     for (char i = 0; i < 39; i++)
         input_buf[i] = 32;
     char ilen = input_line(12, 3, 36, input_buf, WHITE);
 
-    // Trim trailing spaces from input — find real length
+    // Trim trailing spaces
     char rlen = ilen;
     while (rlen > 0 && input_buf[rlen - 1] == 32)
         rlen--;
 
-    // Immediately clear everything — the machine takes over
+    // Detect theme BEFORE clearing screen
+    char theme = find_theme(input_buf, rlen);
+
+    // Machine takes over — clear and show waiting display
     cls();
     cls();
+    show_waiting(theme); // blocks ~7.5 sec while cartridge handles HTTPS
 
-    // Thinking dots — 3 dots pulse in centre while "processing"
-    // 8 cycles = ~8 seconds of masking time for SML
-    for (char cycle = 0; cycle < 8; cycle++)
-    {
-        pch(12, 18, 46, MDGRAY);
-        wait_frames(12);
-        pch(12, 20, 46, MDGRAY);
-        wait_frames(12);
-        pch(12, 22, 46, MDGRAY);
-        wait_frames(20);
-        pch(12, 18, 32, BLACK);
-        pch(12, 20, 32, BLACK);
-        pch(12, 22, 32, BLACK);
-        wait_frames(10);
-    }
-
-    // Column dissolve — stride 7 through all 40 columns
-    char dcol = 0;
-    for (char step = 0; step < 40; step++)
-    {
-        for (char row = 0; row < 25; row++)
-            COLORRAM[(int)row * 40 + dcol] = BLACK;
-        dcol = (dcol + 7) % 40;
-        wait_frame();
-    }
-    wait_frames(15);
-    cls();
-    cls();
-    wait_frames(20);
-
-    // --- THE RESPONSE ---
-    // Keyword matching via responses.h (generated from responses.txt by convert.py)
-    // To add/edit responses: edit responses.txt, run: python convert.py responses.txt responses.h
-    // Phase 2: replace find_response() with SML serial call, keep display code identical.
-
+    // ---------------------------------------------------------------------------
+    // Keyword matching via responses.h
+    // To add/edit: edit responses.txt, run: python convert.py responses.txt responses.h
+    // SML upgrade: replace find_response() with serial call; keep display code identical
+    // ---------------------------------------------------------------------------
     const char *match_l1;
     const char *match_l2;
     find_response(input_buf, rlen, &match_l1, &match_l2);
 
-    // Static strings for response layout
-    static const char r_hdr[] = {25, 15, 21, 32, 4, 18, 5, 1, 13, 5, 4, 32, 15, 6, 0};                                        // YOU DREAMED OF
-    static const char r_sys[] = {20, 8, 5, 32, 19, 25, 19, 20, 5, 13, 32, 8, 5, 1, 18, 4, 0};                                 // THE SYSTEM HEARD
-    static const char r_end[] = {25, 15, 21, 18, 32, 4, 18, 5, 1, 13, 32, 9, 19, 32, 20, 8, 5, 32, 19, 25, 19, 20, 5, 13, 0}; // YOUR DREAM IS THE SYSTEM
-
-    // Reveal the response
-    typeout(7, (40 - 14) >> 1, r_hdr, DKGRAY, 3);
+    // Reveal response
+    typeout(7, (40 - 14) >> 1, s3_hdr, DKGRAY, 3);
     wait_frames(15);
 
-    // Their exact words in white — this is the magic moment
+    // Their exact words echoed back in white — the magic moment
     if (rlen > 0)
     {
         char icol = (40 - rlen) >> 1;
@@ -1043,10 +1424,9 @@ void scene2_run(void)
     hline(10, 45, DKGRAY);
     wait_frames(20);
 
-    typeout(12, (40 - 16) >> 1, r_sys, DKGRAY, 3);
+    typeout(12, (40 - 16) >> 1, s3_sys, DKGRAY, 3);
     wait_frames(20);
 
-    // Measure response lines for centering
     char l1len = 0;
     while (match_l1[l1len])
         l1len++;
@@ -1061,35 +1441,59 @@ void scene2_run(void)
     hline(16, 45, DKGRAY);
     wait_frames(30);
 
-    typeout(18, (40 - 24) >> 1, r_end, MDGRAY, 4);
+    typeout(18, (40 - 24) >> 1, s3_end, MDGRAY, 4);
 
     wait_frames(120);
     fade_to_black();
     wait_frames(20);
+}
 
-    // -----------------------------------------------------------------------
-    // PART 4 — AUTHORSHIP STATEMENT
-    // Ends on "WRITTEN BY THE FUTURE" — scene 3 delivers the payoff
-    // -----------------------------------------------------------------------
+// ===========================================================================
+//
+//  SCENE 4 — AUTHORSHIP
+//
+//  The machine reveals who made it — and what made the machine.
+//  Ends on "WRITTEN BY THE FUTURE" with a blinking cursor,
+//  implying the story is not over.
+//
+//  Row  6:  THIS DEMO WAS MADE BY AI
+//  Row  8:  DIRECTED BY [name]
+//  Row 10:  COMMODORE 64  2026
+//  Row 13:  [separator]
+//  Row 16:  THE MACHINE THAT HELD THE
+//  Row 17:  FIRST PROMISE NOW RUNS CODE
+//  Row 18:  WRITTEN BY THE FUTURE  [blinking cursor]
+//
+// ===========================================================================
+
+static const char s4_by1[] = {20, 8, 9, 19, 32, 4, 5, 13, 15, 32, 23, 1, 19, 32, 13, 1, 4, 5, 32, 2, 25, 32, 1, 9, 0};                                                // THIS DEMO WAS MADE BY AI
+static const char s4_by2[] = {4, 9, 18, 5, 3, 20, 5, 4, 32, 2, 25, 32, 10, 15, 14, 1, 19, 32, 19, 3, 8, 15, 21, 19, 20, 18, 21, 16, 45, 20, 8, 15, 13, 19, 5, 14, 0}; // DIRECTED BY JONAS SCHOUSTRUP-THOMSEN
+static const char s4_by3[] = {3, 15, 13, 13, 15, 4, 15, 18, 5, 32, 54, 52, 32, 32, 50, 48, 50, 54, 0};                                                                // COMMODORE 64  2026
+static const char s4_m1[] = {20, 8, 5, 32, 13, 1, 3, 8, 9, 14, 5, 32, 20, 8, 1, 20, 32, 8, 5, 12, 4, 32, 20, 8, 5, 0};                                                // THE MACHINE THAT HELD THE
+static const char s4_m2[] = {6, 9, 18, 19, 20, 32, 16, 18, 15, 13, 9, 19, 5, 32, 14, 15, 23, 32, 18, 21, 14, 19, 32, 3, 15, 4, 5, 0};                                 // FIRST PROMISE NOW RUNS CODE
+static const char s4_m3[] = {23, 18, 9, 20, 20, 5, 14, 32, 2, 25, 32, 20, 8, 5, 32, 6, 21, 20, 21, 18, 5, 0};                                                         // WRITTEN BY THE FUTURE
+
+void scene4_run(void)
+{
     cls();
     cls();
 
     wait_frames(30);
-    typeout(6, (40 - 24) >> 1, s2_by1, LTGRAY, 2);
+    typeout(6, (40 - 24) >> 1, s4_by1, LTGRAY, 2);
     wait_frames(15);
-    typeout(8, (40 - 27) >> 1, s2_by2, WHITE, 2);
+    typeout(8, (40 - 36) >> 1, s4_by2, WHITE, 2);
     wait_frames(15);
-    typeout(10, (40 - 18) >> 1, s2_by3, DKGRAY, 2);
+    typeout(10, (40 - 18) >> 1, s4_by3, LTBLUE, 2);
     wait_frames(30);
     hline(13, 45, DKGRAY);
     wait_frames(20);
-    typeout(16, (40 - 25) >> 1, s2_m1, MDGRAY, 3);
+    typeout(16, (40 - 25) >> 1, s4_m1, MDGRAY, 3);
     wait_frames(10);
-    typeout(17, (40 - 27) >> 1, s2_m2, MDGRAY, 3);
+    typeout(17, (40 - 27) >> 1, s4_m2, MDGRAY, 3);
     wait_frames(20);
-    typeout(18, (40 - 21) >> 1, s2_m3, WHITE, 4);
+    typeout(18, (40 - 21) >> 1, s4_m3, WHITE, 4);
 
-    // Hold on the ambiguous line — blinking cursor implies incompleteness
+    // Blinking cursor after "WRITTEN BY THE FUTURE" — implies incompleteness
     wait_frames(60);
     char cpos = ((40 - 21) >> 1) + 21;
     for (char b = 0; b < 10; b++)
@@ -1106,62 +1510,45 @@ void scene2_run(void)
 
 // ===========================================================================
 //
-//  SCENE 3 — THE QUESTION
+//  SCENE 5 — THE PROMISE
 //
-//  Pure black. Two lines appear slowly. Raster bars in deep red.
-//  No scroller. Just the question hanging in silence.
+//  Pure black. Two questions appear slowly in silence. No scroller.
+//  Just the question hanging in the dark.
+//  The final line blinks forever — the demo never truly ends.
 //
 //  Row 10:  DID WE GET WHAT WE WERE PROMISED
-//  Row 12:  OR SOMETHING FAR MORE DANGEROUS
-//  Row 18:  PRESS FIRE TO CONTINUE
+//  Row 12:  OR SOMETHING FAR MORE...
+//  Row 18:  THE END IS NOT YET WRITTEN  (blinks forever)
 //
 // ===========================================================================
 
-static const char s3_q1[] = {
-    4, 9, 4, 32, 23, 5, 32, 7, 5, 20, 32, 23, 8, 1, 20, 32, 23, 5, 32, 23, 5, 18, 5, 32, 16, 18, 15, 13, 9, 19, 5, 4, 0};
-static const char s3_q2[] = {
-    15, 18, 32, 19, 15, 13, 5, 20, 8, 9, 14, 7, 32, 6, 1, 18, 32, 13, 15, 18, 5, 46, 46, 46, 0};
-// "OR SOMETHING FAR MORE..."  -- ends with ellipsis, color MDGRAY (neutral, neither hope nor warning)
-// "THE END IS NOT YET WRITTEN"
-static const char s3_end[] = {
-    20, 8, 5, 32, 5, 14, 4, 32, 9, 19, 32, 14, 15, 20, 32, 25, 5, 20, 32, 23, 18, 9, 20, 20, 5, 14, 0};
+static const char s5_q1[] = {4, 9, 4, 32, 23, 5, 32, 7, 5, 20, 32, 23, 8, 1, 20, 32, 23, 5, 32, 23, 5, 18, 5, 32, 16, 18, 15, 13, 9, 19, 5, 4, 0};
+// DID WE GET WHAT WE WERE PROMISED
+static const char s5_q2[] = {15, 18, 32, 19, 15, 13, 5, 20, 8, 9, 14, 7, 32, 6, 1, 18, 32, 13, 15, 18, 5, 46, 46, 46, 0};
+// OR SOMETHING FAR MORE...
+static const char s5_end[] = {20, 8, 5, 32, 5, 14, 4, 32, 9, 19, 32, 14, 15, 20, 32, 25, 5, 20, 32, 23, 18, 9, 20, 20, 5, 14, 0};
+// THE END IS NOT YET WRITTEN
 
-void scene3_run(void)
+void scene5_run(void)
 {
     cls();
 
     wait_frames(40);
-    pcenter(10, s3_q1, WHITE);
+    pcenter(10, s5_q1, WHITE);
     wait_frames(50);
-    pcenter(12, s3_q2, MDGRAY);
+    pcenter(12, s5_q2, MDGRAY);
     wait_frames(40);
 
-    // Show the final line and blink it — demo ends here
-    pcenter(18, s3_end, MDGRAY);
+    pcenter(18, s5_end, MDGRAY);
     blink_reset();
 
     for (;;)
     {
         wait_frame();
         blink_row(18, WHITE);
-        // Loop forever — this is the end
+        // Loop forever — THE END IS NOT YET WRITTEN
     }
 }
-
-// ===========================================================================
-//
-//  SCENE 4 — END SCREEN (loops)
-//
-//  Cool blue/purple bars. The final line blinks.
-//
-//  Row  8:  A C64 DEMO
-//  Row 11:  [separator]
-//  Row 13:  THE END IS NOT YET WRITTEN
-//  Row 17:  [separator]
-//  Row 20:  GEORGE ORWELL  1949
-//  Row 24:  [scroller]
-//
-// ===========================================================================
 
 // ===========================================================================
 //  MAIN
@@ -1172,9 +1559,11 @@ int main(void)
     vic.color_border = BLACK;
     vic.color_back = BLACK;
 
-    scene1_run();
-    scene2_run();
-    scene3_run(); // loops forever — THE END IS NOT YET WRITTEN
+    scene1_run(); // The Eye
+    scene2_run(); // Doublethink
+    scene3_run(); // The Question + waiting display + response
+    scene4_run(); // Authorship
+    scene5_run(); // The Promise — loops forever
 
     return 0;
 }
