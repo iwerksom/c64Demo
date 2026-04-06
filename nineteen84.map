@@ -1,185 +1,418 @@
 sections
-0880 - 0fa2 : DATA, code
-0fa2 - 127e : DATA, data
-127e - 12a6 : BSS, bss
-12a8 - 9000 : HEAP, heap
-9000 - a000 : STACK, stack
+0880 - 171c : DATA, code
+171c - 226b : DATA, data
+226b - 2399 : BSS, bss
+23a0 - 9000 : HEAP, heap
+9000 - 9ff6 : STACK, stack
 00f7 - 00f7 : ZEROPAGE, zeropage
 0801 - 0853 : DATA, startup
 a000 - a000 : SSTACK, sstack
 a000 - a000 : SSTACK, cls@stack
-a000 - a000 : SSTACK, print_at@stack
-a000 - a000 : SSTACK, print_centered@stack
+a000 - a000 : SSTACK, sprite_load@stack
+9ff6 - a000 : SSTACK, draw_year@stack
 a000 - a000 : SSTACK, hline@stack
+a000 - a000 : SSTACK, pat@stack
+a000 - a000 : SSTACK, pcenter@stack
 a000 - a000 : SSTACK, scroll_init@stack
 a000 - a000 : SSTACK, wait_frame@stack
 a000 - a000 : SSTACK, scroll_step@stack
+a000 - a000 : SSTACK, rowcol@stack
 a000 - a000 : SSTACK, blink_row@stack
-a000 - a000 : SSTACK, fire_pressed@stack
-a000 - a000 : SSTACK, fade_to_black@stack
+a000 - a000 : SSTACK, any_key@stack
 a000 - a000 : SSTACK, wait_frames@stack
-a000 - a000 : SSTACK, scene1_run@stack
-a000 - a000 : SSTACK, glitch_row@stack
-a000 - a000 : SSTACK, scene2_run@stack
-a000 - a000 : SSTACK, draw_bars@stack
-a000 - a000 : SSTACK, rotate_bars_left@stack
-a000 - a000 : SSTACK, scene3_run@stack
-a000 - a000 : SSTACK, scene4_run@stack
-a000 - a000 : SSTACK, main@stack
+a000 - a000 : SSTACK, fade_to_black@stack
+9ff6 - 9ff6 : SSTACK, scene1_run@stack
+a000 - a000 : SSTACK, scroller_init@stack
+a000 - a000 : SSTACK, scroller_step@stack
+a000 - a000 : SSTACK, scroller_crossflash@stack
+a000 - a000 : SSTACK, pch@stack
+a000 - a000 : SSTACK, reveal_word@stack
+a000 - a000 : SSTACK, glitch_transition@stack
+a000 - a000 : SSTACK, read_key@stack
+a000 - a000 : SSTACK, petscii_to_sc@stack
+a000 - a000 : SSTACK, input_line@stack
+a000 - a000 : SSTACK, find_response@stack
+a000 - a000 : SSTACK, typeout@stack
+9ffc - a000 : SSTACK, scene2_run@stack
+9ff6 - 9ff6 : SSTACK, main@stack
 
 regions
 00f7 - 00ff : 0000, 0000, zeropage
 0801 - 0880 : 0853, 0052, startup
-0880 - 9000 : 127e, 0a26, main
+0880 - 9000 : 226b, 1b19, main
 
 objects
 00f7 - 00f7 : ZeroStart, START:zeropage
 00f7 - 00f7 : ZeroEnd, END:zeropage
 0801 - 0853 : startup, NATIVE_CODE:startup
-0880 - 094e : main, NATIVE_CODE:code
-094e - 09d3 : scene1_run, NATIVE_CODE:code
-09d3 - 09d7 : wait_frames@proxy, NATIVE_CODE:code
-09d7 - 09e4 : wait_frames, NATIVE_CODE:code
-09e4 - 09e8 : cls@proxy, NATIVE_CODE:code
-09e8 - 0a21 : cls, NATIVE_CODE:code
-0a21 - 0a29 : print_centered@proxy, NATIVE_CODE:code
-0a29 - 0a55 : print_centered, NATIVE_CODE:code
-0a55 - 0ab1 : print_at, NATIVE_CODE:code
-0ab1 - 0ae8 : hline, NATIVE_CODE:code
-0ae8 - 0afe : scroll_init, NATIVE_CODE:code
-0afe - 0b0d : wait_frame, NATIVE_CODE:code
-0b0d - 0b6b : scroll_step, NATIVE_CODE:code
-0b6b - 0bab : blink_row, NATIVE_CODE:code
-0bab - 0bdd : fire_pressed, NATIVE_CODE:code
-0bdd - 0be1 : fade_to_black@proxy, NATIVE_CODE:code
-0be1 - 0c16 : fade_to_black, NATIVE_CODE:code
-0c16 - 0c7c : scene2_run, NATIVE_CODE:code
-0c7c - 0ca3 : glitch_row, NATIVE_CODE:code
-0ca3 - 0e3e : scene3_run, NATIVE_CODE:code
-0e3e - 0e75 : draw_bars, NATIVE_CODE:code
-0e75 - 0e89 : rotate_bars_left, NATIVE_CODE:code
-0e89 - 0f19 : scene4_run, NATIVE_CODE:code
-0f19 - 0f20 : wait_frames@proxy, NATIVE_CODE:code
-0f20 - 0f2f : __multab40L, DATA:code
-0f2f - 0f3e : __multab40H, DATA:code
-0f3e - 0f45 : print_at@proxy, NATIVE_CODE:code
-0f45 - 0f4c : print_at@proxy, NATIVE_CODE:code
-0f4c - 0f53 : wait_frames@proxy, NATIVE_CODE:code
-0f53 - 0f5a : wait_frames@proxy, NATIVE_CODE:code
-0f5a - 0f61 : fade_to_black@proxy, NATIVE_CODE:code
-0f61 - 0f68 : print_centered@proxy, NATIVE_CODE:code
-0f68 - 0f73 : print_centered@proxy, NATIVE_CODE:code
-0f73 - 0f7a : print_centered@proxy, NATIVE_CODE:code
-0f7a - 0f81 : print_centered@proxy, NATIVE_CODE:code
-0f81 - 0f88 : print_centered@proxy, NATIVE_CODE:code
-0f88 - 0f9b : print_centered@proxy, NATIVE_CODE:code
-0f9b - 0fa2 : cls@proxy, NATIVE_CODE:code
-0fa2 - 0fa3 : spentry, DATA:data
-0fa3 - 0fab : bar_pal, DATA:data
-0fab - 0fc0 : s_title, DATA:data
-0fc0 - 0fe0 : s_sub1, DATA:data
-0fe0 - 0ff1 : s_sub2, DATA:data
-0ff1 - 0ffb : eye, DATA:data
-0ffb - 0ffd : scroll_idx, DATA:data
-0ffd - 0ffe : scroll_tick, DATA:data
-0ffe - 0fff : blink_cnt, DATA:data
-0fff - 1000 : blink_phase, DATA:data
-1000 - 1014 : s_orwell, DATA:data
-1014 - 102c : s_bb, DATA:data
-102c - 1043 : s_press, DATA:data
-1043 - 114f : scroll_text, DATA:data
-114f - 115c : s_sl1, DATA:data
-115c - 1164 : glitch_pal, DATA:data
-1164 - 1177 : s_sl2, DATA:data
-1177 - 118d : s_sl3, DATA:data
-118d - 11b0 : s_tc, DATA:data
-11b0 - 11b5 : col_then, DATA:data
-11b5 - 11b9 : col_now, DATA:data
-11b9 - 11cf : s_ai3, DATA:data
-11cf - 11ec : s_ai2, DATA:data
-11ec - 11ff : s_ai1, DATA:data
-1200 - 1217 : s_ai4, DATA:data
-1217 - 1238 : s_q1, DATA:data
-1238 - 1258 : s_q2, DATA:data
-1258 - 1263 : s_c64, DATA:data
-1263 - 127e : s_end, DATA:data
-127e - 12a6 : scroll_buf, DATA:bss
-127e - 127e : BSSStart, START:bss
-12a6 - 12a6 : BSSEnd, END:bss
-a000 - a000 : StackEnd, END:stack
+0880 - 08ee : main, NATIVE_CODE:code
+08ee - 09f3 : scene1_run, NATIVE_CODE:code
+09f3 - 09f7 : wait_frames@proxy, NATIVE_CODE:code
+09f7 - 0a05 : wait_frames, NATIVE_CODE:code
+0a05 - 0a9f : glitch_transition, NATIVE_CODE:code
+0a9f - 0ad8 : cls, NATIVE_CODE:code
+0ad8 - 0aea : sprite_load, NATIVE_CODE:code
+0aea - 0b81 : draw_year, NATIVE_CODE:code
+0b81 - 0bb8 : hline, NATIVE_CODE:code
+0bb8 - 0bbc : pcenter@proxy, NATIVE_CODE:code
+0bbc - 0be8 : pcenter, NATIVE_CODE:code
+0be8 - 0c44 : pat, NATIVE_CODE:code
+0c44 - 0c5a : scroll_init, NATIVE_CODE:code
+0c5a - 0c69 : wait_frame, NATIVE_CODE:code
+0c69 - 0cb1 : scroll_step, NATIVE_CODE:code
+0cb1 - 0cdf : blink_row, NATIVE_CODE:code
+0cdf - 0d0b : rowcol, NATIVE_CODE:code
+0d0b - 0d46 : any_key, NATIVE_CODE:code
+0d46 - 0d63 : fade_to_black, NATIVE_CODE:code
+0d63 - 1253 : scene2_run, NATIVE_CODE:code
+1253 - 1291 : scroller_init, NATIVE_CODE:code
+1291 - 1389 : scroller_step, NATIVE_CODE:code
+1389 - 13ed : scroller_crossflash, NATIVE_CODE:code
+13ed - 1401 : reveal_word@proxy, NATIVE_CODE:code
+1401 - 1430 : reveal_word, NATIVE_CODE:code
+1430 - 1434 : pch@proxy, NATIVE_CODE:code
+1434 - 146f : pch, NATIVE_CODE:code
+146f - 1529 : input_line, NATIVE_CODE:code
+1529 - 154c : read_key, NATIVE_CODE:code
+154c - 1577 : petscii_to_sc, NATIVE_CODE:code
+1577 - 1605 : find_response, NATIVE_CODE:code
+1605 - 1609 : typeout@proxy, NATIVE_CODE:code
+1609 - 1636 : typeout, NATIVE_CODE:code
+1636 - 16bb : divmod, NATIVE_CODE:code
+16bb - 16bf : __multab100L, DATA:code
+16bf - 16c6 : typeout@proxy, NATIVE_CODE:code
+16c6 - 16dd : reveal_word@proxy, NATIVE_CODE:code
+16dd - 16e4 : pat@proxy, NATIVE_CODE:code
+16e4 - 16eb : pch@proxy, NATIVE_CODE:code
+16eb - 16f2 : pch@proxy, NATIVE_CODE:code
+16f2 - 16f9 : pch@proxy, NATIVE_CODE:code
+16f9 - 1700 : pch@proxy, NATIVE_CODE:code
+1700 - 1707 : wait_frames@proxy, NATIVE_CODE:code
+1707 - 170e : wait_frames@proxy, NATIVE_CODE:code
+170e - 1715 : wait_frames@proxy, NATIVE_CODE:code
+1715 - 171c : wait_frames@proxy, NATIVE_CODE:code
+171c - 171d : spentry, DATA:data
+171d - 175c : eye_centre, DATA:data
+175c - 176e : year_row0, DATA:data
+176e - 1780 : year_row1, DATA:data
+1780 - 1792 : year_row2, DATA:data
+1792 - 17a4 : year_row3, DATA:data
+17a4 - 17b6 : year_row4, DATA:data
+17b6 - 17c4 : s1_orwell, DATA:data
+17c4 - 17db : s1_press, DATA:data
+17db - 17dd : scroll_idx, DATA:data
+17dd - 17de : scroll_tick, DATA:data
+17de - 17df : blink_cnt, DATA:data
+17df - 17e0 : blink_phase, DATA:data
+17e0 - 17e5 : seq_frame, DATA:data
+17e5 - 17ea : seq_hold, DATA:data
+17ea - 17f8 : s2_hdr, DATA:data
+17f8 - 17ff : s2_l1, DATA:data
+1800 - 18e4 : scroll_text, DATA:data
+18e4 - 18ee : s2_l2, DATA:data
+18ee - 18f7 : s2_l3, DATA:data
+18f7 - 18fb : sw_war, DATA:data
+18fb - 18ff : sw_dot, DATA:data
+1900 - 193f : eye_left, DATA:data
+193f - 197e : eye_right, DATA:data
+197e - 198e : wave_red, DATA:data
+198e - 19e8 : smsg1, DATA:data
+19e8 - 19f8 : wave_blue, DATA:data
+19f8 - 1a00 : sw_freedom, DATA:data
+1a00 - 1a61 : smsg2, DATA:data
+1a61 - 1a71 : wave_gray, DATA:data
+1a71 - 1aca : smsg3, DATA:data
+1aca - 1ad7 : sw_surveillance, DATA:data
+1ad7 - 1adc : sw_data, DATA:data
+1adc - 1ae5 : sw_strength, DATA:data
+1ae5 - 1ae8 : sw_ai, DATA:data
+1ae8 - 1af1 : sw_watching, DATA:data
+1af1 - 1afb : sw_listening, DATA:data
+1afb - 1afe : s2_pfx, DATA:data
+1b00 - 1b23 : s2_q, DATA:data
+1b23 - 1b47 : s2_hint, DATA:data
+1b47 - 1b9b : _kw_table, DATA:data
+1b9b - 1ba2 : _kw000, DATA:data
+1ba2 - 1ba8 : _kw001, DATA:data
+1ba8 - 1bae : _kw002, DATA:data
+1bae - 1bb6 : _kw003, DATA:data
+1bb6 - 1bbb : _kw005, DATA:data
+1bbb - 1bc3 : _kw006, DATA:data
+1bc3 - 1bce : _kw007, DATA:data
+1bce - 1bd4 : _kw008, DATA:data
+1bd4 - 1bde : _kw009, DATA:data
+1bde - 1be8 : _kw010, DATA:data
+1be8 - 1bef : _kw011, DATA:data
+1bef - 1bf3 : _kw012, DATA:data
+1bf3 - 1bf9 : _kw013, DATA:data
+1bf9 - 1bff : _kw014, DATA:data
+1bff - 1c05 : _kw015, DATA:data
+1c05 - 1c0e : _kw016, DATA:data
+1c0e - 1c13 : _kw017, DATA:data
+1c13 - 1c18 : _kw018, DATA:data
+1c18 - 1c21 : _kw019, DATA:data
+1c21 - 1c29 : _kw020, DATA:data
+1c29 - 1c2f : _kw021, DATA:data
+1c2f - 1c36 : _kw022, DATA:data
+1c36 - 1c3c : _kw023, DATA:data
+1c3c - 1c42 : _kw024, DATA:data
+1c42 - 1c4b : _kw025, DATA:data
+1c4b - 1c52 : _kw026, DATA:data
+1c52 - 1c59 : _kw027, DATA:data
+1c59 - 1c61 : _kw028, DATA:data
+1c61 - 1c6a : _kw029, DATA:data
+1c6a - 1c71 : _kw030, DATA:data
+1c71 - 1c7a : _kw031, DATA:data
+1c7a - 1c7f : _kw032, DATA:data
+1c7f - 1c84 : _kw033, DATA:data
+1c84 - 1c88 : _kw034, DATA:data
+1c88 - 1c8d : _kw035, DATA:data
+1c8d - 1c92 : _kw036, DATA:data
+1c92 - 1c99 : _kw037, DATA:data
+1c99 - 1ca2 : _kw038, DATA:data
+1ca2 - 1ca8 : _kw039, DATA:data
+1ca8 - 1cad : _kw040, DATA:data
+1cad - 1cb2 : _kw041, DATA:data
+1cb2 - 1cd5 : _r1_000, DATA:data
+1cd5 - 1cf7 : _r1_001, DATA:data
+1d00 - 1d54 : _r1_table, DATA:data
+1d54 - 1d73 : _r1_004, DATA:data
+1d73 - 1d97 : _r1_006, DATA:data
+1d97 - 1dbc : _r1_008, DATA:data
+1dbc - 1dd7 : _r1_011, DATA:data
+1dd7 - 1dfc : _r1_015, DATA:data
+1dfc - 1e1e : _r1_018, DATA:data
+1e1e - 1e3c : _r1_021, DATA:data
+1e3c - 1e58 : _r1_024, DATA:data
+1e58 - 1e78 : _r1_027, DATA:data
+1e78 - 1e98 : _r1_030, DATA:data
+1e98 - 1ebb : _r1_033, DATA:data
+1ebb - 1ed9 : _r1_036, DATA:data
+1ed9 - 1ef4 : _r1_039, DATA:data
+1f00 - 1f54 : _r2_table, DATA:data
+1f54 - 1f6b : _r2_000, DATA:data
+1f6b - 1f86 : _r2_001, DATA:data
+1f86 - 1fa1 : _r2_004, DATA:data
+1fa1 - 1fbf : _r2_006, DATA:data
+1fbf - 1fda : _r2_008, DATA:data
+1fda - 1ff9 : _r2_011, DATA:data
+1ff9 - 2013 : _r2_015, DATA:data
+2013 - 2031 : _r2_018, DATA:data
+2031 - 204f : _r2_021, DATA:data
+204f - 2069 : _r2_024, DATA:data
+2069 - 2084 : _r2_027, DATA:data
+2084 - 20a0 : _r2_030, DATA:data
+20a0 - 20bc : _r2_033, DATA:data
+20bc - 20da : _r2_036, DATA:data
+20da - 20fa : _r2_039, DATA:data
+2100 - 211e : _resp_default_1, DATA:data
+211e - 2138 : _resp_default_2, DATA:data
+2138 - 2147 : r_hdr, DATA:data
+2147 - 2158 : r_sys, DATA:data
+2158 - 2171 : r_end, DATA:data
+2171 - 218a : s2_by1, DATA:data
+218a - 21a6 : s2_by2, DATA:data
+21a6 - 21b9 : s2_by3, DATA:data
+21b9 - 21d3 : s2_m1, DATA:data
+21d3 - 21ef : s2_m2, DATA:data
+2200 - 2216 : s2_m3, DATA:data
+2216 - 2237 : s3_q1, DATA:data
+2237 - 2250 : s3_q2, DATA:data
+2250 - 226b : s3_end, DATA:data
+226b - 2293 : scroll_buf, DATA:bss
+226b - 226b : BSSStart, START:bss
+2293 - 22ba : input_buf, DATA:bss
+2300 - 2399 : scr, DATA:bss
+2399 - 2399 : BSSEnd, END:bss
+9ff6 - 9ff6 : StackEnd, END:stack
+9ff6 - a000 : rows, BSS:draw_year@stack
+9ffc - 9ffe : match_l2, BSS:scene2_run@stack
+9ffe - a000 : match_l1, BSS:scene2_run@stack
 
 objects by size
-0ca3 (019b) : scene3_run, NATIVE_CODE:code
-1043 (010c) : scroll_text, DATA:data
-0880 (00ce) : main, NATIVE_CODE:code
-0e89 (0090) : scene4_run, NATIVE_CODE:code
-094e (0085) : scene1_run, NATIVE_CODE:code
-0c16 (0066) : scene2_run, NATIVE_CODE:code
-0b0d (005e) : scroll_step, NATIVE_CODE:code
-0a55 (005c) : print_at, NATIVE_CODE:code
+0d63 (04f0) : scene2_run, NATIVE_CODE:code
+08ee (0105) : scene1_run, NATIVE_CODE:code
+1291 (00f8) : scroller_step, NATIVE_CODE:code
+1800 (00e4) : scroll_text, DATA:data
+146f (00ba) : input_line, NATIVE_CODE:code
+0a05 (009a) : glitch_transition, NATIVE_CODE:code
+2300 (0099) : scr, DATA:bss
+0aea (0097) : draw_year, NATIVE_CODE:code
+1577 (008e) : find_response, NATIVE_CODE:code
+1636 (0085) : divmod, NATIVE_CODE:code
+0880 (006e) : main, NATIVE_CODE:code
+1389 (0064) : scroller_crossflash, NATIVE_CODE:code
+1a00 (0061) : smsg2, DATA:data
+0be8 (005c) : pat, NATIVE_CODE:code
+198e (005a) : smsg1, DATA:data
+1a71 (0059) : smsg3, DATA:data
+1b47 (0054) : _kw_table, DATA:data
+1d00 (0054) : _r1_table, DATA:data
+1f00 (0054) : _r2_table, DATA:data
 0801 (0052) : startup, NATIVE_CODE:startup
-0b6b (0040) : blink_row, NATIVE_CODE:code
-09e8 (0039) : cls, NATIVE_CODE:code
-0ab1 (0037) : hline, NATIVE_CODE:code
-0e3e (0037) : draw_bars, NATIVE_CODE:code
-0be1 (0035) : fade_to_black, NATIVE_CODE:code
-0bab (0032) : fire_pressed, NATIVE_CODE:code
-0a29 (002c) : print_centered, NATIVE_CODE:code
-127e (0028) : scroll_buf, DATA:bss
-0c7c (0027) : glitch_row, NATIVE_CODE:code
-118d (0023) : s_tc, DATA:data
-1217 (0021) : s_q1, DATA:data
-0fc0 (0020) : s_sub1, DATA:data
-1238 (0020) : s_q2, DATA:data
-11cf (001d) : s_ai2, DATA:data
-1263 (001b) : s_end, DATA:data
-1014 (0018) : s_bb, DATA:data
-102c (0017) : s_press, DATA:data
-1200 (0017) : s_ai4, DATA:data
-0ae8 (0016) : scroll_init, NATIVE_CODE:code
-1177 (0016) : s_sl3, DATA:data
-11b9 (0016) : s_ai3, DATA:data
-0fab (0015) : s_title, DATA:data
-0e75 (0014) : rotate_bars_left, NATIVE_CODE:code
-1000 (0014) : s_orwell, DATA:data
-0f88 (0013) : print_centered@proxy, NATIVE_CODE:code
-1164 (0013) : s_sl2, DATA:data
-11ec (0013) : s_ai1, DATA:data
-0fe0 (0011) : s_sub2, DATA:data
-0afe (000f) : wait_frame, NATIVE_CODE:code
-0f20 (000f) : __multab40L, DATA:code
-0f2f (000f) : __multab40H, DATA:code
-09d7 (000d) : wait_frames, NATIVE_CODE:code
-114f (000d) : s_sl1, DATA:data
-0f68 (000b) : print_centered@proxy, NATIVE_CODE:code
-1258 (000b) : s_c64, DATA:data
-0ff1 (000a) : eye, DATA:data
-0a21 (0008) : print_centered@proxy, NATIVE_CODE:code
-0fa3 (0008) : bar_pal, DATA:data
-115c (0008) : glitch_pal, DATA:data
-0f19 (0007) : wait_frames@proxy, NATIVE_CODE:code
-0f3e (0007) : print_at@proxy, NATIVE_CODE:code
-0f45 (0007) : print_at@proxy, NATIVE_CODE:code
-0f4c (0007) : wait_frames@proxy, NATIVE_CODE:code
-0f53 (0007) : wait_frames@proxy, NATIVE_CODE:code
-0f5a (0007) : fade_to_black@proxy, NATIVE_CODE:code
-0f61 (0007) : print_centered@proxy, NATIVE_CODE:code
-0f73 (0007) : print_centered@proxy, NATIVE_CODE:code
-0f7a (0007) : print_centered@proxy, NATIVE_CODE:code
-0f81 (0007) : print_centered@proxy, NATIVE_CODE:code
-0f9b (0007) : cls@proxy, NATIVE_CODE:code
-11b0 (0005) : col_then, DATA:data
-09d3 (0004) : wait_frames@proxy, NATIVE_CODE:code
-09e4 (0004) : cls@proxy, NATIVE_CODE:code
-0bdd (0004) : fade_to_black@proxy, NATIVE_CODE:code
-11b5 (0004) : col_now, DATA:data
-0ffb (0002) : scroll_idx, DATA:data
-0fa2 (0001) : spentry, DATA:data
-0ffd (0001) : scroll_tick, DATA:data
-0ffe (0001) : blink_cnt, DATA:data
-0fff (0001) : blink_phase, DATA:data
+0c69 (0048) : scroll_step, NATIVE_CODE:code
+171d (003f) : eye_centre, DATA:data
+1900 (003f) : eye_left, DATA:data
+193f (003f) : eye_right, DATA:data
+1253 (003e) : scroller_init, NATIVE_CODE:code
+0d0b (003b) : any_key, NATIVE_CODE:code
+1434 (003b) : pch, NATIVE_CODE:code
+0a9f (0039) : cls, NATIVE_CODE:code
+0b81 (0037) : hline, NATIVE_CODE:code
+1401 (002f) : reveal_word, NATIVE_CODE:code
+0cb1 (002e) : blink_row, NATIVE_CODE:code
+1609 (002d) : typeout, NATIVE_CODE:code
+0bbc (002c) : pcenter, NATIVE_CODE:code
+0cdf (002c) : rowcol, NATIVE_CODE:code
+154c (002b) : petscii_to_sc, NATIVE_CODE:code
+226b (0028) : scroll_buf, DATA:bss
+2293 (0027) : input_buf, DATA:bss
+1d97 (0025) : _r1_008, DATA:data
+1dd7 (0025) : _r1_015, DATA:data
+1b23 (0024) : s2_hint, DATA:data
+1d73 (0024) : _r1_006, DATA:data
+1529 (0023) : read_key, NATIVE_CODE:code
+1b00 (0023) : s2_q, DATA:data
+1cb2 (0023) : _r1_000, DATA:data
+1e98 (0023) : _r1_033, DATA:data
+1cd5 (0022) : _r1_001, DATA:data
+1dfc (0022) : _r1_018, DATA:data
+2216 (0021) : s3_q1, DATA:data
+1e58 (0020) : _r1_027, DATA:data
+1e78 (0020) : _r1_030, DATA:data
+20da (0020) : _r2_039, DATA:data
+1d54 (001f) : _r1_004, DATA:data
+1fda (001f) : _r2_011, DATA:data
+1e1e (001e) : _r1_021, DATA:data
+1ebb (001e) : _r1_036, DATA:data
+1fa1 (001e) : _r2_006, DATA:data
+2013 (001e) : _r2_018, DATA:data
+2031 (001e) : _r2_021, DATA:data
+20bc (001e) : _r2_036, DATA:data
+2100 (001e) : _resp_default_1, DATA:data
+0d46 (001d) : fade_to_black, NATIVE_CODE:code
+1e3c (001c) : _r1_024, DATA:data
+2084 (001c) : _r2_030, DATA:data
+20a0 (001c) : _r2_033, DATA:data
+218a (001c) : s2_by2, DATA:data
+21d3 (001c) : s2_m2, DATA:data
+1dbc (001b) : _r1_011, DATA:data
+1ed9 (001b) : _r1_039, DATA:data
+1f6b (001b) : _r2_001, DATA:data
+1f86 (001b) : _r2_004, DATA:data
+1fbf (001b) : _r2_008, DATA:data
+2069 (001b) : _r2_027, DATA:data
+2250 (001b) : s3_end, DATA:data
+1ff9 (001a) : _r2_015, DATA:data
+204f (001a) : _r2_024, DATA:data
+211e (001a) : _resp_default_2, DATA:data
+21b9 (001a) : s2_m1, DATA:data
+2158 (0019) : r_end, DATA:data
+2171 (0019) : s2_by1, DATA:data
+2237 (0019) : s3_q2, DATA:data
+16c6 (0017) : reveal_word@proxy, NATIVE_CODE:code
+17c4 (0017) : s1_press, DATA:data
+1f54 (0017) : _r2_000, DATA:data
+0c44 (0016) : scroll_init, NATIVE_CODE:code
+2200 (0016) : s2_m3, DATA:data
+13ed (0014) : reveal_word@proxy, NATIVE_CODE:code
+21a6 (0013) : s2_by3, DATA:data
+0ad8 (0012) : sprite_load, NATIVE_CODE:code
+175c (0012) : year_row0, DATA:data
+176e (0012) : year_row1, DATA:data
+1780 (0012) : year_row2, DATA:data
+1792 (0012) : year_row3, DATA:data
+17a4 (0012) : year_row4, DATA:data
+2147 (0011) : r_sys, DATA:data
+197e (0010) : wave_red, DATA:data
+19e8 (0010) : wave_blue, DATA:data
+1a61 (0010) : wave_gray, DATA:data
+0c5a (000f) : wait_frame, NATIVE_CODE:code
+2138 (000f) : r_hdr, DATA:data
+09f7 (000e) : wait_frames, NATIVE_CODE:code
+17b6 (000e) : s1_orwell, DATA:data
+17ea (000e) : s2_hdr, DATA:data
+1aca (000d) : sw_surveillance, DATA:data
+1bc3 (000b) : _kw007, DATA:data
+18e4 (000a) : s2_l2, DATA:data
+1af1 (000a) : sw_listening, DATA:data
+1bd4 (000a) : _kw009, DATA:data
+1bde (000a) : _kw010, DATA:data
+9ff6 (000a) : rows, BSS:draw_year@stack
+18ee (0009) : s2_l3, DATA:data
+1adc (0009) : sw_strength, DATA:data
+1ae8 (0009) : sw_watching, DATA:data
+1c05 (0009) : _kw016, DATA:data
+1c18 (0009) : _kw019, DATA:data
+1c42 (0009) : _kw025, DATA:data
+1c61 (0009) : _kw029, DATA:data
+1c71 (0009) : _kw031, DATA:data
+1c99 (0009) : _kw038, DATA:data
+19f8 (0008) : sw_freedom, DATA:data
+1bae (0008) : _kw003, DATA:data
+1bbb (0008) : _kw006, DATA:data
+1c21 (0008) : _kw020, DATA:data
+1c59 (0008) : _kw028, DATA:data
+16bf (0007) : typeout@proxy, NATIVE_CODE:code
+16dd (0007) : pat@proxy, NATIVE_CODE:code
+16e4 (0007) : pch@proxy, NATIVE_CODE:code
+16eb (0007) : pch@proxy, NATIVE_CODE:code
+16f2 (0007) : pch@proxy, NATIVE_CODE:code
+16f9 (0007) : pch@proxy, NATIVE_CODE:code
+1700 (0007) : wait_frames@proxy, NATIVE_CODE:code
+1707 (0007) : wait_frames@proxy, NATIVE_CODE:code
+170e (0007) : wait_frames@proxy, NATIVE_CODE:code
+1715 (0007) : wait_frames@proxy, NATIVE_CODE:code
+17f8 (0007) : s2_l1, DATA:data
+1b9b (0007) : _kw000, DATA:data
+1be8 (0007) : _kw011, DATA:data
+1c2f (0007) : _kw022, DATA:data
+1c4b (0007) : _kw026, DATA:data
+1c52 (0007) : _kw027, DATA:data
+1c6a (0007) : _kw030, DATA:data
+1c92 (0007) : _kw037, DATA:data
+1ba2 (0006) : _kw001, DATA:data
+1ba8 (0006) : _kw002, DATA:data
+1bce (0006) : _kw008, DATA:data
+1bf3 (0006) : _kw013, DATA:data
+1bf9 (0006) : _kw014, DATA:data
+1bff (0006) : _kw015, DATA:data
+1c29 (0006) : _kw021, DATA:data
+1c36 (0006) : _kw023, DATA:data
+1c3c (0006) : _kw024, DATA:data
+1ca2 (0006) : _kw039, DATA:data
+17e0 (0005) : seq_frame, DATA:data
+17e5 (0005) : seq_hold, DATA:data
+1ad7 (0005) : sw_data, DATA:data
+1bb6 (0005) : _kw005, DATA:data
+1c0e (0005) : _kw017, DATA:data
+1c13 (0005) : _kw018, DATA:data
+1c7a (0005) : _kw032, DATA:data
+1c7f (0005) : _kw033, DATA:data
+1c88 (0005) : _kw035, DATA:data
+1c8d (0005) : _kw036, DATA:data
+1ca8 (0005) : _kw040, DATA:data
+1cad (0005) : _kw041, DATA:data
+09f3 (0004) : wait_frames@proxy, NATIVE_CODE:code
+0bb8 (0004) : pcenter@proxy, NATIVE_CODE:code
+1430 (0004) : pch@proxy, NATIVE_CODE:code
+1605 (0004) : typeout@proxy, NATIVE_CODE:code
+16bb (0004) : __multab100L, DATA:code
+18f7 (0004) : sw_war, DATA:data
+18fb (0004) : sw_dot, DATA:data
+1bef (0004) : _kw012, DATA:data
+1c84 (0004) : _kw034, DATA:data
+1ae5 (0003) : sw_ai, DATA:data
+1afb (0003) : s2_pfx, DATA:data
+17db (0002) : scroll_idx, DATA:data
+9ffc (0002) : match_l2, BSS:scene2_run@stack
+9ffe (0002) : match_l1, BSS:scene2_run@stack
+171c (0001) : spentry, DATA:data
+17dd (0001) : scroll_tick, DATA:data
+17de (0001) : blink_cnt, DATA:data
+17df (0001) : blink_phase, DATA:data
 00f7 (0000) : ZeroStart, START:zeropage
 00f7 (0000) : ZeroEnd, END:zeropage
-127e (0000) : BSSStart, START:bss
-12a6 (0000) : BSSEnd, END:bss
-a000 (0000) : StackEnd, END:stack
+226b (0000) : BSSStart, START:bss
+2399 (0000) : BSSEnd, END:bss
+9ff6 (0000) : StackEnd, END:stack

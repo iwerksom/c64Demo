@@ -1,0 +1,408 @@
+#!/usr/bin/env python3
+"""
+convert.py — NINETEEN84 response bank converter
+
+Converts between three formats:
+  responses.txt    Human-readable (edit this)
+  responses.h      C header for oscar64 (generated — do not edit)
+  responses.parquet  Parquet for model training/inference
+
+Usage:
+  # Edit responses.txt then regenerate the C header:
+  python convert.py responses.txt responses.h
+
+  # Export to parquet for model training:
+  python convert.py --to-parquet responses.txt responses.parquet
+
+  # Import model output from parquet (overwrites responses.txt + regenerates .h):
+  python convert.py --from-parquet responses.parquet responses.txt responses.h
+
+  # Decode a responses.h back to readable text (for inspection):
+  python convert.py --decode responses.h
+"""
+
+import sys
+import re
+import argparse
+
+
+# ---------------------------------------------------------------------------
+# Screen code conversion
+# C64 screen codes: A=1..Z=26, space=32, 0-9=48-57, -=45, .=46, '=39, !=33, ?=63
+# ---------------------------------------------------------------------------
+
+def text_to_sc(text):
+    """Convert plain text to list of C64 screen codes."""
+    result = []
+    for c in text.upper():
+        if   'A' <= c <= 'Z':  result.append(ord(c) - 64)
+        elif c == ' ':          result.append(32)
+        elif '0' <= c <= '9':  result.append(ord(c))
+        elif c == '-':          result.append(45)
+        elif c == '.':          result.append(46)
+        elif c == "'":          result.append(39)
+        elif c == '!':          result.append(33)
+        elif c == '?':          result.append(63)
+        # Other characters silently dropped
+    return result
+
+
+def sc_to_text(codes):
+    """Convert list of C64 screen codes back to plain text."""
+    result = []
+    for c in codes:
+        if   c == 0:            break
+        elif 1 <= c <= 26:      result.append(chr(c + 64))
+        elif c == 32:           result.append(' ')
+        elif 48 <= c <= 57:    result.append(chr(c))
+        elif c == 45:           result.append('-')
+        elif c == 46:           result.append('.')
+        elif c == 39:           result.append("'")
+        elif c == 33:           result.append('!')
+        elif c == 63:           result.append('?')
+        else:                   result.append('?')
+    return ''.join(result)
+
+
+def sc_array(name, codes):
+    """Format screen codes as a C static char array."""
+    vals = ','.join(str(c) for c in codes)
+    return f"static const char {name}[] = {{ {vals}, 0 }};"
+
+
+# ---------------------------------------------------------------------------
+# Parse responses.txt
+# Returns list of dicts: {keywords: [str], resp1: str, resp2: str}
+# Last entry with keyword DEFAULT is the fallback.
+# ---------------------------------------------------------------------------
+
+def parse_txt(path):
+    entries = []
+    default = None
+
+    with open(path, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+
+        # Skip comments and blanks
+        if not line or line.startswith('#'):
+            i += 1
+            continue
+
+        if line.upper().startswith('KEYWORD:'):
+            kw_raw = line[8:].strip()
+            keywords = [k.strip().upper() for k in kw_raw.split(',') if k.strip()]
+
+            # Read RESP1
+            i += 1
+            while i < len(lines) and (not lines[i].strip() or lines[i].strip().startswith('#')):
+                i += 1
+            resp1 = lines[i].strip()[6:].strip() if i < len(lines) else ''
+
+            # Read RESP2
+            i += 1
+            while i < len(lines) and (not lines[i].strip() or lines[i].strip().startswith('#')):
+                i += 1
+            resp2 = lines[i].strip()[6:].strip() if i < len(lines) else ''
+
+            # Validate lengths
+            if len(resp1) > 36:
+                print(f"WARNING: RESP1 too long ({len(resp1)} chars, max 36): {resp1}")
+            if len(resp2) > 36:
+                print(f"WARNING: RESP2 too long ({len(resp2)} chars, max 36): {resp2}")
+
+            entry = {
+                'keywords': keywords,
+                'resp1':    resp1.upper(),
+                'resp2':    resp2.upper(),
+            }
+
+            if keywords == ['DEFAULT']:
+                default = entry
+            else:
+                entries.append(entry)
+
+        i += 1
+
+    if default is None:
+        print("WARNING: No DEFAULT entry found — using empty fallback")
+        default = {
+            'keywords': ['DEFAULT'],
+            'resp1':    'INPUT RECEIVED',
+            'resp2':    'PROCESSING COMPLETE',
+        }
+
+    return entries, default
+
+
+# ---------------------------------------------------------------------------
+# Generate responses.h
+# ---------------------------------------------------------------------------
+
+def generate_h(entries, default, out_path):
+    lines = []
+    lines.append('// responses.h — AUTO-GENERATED by convert.py')
+    lines.append('// DO NOT EDIT — edit responses.txt and re-run convert.py')
+    lines.append('//')
+    lines.append(f'// {len(entries)} response entries + 1 default')
+    lines.append(f'// Generated from: responses.txt')
+    lines.append('')
+
+    all_kw_names  = []
+    all_kw_lens   = []   # keyword lengths for each flat entry
+    r1_names = []
+    r2_names = []
+
+    # Flatten: one entry per keyword
+    idx = 0
+    for entry in entries:
+        for kw in entry['keywords']:
+            kw_name  = f'_kw{idx:03d}'
+            r1_name  = f'_r1_{idx:03d}'
+            r2_name  = f'_r2_{idx:03d}'
+
+            kw_sc  = text_to_sc(kw)
+            r1_sc  = text_to_sc(entry['resp1'])
+            r2_sc  = text_to_sc(entry['resp2'])
+
+            lines.append(f'// "{kw}" -> "{entry["resp1"]}"')
+            lines.append(sc_array(kw_name, kw_sc))
+            lines.append(sc_array(r1_name, r1_sc))
+            lines.append(sc_array(r2_name, r2_sc))
+            lines.append('')
+
+            all_kw_names.append(kw_name)
+            all_kw_lens.append(len(kw_sc))
+            r1_names.append(r1_name)
+            r2_names.append(r2_name)
+            idx += 1
+
+    total = idx
+
+    # Default
+    def_r1_sc = text_to_sc(default['resp1'])
+    def_r2_sc = text_to_sc(default['resp2'])
+    lines.append(f'// DEFAULT: "{default["resp1"]}"')
+    lines.append(sc_array('_resp_default_1', def_r1_sc))
+    lines.append(sc_array('_resp_default_2', def_r2_sc))
+    lines.append('')
+
+    # Lookup tables
+    lines.append(f'#define RESP_COUNT {total}')
+    lines.append('')
+    lines.append(f'static const char * const _kw_table[RESP_COUNT] = {{')
+    lines.append('    ' + ', '.join(all_kw_names))
+    lines.append('};')
+    lines.append('')
+    lines.append(f'static const char * const _r1_table[RESP_COUNT] = {{')
+    lines.append('    ' + ', '.join(r1_names))
+    lines.append('};')
+    lines.append('')
+    lines.append(f'static const char * const _r2_table[RESP_COUNT] = {{')
+    lines.append('    ' + ', '.join(r2_names))
+    lines.append('};')
+    lines.append('')
+
+    # The matching function — inlined so oscar64 can optimize it
+    lines.append("""// find_response: scan input (screen codes) for first matching keyword.
+// Sets *out_l1 and *out_l2 to the matched response lines.
+// input: screen-code buffer, ilen: actual typed length (no trailing spaces)
+void find_response(const char *input, char ilen,
+                   const char **out_l1, const char **out_l2)
+{
+    for (char k = 0; k < RESP_COUNT; k++)
+    {
+        const char *kw = _kw_table[k];
+        char kwlen = 0;
+        while (kw[kwlen]) kwlen++;
+        if (kwlen > ilen) continue;
+
+        for (char i = 0; i + kwlen <= ilen; i++)
+        {
+            char match = 1;
+            for (char j = 0; j < kwlen; j++)
+            {
+                if (input[i+j] != kw[j]) { match = 0; break; }
+            }
+            if (match)
+            {
+                *out_l1 = _r1_table[k];
+                *out_l2 = _r2_table[k];
+                return;
+            }
+        }
+    }
+    // No match — use default
+    *out_l1 = _resp_default_1;
+    *out_l2 = _resp_default_2;
+}
+""")
+
+    with open(out_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines))
+
+    print(f"Written: {out_path}  ({total} keyword entries)")
+
+
+# ---------------------------------------------------------------------------
+# Export to parquet
+# Columns: keyword (str), resp1 (str), resp2 (str)
+# One row per keyword (not per entry group)
+# ---------------------------------------------------------------------------
+
+def to_parquet(entries, default, out_path):
+    try:
+        import pandas as pd
+    except ImportError:
+        print("pandas not installed. Run: pip install pandas pyarrow")
+        sys.exit(1)
+
+    rows = []
+    for entry in entries:
+        for kw in entry['keywords']:
+            rows.append({
+                'keyword': kw,
+                'resp1':   entry['resp1'],
+                'resp2':   entry['resp2'],
+            })
+    rows.append({
+        'keyword': 'DEFAULT',
+        'resp1':   default['resp1'],
+        'resp2':   default['resp2'],
+    })
+
+    df = pd.DataFrame(rows)
+    df.to_parquet(out_path, index=False)
+    print(f"Written: {out_path}  ({len(rows)} rows)")
+    print(df.to_string())
+
+
+# ---------------------------------------------------------------------------
+# Import from parquet
+# Expected columns: keyword, resp1, resp2
+# Groups rows with same resp1+resp2 into multi-keyword entries
+# ---------------------------------------------------------------------------
+
+def from_parquet(parquet_path, txt_path, h_path):
+    try:
+        import pandas as pd
+    except ImportError:
+        print("pandas not installed. Run: pip install pandas pyarrow")
+        sys.exit(1)
+
+    df = pd.read_parquet(parquet_path)
+    print(f"Loaded {len(df)} rows from {parquet_path}")
+
+    # Group by response pair to merge keywords
+    groups = {}
+    default = None
+    for _, row in df.iterrows():
+        kw = str(row['keyword']).strip().upper()
+        r1 = str(row['resp1']).strip().upper()
+        r2 = str(row['resp2']).strip().upper()
+
+        if kw == 'DEFAULT':
+            default = {'keywords': ['DEFAULT'], 'resp1': r1, 'resp2': r2}
+            continue
+
+        key = (r1, r2)
+        if key not in groups:
+            groups[key] = {'keywords': [], 'resp1': r1, 'resp2': r2}
+        groups[key]['keywords'].append(kw)
+
+    entries = list(groups.values())
+
+    if default is None:
+        default = {'keywords': ['DEFAULT'], 'resp1': 'INPUT RECEIVED', 'resp2': 'PROCESSING COMPLETE'}
+
+    # Write responses.txt
+    with open(txt_path, 'w', encoding='utf-8') as f:
+        f.write('# responses.txt — imported from parquet\n')
+        f.write('# Edit this file and run: python convert.py responses.txt responses.h\n\n')
+        for entry in entries:
+            f.write(f"KEYWORD: {','.join(entry['keywords'])}\n")
+            f.write(f"RESP1:   {entry['resp1']}\n")
+            f.write(f"RESP2:   {entry['resp2']}\n\n")
+        f.write(f"KEYWORD: DEFAULT\n")
+        f.write(f"RESP1:   {default['resp1']}\n")
+        f.write(f"RESP2:   {default['resp2']}\n")
+
+    print(f"Written: {txt_path}")
+    generate_h(entries, default, h_path)
+
+
+# ---------------------------------------------------------------------------
+# Decode responses.h back to human-readable (for inspection)
+# ---------------------------------------------------------------------------
+
+def decode_h(h_path):
+    with open(h_path, 'r') as f:
+        content = f.read()
+
+    pattern = r'static const char (_kw\d+)\[\] = \{([^}]+)\}'
+    kw_map = {}
+    for m in re.finditer(pattern, content):
+        name = m.group(1)
+        codes = [int(x) for x in m.group(2).split(',') if x.strip()]
+        kw_map[name] = sc_to_text(codes)
+
+    pattern_r = r'static const char (_r[12]_\d+)\[\] = \{([^}]+)\}'
+    r_map = {}
+    for m in re.finditer(pattern_r, content):
+        name = m.group(1)
+        codes = [int(x) for x in m.group(2).split(',') if x.strip()]
+        r_map[name] = sc_to_text(codes)
+
+    count_m = re.search(r'#define RESP_COUNT (\d+)', content)
+    count = int(count_m.group(1)) if count_m else 0
+
+    print(f"responses.h — {count} entries\n")
+    for i in range(count):
+        kn = f'_kw{i:03d}'
+        r1 = f'_r1_{i:03d}'
+        r2 = f'_r2_{i:03d}'
+        kw_text = kw_map.get(kn, '?')
+        r1_text = r_map.get(r1, '?')
+        r2_text = r_map.get(r2, '?')
+        print(f"  [{i:03d}] KEYWORD: {kw_text}")
+        print(f"        RESP1:   {r1_text}")
+        print(f"        RESP2:   {r2_text}")
+        print()
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main():
+    parser = argparse.ArgumentParser(description='NINETEEN84 response bank converter')
+    parser.add_argument('--to-parquet',   action='store_true', help='Export to parquet')
+    parser.add_argument('--from-parquet', action='store_true', help='Import from parquet')
+    parser.add_argument('--decode',       action='store_true', help='Decode .h to readable')
+    parser.add_argument('files', nargs='+')
+    args = parser.parse_args()
+
+    if args.decode:
+        decode_h(args.files[0])
+
+    elif args.to_parquet:
+        # convert.py --to-parquet responses.txt responses.parquet
+        entries, default = parse_txt(args.files[0])
+        to_parquet(entries, default, args.files[1])
+
+    elif args.from_parquet:
+        # convert.py --from-parquet responses.parquet responses.txt responses.h
+        from_parquet(args.files[0], args.files[1], args.files[2])
+
+    else:
+        # Default: responses.txt -> responses.h
+        entries, default = parse_txt(args.files[0])
+        out = args.files[1] if len(args.files) > 1 else 'responses.h'
+        generate_h(entries, default, out)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,918 +1,1833 @@
 --------------------------------------------------------------------
-main: C:/code/jonas/c64Demo/nineteen84.c:700
-$00 R0(P), $00 R1(P), $00 R2(P), $00 R3(B), $06 R4(C), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 706)		STOREG1		<-	V(6 'bar_pal' A)+0 , CC:2	{}
-0001 ( 707)		STOREG1		<-	V(6 'bar_pal' A)+1 , CC:8	{}
-0002 ( 708)		STOREG1		<-	V(6 'bar_pal' A)+2 , CC:7	{}
-0003 ( 709)		STOREG1		<-	V(6 'bar_pal' A)+3 , CC:1	{}
-0004 ( 710)		STOREG1		<-	V(6 'bar_pal' A)+4 , CC:14	{}
-0005 ( 711)		STOREG1		<-	V(6 'bar_pal' A)+5 , CC:6	{}
-0006 ( 712)		STOREG1		<-	V(6 'bar_pal' A)+6 , CC:4	{}
-0007 ( 713)		STOREG1		<-	V(6 'bar_pal' A)+7 , CC:0	{}
-0008 ( 702)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
-0009 ( 703)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
-000a ( 657)		CONST	R0(P)[0..0]	<-	CG11(41:0 's_c64')	{S}
-000b ( 660)		CONST	R1(P)[0..0]	<-	CG20(14:0 's_orwell')	{S}
-000c ( 677)		CONST	R2(P)[0..0]	<-	CG27(42:0 's_end')	{S}
-000d ( 717)		JUMP		<-		{}
-		==> 1
-L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 717)		CALLN		<-	V(1 'scene1_run')+0 	{}
-0001 ( 718)		CALLN		<-	V(13 'scene2_run')+0 	{}
-0002 ( 719)		CALLN		<-	V(15 'scene3_run')+0 	{}
-0003 ( 720)		CALLN		<-	V(18 'scene4_run')+0 	{}
-0004 ( 657)		STOREC1		<-	V(0 '')+0 , CC:8	{}
-0005 ( 657)		STOREC2		<-	V(2 '')+0 , R0(P)+0 {V(41 's_c64')} [0..0]	{}
-0006 ( 657)		STOREC1		<-	V(4 '')+0 , CC:15	{}
-0007 ( 655)		CALLN		<-	V(2 'cls')+0 	{}
-0008 ( 657)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0009 ( 658)		STOREC1		<-	V(0 '')+0 , CC:11	{}
-000a ( 658)		CALLN		<-	V(5 'hline')+0 	{E}
-000b ( 659)		STOREC1		<-	V(0 '')+0 , CC:17	{}
-000c ( 659)		CALLN		<-	V(5 'hline')+0 	{E}
-000d ( 660)		STOREC1		<-	V(0 '')+0 , CC:20	{}
-000e ( 660)		STOREC2		<-	V(2 '')+0 , R1(P)+0 {V(14 's_orwell')} [0..0]	{}
-000f ( 660)		STOREC1		<-	V(4 '')+0 , CC:11	{}
-0010 ( 660)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0011 ( 676)		STOREC1		<-	V(0 '')+0 , CC:40	{}
-0012 ( 663)		STOREG1		<-	V(6 'bar_pal' A)+0 , CC:4	{}
-0013 ( 664)		STOREG1		<-	V(6 'bar_pal' A)+1 , CC:6	{}
-0014 ( 665)		STOREG1		<-	V(6 'bar_pal' A)+2 , CC:14	{}
-0015 ( 666)		STOREG1		<-	V(6 'bar_pal' A)+3 , CC:3	{}
-0016 ( 667)		STOREG1		<-	V(6 'bar_pal' A)+4 , CC:14	{}
-0017 ( 668)		STOREG1		<-	V(6 'bar_pal' A)+5 , CC:6	{}
-0018 ( 669)		STOREG1		<-	V(6 'bar_pal' A)+6 , CC:4	{}
-0019 ( 670)		STOREG1		<-	V(6 'bar_pal' A)+7 , CC:0	{}
-001a ( 672)		CALLN		<-	V(6 'scroll_init')+0 	{}
-001b ( 343)		STOREG1		<-	V(22 'blink_phase')+0 , CC:0	{}
-001c ( 342)		STOREG1		<-	V(21 'blink_cnt')+0 , CC:0	{}
-001d ( 676)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-001e ( 677)		STOREC1		<-	V(0 '')+0 , CC:13	{}
-001f ( 677)		STOREC2		<-	V(2 '')+0 , R2(P)+0 {V(42 's_end')} [0..0]	{}
-0020 ( 677)		STOREC1		<-	V(4 '')+0 , CC:1	{}
-0021 ( 677)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0022 ( 674)		CONST	R4(C)[0..0]	<-	CI:0	{}
-0023 ( 689)		JUMP		<-		{}
-		==> 2
-L2: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 689)		STOREC1		<-	V(0 '')+0 , CC:13	{}
-0001 ( 689)		STOREC1		<-	V(1 '')+0 , CC:1	{}
-0002 ( 681)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0003 ( 682)		CALLN		<-	V(16 'draw_bars')+0 	{}
-0004 ( 683)		BINOP1	R4(C)[1..8]	<-	R4(CF)[0..7], CI:1	{}
-0005 ( 683)		RELOP25	R3(B)[0..1]	<-	R4(C)[1..8], CC:8	{}
-0006 ( 683)		BRANCH		<-	R3(BF)[0..1]	{}
-		==> 3
-		==> 4
-L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 686)		CALLN		<-	V(17 'rotate_bars_left')+0 	{}
-0001 ( 685)		CONST	R4(C)[0..0]	<-	CI:0	{}
-0002 ( 683)		JUMP		<-		{}
-		==> 4
-L4: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 688)		CALLN		<-	V(8 'scroll_step')+0 	{}
-0001 ( 689)		CALLN		<-	V(9 'blink_row')+0 	{}
-0002 ( 691)		CALLN	R3(C)	<-	V(10 'fire_pressed')+0 	{}
-0003 ( 691)		BRANCH		<-	R3(CF)	{}
-		==> 1
-		==> 2
---------------------------------------------------------------------
-scene1_run: C:/code/jonas/c64Demo/nineteen84.c:418
+main: C:/code/jonas/c64Demo/nineteen84.c:1170
 $00 R0(P), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 424)		STOREC1		<-	V(0 '')+0 , CC:8	{}
-0001 ( 424)		STOREC1		<-	V(4 '')+0 , CC:1	{}
-0002 ( 421)		CALLN		<-	V(2 'cls')+0 	{}
-0003 ( 422)		CALLN		<-	V(2 'cls')+0 	{}
-0004 ( 424)		CONST	R0(P)[0..0]	<-	CG21(9:0 's_title')	{S}
-0005 ( 424)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(9 's_title')} [0..0]	{}
-0006 ( 424)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0007 ( 425)		STOREC1		<-	V(0 '')+0 , CC:9	{}
-0008 ( 425)		STOREC1		<-	V(4 '')+0 , CC:7	{}
-0009 ( 425)		CONST	R0(P)[0..0]	<-	CG32(10:0 's_sub1')	{S}
-000a ( 425)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(10 's_sub1')} [0..0]	{}
-000b ( 425)		CALLN		<-	V(3 'print_centered')+0 	{E}
-000c ( 426)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-000d ( 426)		STOREC1		<-	V(4 '')+0 , CC:7	{}
-000e ( 426)		CONST	R0(P)[0..0]	<-	CG17(11:0 's_sub2')	{S}
-000f ( 426)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(11 's_sub2')} [0..0]	{}
-0010 ( 426)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0011 ( 427)		STOREC1		<-	V(0 '')+0 , CC:12	{}
-0012 ( 427)		CALLN		<-	V(5 'hline')+0 	{E}
-0013 ( 428)		STOREC1		<-	V(0 '')+0 , CC:14	{}
-0014 ( 428)		STOREC1		<-	V(4 '')+0 , CC:12	{}
-0015 ( 428)		CONST	R0(P)[0..0]	<-	CG20(14:0 's_orwell')	{S}
-0016 ( 428)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(14 's_orwell')} [0..0]	{}
-0017 ( 428)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0018 ( 434)		STOREC1		<-	V(0 '')+0 , CC:17	{}
-0019 ( 434)		STOREC1		<-	V(4 '')+0 , CC:15	{}
-001a ( 432)		CONST	R0(P)[0..0]	<-	CG10(15:0 'eye')	{S}
-001b ( 434)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(15 'eye')} [0..0]	{}
-001c ( 434)		CALLN		<-	V(3 'print_centered')+0 	{E}
-001d ( 436)		STOREC1		<-	V(0 '')+0 , CC:19	{}
-001e ( 436)		STOREC1		<-	V(4 '')+0 , CC:2	{}
-001f ( 436)		CONST	R0(P)[0..0]	<-	CG24(16:0 's_bb')	{S}
-0020 ( 436)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(16 's_bb')} [0..0]	{}
-0021 ( 436)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0022 ( 437)		STOREC1		<-	V(0 '')+0 , CC:21	{}
-0023 ( 437)		STOREC1		<-	V(4 '')+0 , CC:12	{}
-0024 ( 437)		CONST	R0(P)[0..0]	<-	CG23(17:0 's_press')	{S}
-0025 ( 437)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(17 's_press')} [0..0]	{}
-0026 ( 437)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0027 ( 439)		CALLN		<-	V(6 'scroll_init')+0 	{}
-0028 ( 343)		STOREG1		<-	V(22 'blink_phase')+0 , CC:0	{}
-0029 ( 342)		STOREG1		<-	V(21 'blink_cnt')+0 , CC:0	{}
-002a ( 446)		JUMP		<-		{}
+0000 (1172)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
+0001 (1173)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
+0002 (1175)		CALLN		<-	V(1 'scene1_run')+0 	{}
+0003 (1176)		CALLN		<-	V(16 'scene2_run')+0 	{}
+0004 (1133)		STOREC1		<-	V(0 '')+0 , CC:40	{}
+0005 (1131)		CALLN		<-	V(2 'cls')+0 	{}
+0006 (1133)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0007 (1134)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+0008 (1134)		STOREC1		<-	V(4 '')+0 , CC:1	{}
+0009 (1134)		CONST	R0(P)[0..0]	<-	CG33(211:0 's3_q1')	{S}
+000a (1134)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(211 's3_q1')} [0..0]	{}
+000b (1134)		CALLN		<-	V(6 'pcenter')+0 	{E}
+000c (1135)		STOREC1		<-	V(0 '')+0 , CC:50	{}
+000d (1135)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000e (1136)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+000f (1136)		STOREC1		<-	V(4 '')+0 , CC:12	{}
+0010 (1136)		CONST	R0(P)[0..0]	<-	CG25(212:0 's3_q2')	{S}
+0011 (1136)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(212 's3_q2')} [0..0]	{}
+0012 (1136)		CALLN		<-	V(6 'pcenter')+0 	{E}
+0013 (1137)		STOREC1		<-	V(0 '')+0 , CC:40	{}
+0014 (1137)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0015 (1140)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0016 (1140)		STOREC1		<-	V(4 '')+0 , CC:12	{}
+0017 (1140)		CONST	R0(P)[0..0]	<-	CG27(213:0 's3_end')	{S}
+0018 (1140)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(213 's3_end')} [0..0]	{}
+0019 (1140)		CALLN		<-	V(6 'pcenter')+0 	{E}
+001a ( 198)		STOREG1		<-	V(23 'blink_phase')+0 , CC:0	{}
+001b ( 197)		STOREG1		<-	V(22 'blink_cnt')+0 , CC:0	{}
+001c (1146)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 446)		STOREC1		<-	V(0 '')+0 , CC:21	{}
-0001 ( 446)		STOREC1		<-	V(1 '')+0 , CC:12	{}
-0002 ( 444)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0003 ( 445)		CALLN		<-	V(8 'scroll_step')+0 	{}
-0004 ( 446)		CALLN		<-	V(9 'blink_row')+0 	{}
-0005 ( 447)		CALLN	R0(C)	<-	V(10 'fire_pressed')+0 	{}
-0006 ( 447)		BRANCH		<-	R0(CF)	{}
+0000 (1146)		STOREC1		<-	V(2 '')+0 , CC:18	{}
+0001 (1146)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0002 (1145)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0003 (1146)		CALLN		<-	V(11 'blink_row')+0 	{}
+0004 (1143)		JUMP		<-		{I}
+		==> 1
+--------------------------------------------------------------------
+scene1_run: C:/code/jonas/c64Demo/nineteen84.c:463
+$00 R0(P), $04 R1(C), $05 R2(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 465)		CALLN		<-	V(2 'cls')+0 	{}
+0001 ( 466)		CALLN		<-	V(2 'cls')+0 	{}
+0002 ( 475)		CONST	R0(P)[0..0]	<-	CG63(6:0 'eye_centre')	{S}
+0003 ( 475)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(6 'eye_centre')} [0..0]	{}
+0004 ( 475)		CALLN		<-	V(3 'sprite_load')+0 	{}
+0005 ( 482)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0006 ( 411)		STOREA1		<-	V(-1 '')+2040 , CC:128	{V}
+0007 ( 412)		STOREA1		<-	V(-1 '')+53248 , CC:160	{V}
+0008 ( 413)		STOREA1		<-	V(-1 '')+53249 , CC:56	{V}
+0009 ( 414)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53264 	{V}
+000a ( 414)		BINOP9	R0(C)[0..254]	<-	R0(CF)[0..255], CC:-2	{}
+000b ( 414)		STOREA1		<-	V(-1 '')+53264 , R0(CF)[0..254]	{V}
+000c ( 415)		STOREA1		<-	V(-1 '')+53287 , CC:1	{V}
+000d ( 416)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53276 	{V}
+000e ( 416)		BINOP9	R0(C)[0..254]	<-	R0(CF)[0..255], CC:-2	{}
+000f ( 416)		STOREA1		<-	V(-1 '')+53276 , R0(CF)[0..254]	{V}
+0010 ( 417)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53275 	{V}
+0011 ( 417)		BINOP9	R0(C)[0..254]	<-	R0(CF)[0..255], CC:-2	{}
+0012 ( 417)		STOREA1		<-	V(-1 '')+53275 , R0(CF)[0..254]	{V}
+0013 ( 418)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53277 	{V}
+0014 ( 418)		BINOP8	R0(C)[0..255]	<-	R0(CF)[0..255], CC:1	{}
+0015 ( 418)		STOREA1		<-	V(-1 '')+53277 , R0(CF)[0..255]	{V}
+0016 ( 419)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53271 	{V}
+0017 ( 419)		BINOP8	R0(C)[0..255]	<-	R0(CF)[0..255], CC:1	{}
+0018 ( 419)		STOREA1		<-	V(-1 '')+53271 , R0(CF)[0..255]	{V}
+0019 ( 420)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53269 	{V}
+001a ( 420)		BINOP8	R0(C)[0..255]	<-	R0(CF)[0..255], CC:1	{}
+001b ( 420)		STOREA1		<-	V(-1 '')+53269 , R0(CF)[0..255]	{V}
+001c ( 479)		CALLN		<-	V(4 'draw_year')+0 	{E}
+001d ( 482)		CALLN		<-	V(5 'hline')+0 	{E}
+001e ( 483)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+001f ( 483)		STOREC1		<-	V(4 '')+0 , CC:11	{}
+0020 ( 483)		CONST	R0(P)[0..0]	<-	CG14(17:0 's1_orwell')	{S}
+0021 ( 483)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(17 's1_orwell')} [0..0]	{}
+0022 ( 483)		CALLN		<-	V(6 'pcenter')+0 	{E}
+0023 ( 484)		STOREC1		<-	V(0 '')+0 , CC:22	{}
+0024 ( 484)		STOREC1		<-	V(4 '')+0 , CC:12	{}
+0025 ( 484)		CONST	R0(P)[0..0]	<-	CG23(18:0 's1_press')	{S}
+0026 ( 484)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(18 's1_press')} [0..0]	{}
+0027 ( 484)		CALLN		<-	V(6 'pcenter')+0 	{E}
+0028 ( 486)		CALLN		<-	V(8 'scroll_init')+0 	{}
+0029 ( 198)		STOREG1		<-	V(23 'blink_phase')+0 , CC:0	{}
+002a ( 197)		STOREG1		<-	V(22 'blink_cnt')+0 , CC:0	{}
+002b ( 494)		CONST	R1(C)[0..0]	<-	CI:0	{}
+002c ( 495)		CONST	R2(C)[0..0]	<-	CI:0	{}
+002d ( 501)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 501)		STOREC1		<-	V(2 '')+0 , CC:22	{}
+0001 ( 501)		STOREC1		<-	V(3 '')+0 , CC:12	{}
+0002 ( 499)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0003 ( 500)		CALLN		<-	V(10 'scroll_step')+0 	{}
+0004 ( 501)		CALLN		<-	V(11 'blink_row')+0 	{}
+0005 ( 504)		CONV37	R0(I)[0..4]	<-	R1(C)[0..4]	{}
+0006 ( 504)		LEAG	R0(P)[0..4]	<-	V(25 'seq_hold')+0 , R0(IF)[0..4]	{}
+0007 ( 504)		LOADI1	R0(C)[25..60]	<-	R0(PF)+0 {V(25 'seq_hold')} [0..4]	{}
+0008 ( 503)		BINOP1	R2(C)[1..]	<-	R2(CF)[0..], CI:1	{}
+0009 ( 504)		RELOP25	R0(B)[0..1]	<-	R2(C)[1..], R0(CF)[25..60]	{}
+000a ( 504)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 3
+		==> 10
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 506)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0001 ( 507)		BINOP1	R1(C)[1..5]	<-	R1(CF)[0..4], CI:1	{}
+0002 ( 508)		RELOP25	R0(B)[0..1]	<-	R1(C)[1..5], CC:5	{}
+0003 ( 508)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 4
+		==> 5
+L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 509)		CONST	R1(C)[0..0]	<-	CI:0	{}
+0001 ( 508)		JUMP		<-		{}
+		==> 5
+L5: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 512)		CONV37	R0(I)[0..4]	<-	R1(C)[0..4]	{}
+0001 ( 512)		LEAG	R0(P)[0..4]	<-	V(24 'seq_frame')+0 , R0(IF)[0..4]	{}
+0002 ( 512)		LOADI1	R0(C)[0..2]	<-	R0(PF)+0 {V(24 'seq_frame')} [0..4]	{}
+0003 ( 513)		BRANCH		<-	R0(C)[0..2]	{}
+		==> 7
+		==> 6
+L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 515)		RELOP19	R0(B)[0..1]	<-	R0(CF)[0..2], CC:1	{}
+0001 ( 515)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 8
+		==> 9
+L8: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 516)		CONST	R0(P)[0..0]	<-	CG63(6:0 'eye_centre')	{S}
+0001 ( 521)		JUMP		<-		{}
+		==> 11
+L11: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 516)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(6 'eye_centre')} [0..0]	{}
+0001 ( 516)		CALLN		<-	V(3 'sprite_load')+0 	{}
+0002 ( 521)		JUMP		<-		{}
+		==> 10
+L10: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 521)		CALLN	R0(C)	<-	V(13 'any_key')+0 	{}
+0001 ( 521)		BRANCH		<-	R0(CF)	{}
 		==> 2
 		==> 1
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 451)		STOREC1		<-	V(0 '')+0 , CC:15	{}
-0001 ( 451)		CALLN		<-	V(11 'fade_to_black')+0 	{}
-0002 ( 452)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-0003 ( 452)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0004 ( 453)		RET		<-		{}
+0000 ( 526)		STOREC1		<-	V(0 '')+0 , CC:5	{}
+0001 ( 425)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53269 	{V}
+0002 ( 425)		BINOP9	R0(C)[0..254]	<-	R0(CF)[0..255], CC:-2	{}
+0003 ( 425)		STOREA1		<-	V(-1 '')+53269 , R0(CF)[0..254]	{V}
+0004 ( 426)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53277 	{V}
+0005 ( 426)		BINOP9	R0(C)[0..254]	<-	R0(CF)[0..255], CC:-2	{}
+0006 ( 426)		STOREA1		<-	V(-1 '')+53277 , R0(CF)[0..254]	{V}
+0007 ( 427)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53271 	{V}
+0008 ( 427)		BINOP9	R0(C)[0..254]	<-	R0(CF)[0..255], CC:-2	{}
+0009 ( 427)		STOREA1		<-	V(-1 '')+53271 , R0(CF)[0..254]	{V}
+000a ( 526)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000b ( 527)		CALLN		<-	V(15 'fade_to_black')+0 	{}
+000c ( 528)		STOREC1		<-	V(0 '')+0 , CC:15	{}
+000d ( 528)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000e ( 529)		RET		<-		{}
+L9: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 518)		CONST	R0(P)[0..0]	<-	CG63(28:0 'eye_right')	{S}
+0001 ( 521)		JUMP		<-		{}
+		==> 11
+L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 514)		CONST	R0(P)[0..0]	<-	CG63(27:0 'eye_left')	{S}
+0001 ( 521)		JUMP		<-		{}
+		==> 11
 --------------------------------------------------------------------
-cls: C:/code/jonas/c64Demo/nineteen84.c:49
+cls: C:/code/jonas/c64Demo/nineteen84.c:50
 $00 R0(P), $00 R1(B), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  51)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
-0001 (  52)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
-0002 (  55)		CONST	R0(P)[1024..1024]	<-	CA0(-1:1024 '')	{}
-0003 (  55)		JUMP		<-		{}
+0000 (  52)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
+0001 (  53)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
+0002 (  56)		CONST	R0(P)[1024..1024]	<-	CA0(-1:1024 '')	{}
+0003 (  56)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  55)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1024..2023], CC:32	{}
-0001 (  56)		STOREI1		<-	R0(P)+54272 {V(-1 'ABS')} [1024..2023], CC:0	{}
-0002 (  55)		LEAA	R0(P)[1025..2023]	<-	R0(PF)[1024..2023], CI:1	{}
-0003 (  53)		RELOP20	R1(B)[0..1]	<-	R0(P)[1025..2023], V(-1 '')+2024 	{}
-0004 (  53)		BRANCH		<-	R1(BF)[0..1]	{}
+0000 (  56)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1024..2023], CC:32	{}
+0001 (  57)		STOREI1		<-	R0(P)+54272 {V(-1 'ABS')} [1024..2023], CC:0	{}
+0002 (  56)		LEAA	R0(P)[1025..2023]	<-	R0(PF)[1024..2023], CI:1	{}
+0003 (  54)		RELOP20	R1(B)[0..1]	<-	R0(P)[1025..2023], V(-1 '')+2024 	{}
+0004 (  54)		BRANCH		<-	R1(BF)[0..1]	{}
 		==> 1
 		==> 2
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  49)		RET		<-		{}
+0000 (  59)		RET		<-		{}
 --------------------------------------------------------------------
-print_centered: C:/code/jonas/c64Demo/nineteen84.c:71
+sprite_load: C:/code/jonas/c64Demo/nineteen84.c:401
+$00 R0(P), $00 R1(I), $00 R2(P), $00 R3(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 404)		CONST	R3(C)[0..0]	<-	CI:0	{}
+0001 ( 405)		LOADZ2	R0(P)	<-	V(0 '')+0 	{IS}
+0002 ( 405)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 405)		CONV37	R1(I)[0..62]	<-	R3(C)[0..62]	{}
+0001 ( 405)		LEAI	R2(P)+0	<-	R0(P)+0, R1(I)[0..62]	{}
+0002 ( 405)		LOADI1	R2(C)[0..255]	<-	R2(PF)+0	{}
+0003 ( 405)		LEAA	R1(P)[8192..8254]	<-	V(-1 '')+8192 , R1(IF)[0..62]	{}
+0004 ( 405)		STOREI1		<-	R1(PF)+0 {V(-1 'ABS')} [8192..8254], R2(CF)[0..255]	{}
+0005 ( 404)		BINOP1	R3(C)[1..63]	<-	R3(CF)[0..62], CI:1	{}
+0006 ( 404)		RELOP28	R1(B)[0..1]	<-	R3(C)[1..63], CC:63	{}
+0007 ( 404)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 1
+		==> 2
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 406)		STOREA1		<-	V(-1 '')+8255 , CC:0	{}
+0001 ( 407)		RET		<-		{}
+--------------------------------------------------------------------
+draw_year: C:/code/jonas/c64Demo/nineteen84.c:445
+$00 R0(P), $00 R1(I), $00 R2(P), $02 R3(I), $00 R4(I), $00 R5(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 447)		CONST	R0(P)[0..0]	<-	CG18(7:0 'year_row0')	{S}
+0001 ( 447)		STOREG2		<-	V(12 'rows' A)+0 , R0(PF)+0 {V(7 'year_row0')} [0..0]	{}
+0002 ( 447)		CONST	R0(P)[0..0]	<-	CG18(8:0 'year_row1')	{S}
+0003 ( 447)		STOREG2		<-	V(12 'rows' A)+2 , R0(PF)+0 {V(8 'year_row1')} [0..0]	{}
+0004 ( 447)		CONST	R0(P)[0..0]	<-	CG18(9:0 'year_row2')	{S}
+0005 ( 447)		STOREG2		<-	V(12 'rows' A)+4 , R0(PF)+0 {V(9 'year_row2')} [0..0]	{}
+0006 ( 447)		CONST	R0(P)[0..0]	<-	CG18(10:0 'year_row3')	{S}
+0007 ( 447)		STOREG2		<-	V(12 'rows' A)+6 , R0(PF)+0 {V(10 'year_row3')} [0..0]	{}
+0008 ( 447)		CONST	R0(P)[0..0]	<-	CG18(11:0 'year_row4')	{S}
+0009 ( 447)		STOREG2		<-	V(12 'rows' A)+8 , R0(PF)+0 {V(11 'year_row4')} [0..0]	{}
+000a ( 450)		CONST	R0(I)[0..0]	<-	CI:0	{}
+000b ( 450)		CONST	R1(I)[491..491]	<-	CI:491	{}
+000c ( 453)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 453)		LEAA	R2(P)[1515..1715]	<-	V(-1 '')+1024 , R1(I)[491..651]	{}
+0001 ( 451)		CONST	R5(C)[0..0]	<-	CI:0	{}
+0002 ( 453)		BINOP16	R3(I)[0..8]	<-	R0(I)[0..4], CI:1	{I}
+0003 ( 453)		LEAG	R3(P)[0..8]	<-	V(12 'rows' A)+0 , R3(IF)[0..8]	{I}
+0004 ( 453)		LOADI2	R3(P)	<-	R3(PF)+0 {V(12 'rows' A)} [0..8]	{I}
+0005 ( 453)		JUMP		<-		{}
+		==> 4
+L4: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 453)		CONV37	R4(I)[0..17]	<-	R5(C)[0..17]	{}
+0001 ( 453)		LEAI	R4(P)+0	<-	R3(P)+0, R4(IF)[0..17]	{}
+0002 ( 453)		LOADI1	R4(C)[0..255]	<-	R4(PF)+0	{}
+0003 ( 453)		STOREI1		<-	R2(P)+0 {V(-1 'ABS')} [1515..1692], R4(CF)[0..255]	{}
+0004 ( 454)		STOREI1		<-	R2(P)+54272 {V(-1 'ABS')} [1515..1692], CC:1	{}
+0005 ( 453)		LEAI	R2(P)+0 {V(-1 'ABS')} [1516..1693]	<-	R2(PF)+0 {V(-1 'ABS')} [1515..1692], CI:1	{}
+0006 ( 451)		BINOP1	R5(C)[1..18]	<-	R5(CF)[0..17], CI:1	{}
+0007 ( 451)		RELOP28	R4(B)[0..1]	<-	R5(C)[1..18], CC:18	{}
+0008 ( 451)		BRANCH		<-	R4(BF)[0..1]	{}
+		==> 4
+		==> 2
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 450)		BINOP1	R0(I)[1..5]	<-	R0(IF)[0..4], CI:1	{}
+0001 ( 450)		BINOP1	R1(I)[531..691]	<-	R1(IF)[491..651], CI:40	{}
+0002 ( 448)		RELOP20	R2(B)[0..1]	<-	R1(I)[531..691], CI:691	{}
+0003 ( 448)		BRANCH		<-	R2(BF)[0..1]	{}
+		==> 1
+		==> 3
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 445)		RET		<-		{}
+--------------------------------------------------------------------
+hline: C:/code/jonas/c64Demo/nineteen84.c:92
+$00 R0(I), $00 R1(C), $00 R2(B), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (  92)		LOADZ1	R0(C)[2..18]	<-	V(0 '')+0 	{S}
+0001 (  92)		CONV37	R0(I)[2..18]	<-	R0(CF)[2..18]	{S}
+0002 (  94)		BINOP3	R0(I)[80..720]	<-	R0(IF)[2..18], CI:40	{S}
+0003 (  97)		LEAA	R0(P)[1106..1746]	<-	V(-1 '')+1026 , R0(IF)[80..720]	{}
+0004 (  95)		CONST	R1(C)[36..36]	<-	CI:36	{}
+0005 (  97)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (  97)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1106..1781], CC:45	{}
+0001 (  98)		STOREI1		<-	R0(P)+54272 {V(-1 'ABS')} [1106..1781], CC:11	{}
+0002 (  97)		LEAI	R0(P)+0 {V(-1 'ABS')} [1107..1782]	<-	R0(PF)+0 {V(-1 'ABS')} [1106..1781], CI:1	{}
+0003 (  95)		BINOP2	R1(C)[0..35]	<-	R1(CF)[1..36], CI:1	{}
+0004 (  95)		RELOP27	R2(B)[0..1]	<-	R1(C)[0..35], CC:0	{}
+0005 (  95)		BRANCH		<-	R2(BF)[0..1]	{}
+		==> 1
+		==> 2
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (  92)		RET		<-		{}
+--------------------------------------------------------------------
+pcenter: C:/code/jonas/c64Demo/nineteen84.c:74
 $00 R0(P), $00 R1(P), $00 R2(C), $00 R3(C), $00 R4(C), $00 R5(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  73)		CONST	R2(C)[0..0]	<-	CI:0	{}
-0001 (  74)		LOADZ2	R0(P)	<-	V(2 '')+0 	{}
-0002 (  75)		LEAI	R1(P)+0	<-	R0(P)+0, CI:1	{}
-0003 (  71)		LOADZ1	R3(C)[0..255]	<-	V(4 '')+0 	{S}
-0004 (  71)		LOADZ1	R4(C)[0..255]	<-	V(0 '')+0 	{S}
-0005 (  75)		LOADI1	R5(C)[0..255]	<-	R0(P)+0	{}
-0006 (  75)		BRANCH		<-	R5(CF)[0..255]	{}
+0000 (  76)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0001 (  77)		LOADZ2	R0(P)	<-	V(2 '')+0 	{}
+0002 (  78)		LEAI	R1(P)+0	<-	R0(P)+0, CI:1	{}
+0003 (  74)		LOADZ1	R3(C)[0..255]	<-	V(4 '')+0 	{S}
+0004 (  74)		LOADZ1	R4(C)[0..255]	<-	V(0 '')+0 	{S}
+0005 (  78)		LOADI1	R5(C)[0..255]	<-	R0(P)+0	{}
+0006 (  78)		BRANCH		<-	R5(CF)[0..255]	{}
 		==> 1
 		==> 2
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  76)		BINOP1	R2(C)[1..]	<-	R2(CF)[0..], CI:1	{}
-0001 (  75)		LOADI1	R5(C)[0..255]	<-	R1(P)+0	{}
-0002 (  75)		LEAI	R1(P)+0	<-	R1(PF)+0, CI:1	{}
-0003 (  75)		BRANCH		<-	R5(CF)[0..255]	{}
+0000 (  79)		BINOP1	R2(C)[1..]	<-	R2(CF)[0..], CI:1	{}
+0001 (  78)		LOADI1	R5(C)[0..255]	<-	R1(P)+0	{}
+0002 (  78)		LEAI	R1(P)+0	<-	R1(PF)+0, CI:1	{}
+0003 (  78)		BRANCH		<-	R5(CF)[0..255]	{}
 		==> 1
 		==> 2
 L2: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  78)		STOREC1		<-	V(0 '')+0 , R4(CF)[2..21]	{}
-0001 (  78)		STOREC2		<-	V(2 '')+0 , R0(PF)	{}
-0002 (  78)		STOREC1		<-	V(4 '')+0 , R3(CF)[1..15]	{}
-0003 (  77)		CONV37	R0(I)[0..255]	<-	R2(CF)[0..]	{}
-0004 (  77)		BINOP2	R0(I)[-215..40]	<-	CI:40, R0(IF)[0..255]	{}
-0005 (  77)		BINOP18	R0(I)[-108..20]	<-	R0(IF)[-215..40], CI:1	{}
-0006 (  78)		STOREC1		<-	V(1 '')+0 , R0(CF)[-108..20]	{}
-0007 (  78)		CALLN		<-	V(4 'print_at')+0 	{E}
-0008 (  71)		RET		<-		{}
+0000 (  80)		STOREC1		<-	V(0 '')+0 , R4(CF)[1..22]	{}
+0001 (  80)		STOREC2		<-	V(2 '')+0 , R0(PF)	{}
+0002 (  80)		STOREC1		<-	V(4 '')+0 , R3(CF)[1..12]	{}
+0003 (  80)		CONV37	R0(I)[0..255]	<-	R2(CF)[0..]	{}
+0004 (  80)		BINOP2	R0(I)[-215..40]	<-	CI:40, R0(IF)[0..255]	{}
+0005 (  80)		BINOP18	R0(I)[-108..20]	<-	R0(IF)[-215..40], CI:1	{}
+0006 (  80)		STOREC1		<-	V(1 '')+0 , R0(CF)[-108..20]	{}
+0007 (  80)		CALLN		<-	V(7 'pat')+0 	{E}
+0008 (  74)		RET		<-		{}
 --------------------------------------------------------------------
-print_at: C:/code/jonas/c64Demo/nineteen84.c:60
+pat: C:/code/jonas/c64Demo/nineteen84.c:62
 $00 R0(P), $00 R1(I), $00 R2(I), $00 R3(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  63)		LOADZ2	R0(P)	<-	V(2 '')+0 	{}
-0001 (  63)		LOADI1	R1(C)[0..255]	<-	R0(P)+0	{}
-0002 (  63)		BRANCH		<-	R1(CF)[0..255]	{}
+0000 (  65)		LOADZ2	R0(P)	<-	V(2 '')+0 	{}
+0001 (  65)		LOADI1	R1(C)[0..255]	<-	R0(P)+0	{}
+0002 (  65)		BRANCH		<-	R1(CF)[0..255]	{}
 		==> 3
 		==> 2
 L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  62)		LOADZ1	R1(C)[0..255]	<-	V(1 '')+0 	{S}
-0001 (  62)		CONV37	R1(I)[0..255]	<-	R1(CF)[0..255]	{S}
-0002 (  62)		LOADZ1	R2(C)[0..255]	<-	V(0 '')+0 	{S}
-0003 (  62)		CONV37	R2(I)[0..255]	<-	R2(CF)[0..255]	{S}
-0004 (  62)		BINOP3	R2(I)[0..10200]	<-	R2(IF)[0..255], CI:40	{S}
-0005 (  62)		LEAA	R2(P)[1024..11224]	<-	V(-1 '')+1024 , R2(IF)[0..10200]	{}
-0006 (  65)		LEAI	R2(P)+0 {V(-1 'ABS')} [1024..11479]	<-	R2(PF)+0 {V(-1 'ABS')} [1024..11224], R1(IF)[0..255]	{}
-0007 (  66)		LOADZ1	R1(C)[0..255]	<-	V(4 '')+0 	{IS}
-0008 (  65)		JUMP		<-		{}
+0000 (  64)		LOADZ1	R1(C)[0..255]	<-	V(1 '')+0 	{S}
+0001 (  64)		CONV37	R1(I)[0..255]	<-	R1(CF)[0..255]	{S}
+0002 (  64)		LOADZ1	R2(C)[0..255]	<-	V(0 '')+0 	{S}
+0003 (  64)		CONV37	R2(I)[0..255]	<-	R2(CF)[0..255]	{S}
+0004 (  64)		BINOP3	R2(I)[0..10200]	<-	R2(IF)[0..255], CI:40	{S}
+0005 (  64)		LEAA	R2(P)[1024..11224]	<-	V(-1 '')+1024 , R2(IF)[0..10200]	{}
+0006 (  67)		LEAI	R2(P)+0 {V(-1 'ABS')} [1024..11479]	<-	R2(PF)+0 {V(-1 'ABS')} [1024..11224], R1(IF)[0..255]	{}
+0007 (  68)		LOADZ1	R1(C)[0..255]	<-	V(4 '')+0 	{IS}
+0008 (  67)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  65)		LOADI1	R3(C)[0..255]	<-	R0(P)+0	{}
-0001 (  65)		STOREI1		<-	R2(P)+0 {V(-1 'ABS')} [1024..], R3(CF)[0..255]	{}
-0002 (  66)		STOREI1		<-	R2(P)+54272 {V(-1 'ABS')} [1024..], R1(C)[0..255]	{}
-0003 (  65)		LEAA	R2(P)[1025..]	<-	R2(PF)[1024..], CI:1	{}
-0004 (  65)		LEAI	R0(P)+0	<-	R0(PF)+0, CI:1	{}
-0005 (  63)		LOADI1	R3(C)[0..255]	<-	R0(P)+0	{}
-0006 (  63)		BRANCH		<-	R3(CF)[0..255]	{}
+0000 (  67)		LOADI1	R3(C)[0..255]	<-	R0(P)+0	{}
+0001 (  67)		STOREI1		<-	R2(P)+0 {V(-1 'ABS')} [1024..], R3(CF)[0..255]	{}
+0002 (  68)		STOREI1		<-	R2(P)+54272 {V(-1 'ABS')} [1024..], R1(C)[0..255]	{}
+0003 (  67)		LEAA	R2(P)[1025..]	<-	R2(PF)[1024..], CI:1	{}
+0004 (  67)		LEAI	R0(P)+0	<-	R0(PF)+0, CI:1	{}
+0005 (  65)		LOADI1	R3(C)[0..255]	<-	R0(P)+0	{}
+0006 (  65)		BRANCH		<-	R3(CF)[0..255]	{}
 		==> 1
 		==> 2
 L2: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  69)		RET		<-		{}
+0000 (  71)		RET		<-		{}
 --------------------------------------------------------------------
-hline: C:/code/jonas/c64Demo/nineteen84.c:81
-$00 R0(I), $00 R1(C), $00 R2(B), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  81)		LOADZ1	R0(C)[11..19]	<-	V(0 '')+0 	{S}
-0001 (  81)		CONV37	R0(I)[11..19]	<-	R0(CF)[11..19]	{S}
-0002 (  84)		BINOP3	R0(I)[440..760]	<-	R0(IF)[11..19], CI:40	{S}
-0003 (  87)		LEAA	R0(P)[1466..1786]	<-	V(-1 '')+1026 , R0(IF)[440..760]	{}
-0004 (  85)		CONST	R1(C)[36..36]	<-	CI:36	{}
-0005 (  87)		JUMP		<-		{}
-		==> 1
-L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  87)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1466..1821], CC:45	{}
-0001 (  88)		STOREI1		<-	R0(P)+54272 {V(-1 'ABS')} [1466..1821], CC:11	{}
-0002 (  87)		LEAI	R0(P)+0 {V(-1 'ABS')} [1467..1822]	<-	R0(PF)+0 {V(-1 'ABS')} [1466..1821], CI:1	{}
-0003 (  85)		BINOP2	R1(C)[0..35]	<-	R1(CF)[1..36], CI:1	{}
-0004 (  85)		RELOP27	R2(B)[0..1]	<-	R1(C)[0..35], CC:0	{}
-0005 (  85)		BRANCH		<-	R2(BF)[0..1]	{}
-		==> 1
-		==> 2
-L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 (  81)		RET		<-		{}
---------------------------------------------------------------------
-scroll_init: C:/code/jonas/c64Demo/nineteen84.c:246
+scroll_init: C:/code/jonas/c64Demo/nineteen84.c:302
 $00 R0(I), $00 R1(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 249)		STOREG1		<-	V(19 'scroll_tick')+0 , CC:0	{}
-0001 ( 248)		STOREG2		<-	V(18 'scroll_idx')+0 , CI:0	{}
-0002 ( 250)		CONST	R1(C)[0..0]	<-	CI:0	{}
-0003 ( 251)		JUMP		<-		{}
+0000 ( 305)		STOREG1		<-	V(20 'scroll_tick')+0 , CC:0	{}
+0001 ( 304)		STOREG2		<-	V(19 'scroll_idx')+0 , CI:0	{}
+0002 ( 306)		CONST	R1(C)[0..0]	<-	CI:0	{}
+0003 ( 307)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 251)		CONV37	R0(I)[0..39]	<-	R1(C)[0..39]	{}
-0001 ( 251)		LEAG	R0(P)[0..39]	<-	V(20 'scroll_buf' A)+0 , R0(IF)[0..39]	{}
-0002 ( 251)		STOREI1		<-	R0(PF)+0 {V(20 'scroll_buf' A)} [0..39], CC:32	{}
-0003 ( 250)		BINOP1	R1(C)[1..40]	<-	R1(CF)[0..39], CI:1	{}
-0004 ( 250)		RELOP28	R0(B)[0..1]	<-	R1(C)[1..40], CC:40	{}
-0005 ( 250)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 307)		CONV37	R0(I)[0..39]	<-	R1(C)[0..39]	{}
+0001 ( 307)		LEAG	R0(P)[0..39]	<-	V(21 'scroll_buf' A)+0 , R0(IF)[0..39]	{}
+0002 ( 307)		STOREI1		<-	R0(PF)+0 {V(21 'scroll_buf' A)} [0..39], CC:32	{}
+0003 ( 306)		BINOP1	R1(C)[1..40]	<-	R1(CF)[0..39], CI:1	{}
+0004 ( 306)		RELOP28	R0(B)[0..1]	<-	R1(C)[1..40], CC:40	{}
+0005 ( 306)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 1
 		==> 2
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 252)		RET		<-		{}
+0000 ( 308)		RET		<-		{}
 --------------------------------------------------------------------
-wait_frame: C:/code/jonas/c64Demo/nineteen84.c:284
+wait_frame: C:/code/jonas/c64Demo/nineteen84.c:120
 $00 R0(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 286)		JUMP		<-		{}
+0000 ( 122)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 286)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53266 	{V}
-0001 ( 286)		RELOP28	R0(B)[0..1]	<-	R0(CF)[0..255], CC:250	{}
-0002 ( 286)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 122)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53266 	{V}
+0001 ( 122)		RELOP28	R0(B)[0..1]	<-	R0(CF)[0..255], CC:250	{}
+0002 ( 122)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 1
 		==> 2
 L2: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 288)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53266 	{V}
-0001 ( 288)		RELOP25	R0(B)[0..1]	<-	R0(CF)[0..255], CC:250	{}
-0002 ( 288)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 124)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53266 	{V}
+0001 ( 124)		RELOP25	R0(B)[0..1]	<-	R0(CF)[0..255], CC:250	{}
+0002 ( 124)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 2
 		==> 3
 L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 290)		RET		<-		{}
+0000 ( 126)		RET		<-		{}
 --------------------------------------------------------------------
-scroll_step: C:/code/jonas/c64Demo/nineteen84.c:254
+scroll_step: C:/code/jonas/c64Demo/nineteen84.c:310
 $00 R0(I), $00 R1(P), $00 R2(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 257)		LOADG1	R0(C)[0..255]	<-	V(19 'scroll_tick')+0 	{}
-0001 ( 257)		BINOP1	R0(C)	<-	R0(CF)[0..255], CI:1	{}
-0002 ( 257)		STOREG1		<-	V(19 'scroll_tick')+0 , R0(C)	{}
-0003 ( 257)		RELOP28	R0(B)[0..1]	<-	R0(CF), CC:12	{}
-0004 ( 257)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 312)		LOADG1	R0(C)[0..255]	<-	V(20 'scroll_tick')+0 	{}
+0001 ( 312)		BINOP1	R0(C)	<-	R0(CF)[0..255], CI:1	{}
+0002 ( 312)		STOREG1		<-	V(20 'scroll_tick')+0 , R0(C)	{}
+0003 ( 312)		RELOP28	R0(B)[0..1]	<-	R0(CF), CC:12	{}
+0004 ( 312)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 1
 		==> 2
 L1: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 258)		RET		<-		{}
+0000 ( 313)		RET		<-		{}
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 259)		STOREG1		<-	V(19 'scroll_tick')+0 , CC:0	{}
-0001 ( 261)		CONST	R2(C)[0..0]	<-	CI:0	{}
-0002 ( 262)		JUMP		<-		{}
+0000 ( 314)		STOREG1		<-	V(20 'scroll_tick')+0 , CC:0	{}
+0001 ( 315)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0002 ( 316)		JUMP		<-		{}
 		==> 3
 L3: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 262)		CONV37	R0(I)[0..38]	<-	R2(C)[0..38]	{}
-0001 ( 262)		LEAG	R1(P)[1..39]	<-	V(20 'scroll_buf' A)+1 , R0(I)[0..38]	{}
-0002 ( 262)		LOADI1	R1(C)[0..255]	<-	R1(PF)+0 {V(20 'scroll_buf' A)} [1..39]	{}
-0003 ( 262)		LEAG	R0(P)[0..38]	<-	V(20 'scroll_buf' A)+0 , R0(IF)[0..38]	{}
-0004 ( 262)		STOREI1		<-	R0(PF)+0 {V(20 'scroll_buf' A)} [0..38], R1(CF)[0..255]	{}
-0005 ( 261)		BINOP1	R2(C)[1..39]	<-	R2(CF)[0..38], CI:1	{}
-0006 ( 261)		RELOP28	R0(B)[0..1]	<-	R2(C)[1..39], CC:39	{}
-0007 ( 261)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 316)		CONV37	R0(I)[0..38]	<-	R2(C)[0..38]	{}
+0001 ( 316)		LEAG	R1(P)[1..39]	<-	V(21 'scroll_buf' A)+1 , R0(I)[0..38]	{}
+0002 ( 316)		LOADI1	R1(C)[0..255]	<-	R1(PF)+0 {V(21 'scroll_buf' A)} [1..39]	{}
+0003 ( 316)		LEAG	R0(P)[0..38]	<-	V(21 'scroll_buf' A)+0 , R0(IF)[0..38]	{}
+0004 ( 316)		STOREI1		<-	R0(PF)+0 {V(21 'scroll_buf' A)} [0..38], R1(CF)[0..255]	{}
+0005 ( 315)		BINOP1	R2(C)[1..39]	<-	R2(CF)[0..38], CI:1	{}
+0006 ( 315)		RELOP28	R0(B)[0..1]	<-	R2(C)[1..39], CC:39	{}
+0007 ( 315)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 3
 		==> 4
 L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 264)		LOADG2	R0(I)[0..267]	<-	V(18 'scroll_idx')+0 	{}
-0001 ( 264)		BINOP1	R1(I)[1..268]	<-	R0(I)[0..267], CI:1	{}
-0002 ( 264)		STOREG2		<-	V(18 'scroll_idx')+0 , R1(IF)[1..268]	{}
-0003 ( 264)		LEAG	R0(P)[0..267]	<-	V(23 'scroll_text')+0 , R0(IF)[0..267]	{}
-0004 ( 264)		LOADI1	R0(C)[0..255]	<-	R0(PF)+0 {V(23 'scroll_text')} [0..267]	{}
-0005 ( 265)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..255], CC:255	{}
-0006 ( 265)		BRANCH		<-	R1(BF)[0..1]	{}
+0000 ( 317)		LOADG2	R0(I)[0..227]	<-	V(19 'scroll_idx')+0 	{}
+0001 ( 317)		BINOP1	R1(I)[1..228]	<-	R0(I)[0..227], CI:1	{}
+0002 ( 317)		STOREG2		<-	V(19 'scroll_idx')+0 , R1(IF)[1..228]	{}
+0003 ( 317)		LEAG	R0(P)[0..227]	<-	V(26 'scroll_text')+0 , R0(IF)[0..227]	{}
+0004 ( 317)		LOADI1	R0(C)[0..255]	<-	R0(PF)+0 {V(26 'scroll_text')} [0..227]	{}
+0005 ( 318)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..255], CC:255	{}
+0006 ( 318)		BRANCH		<-	R1(BF)[0..1]	{}
 		==> 5
 		==> 6
 L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 267)		STOREG2		<-	V(18 'scroll_idx')+0 , CI:0	{}
-0001 ( 268)		CONST	R0(C)[32..32]	<-	CI:32	{}
-0002 ( 265)		JUMP		<-		{}
+0000 ( 320)		STOREG2		<-	V(19 'scroll_idx')+0 , CI:0	{}
+0001 ( 321)		CONST	R0(C)[32..32]	<-	CI:32	{}
+0002 ( 318)		JUMP		<-		{}
 		==> 6
 L6: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 270)		STOREG1		<-	V(20 'scroll_buf' A)+39 , R0(CF)[0..255]	{}
-0001 ( 273)		CONST	R2(C)[0..0]	<-	CI:0	{}
-0002 ( 275)		JUMP		<-		{}
+0000 ( 323)		STOREG1		<-	V(21 'scroll_buf' A)+39 , R0(CF)[0..255]	{}
+0001 ( 325)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0002 ( 327)		JUMP		<-		{}
 		==> 7
 L7: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 275)		CONV37	R0(I)[0..39]	<-	R2(C)[0..39]	{}
-0001 ( 275)		LEAG	R1(P)[0..39]	<-	V(20 'scroll_buf' A)+0 , R0(I)[0..39]	{}
-0002 ( 275)		LOADI1	R1(C)[0..255]	<-	R1(PF)+0 {V(20 'scroll_buf' A)} [0..39]	{}
-0003 ( 275)		LEAA	R0(P)[1984..2023]	<-	V(-1 '')+1984 , R0(IF)[0..39]	{}
-0004 ( 275)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1984..2023], R1(CF)[0..255]	{}
-0005 ( 276)		LEAI	R0(P)+0 {V(-1 'ABS')} [56256..56295]	<-	R0(PF)+0 {V(-1 'ABS')} [1984..2023], CI:54272	{}
-0006 ( 276)		STOREI1		<-	R0(PF)+0 {V(-1 'ABS')} [56256..56295], CC:13	{}
-0007 ( 273)		BINOP1	R2(C)[1..40]	<-	R2(CF)[0..39], CI:1	{}
-0008 ( 273)		RELOP28	R0(B)[0..1]	<-	R2(C)[1..40], CC:40	{}
-0009 ( 273)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 327)		CONV37	R0(I)[0..39]	<-	R2(C)[0..39]	{}
+0001 ( 327)		LEAG	R1(P)[0..39]	<-	V(21 'scroll_buf' A)+0 , R0(I)[0..39]	{}
+0002 ( 327)		LOADI1	R1(C)[0..255]	<-	R1(PF)+0 {V(21 'scroll_buf' A)} [0..39]	{}
+0003 ( 327)		LEAA	R0(P)[1984..2023]	<-	V(-1 '')+1984 , R0(IF)[0..39]	{}
+0004 ( 327)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1984..2023], R1(CF)[0..255]	{}
+0005 ( 328)		LEAI	R0(P)+0 {V(-1 'ABS')} [56256..56295]	<-	R0(PF)+0 {V(-1 'ABS')} [1984..2023], CI:54272	{}
+0006 ( 328)		STOREI1		<-	R0(PF)+0 {V(-1 'ABS')} [56256..56295], CC:13	{}
+0007 ( 325)		BINOP1	R2(C)[1..40]	<-	R2(CF)[0..39], CI:1	{}
+0008 ( 325)		RELOP28	R0(B)[0..1]	<-	R2(C)[1..40], CC:40	{}
+0009 ( 325)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 7
 		==> 1
 --------------------------------------------------------------------
-blink_row: C:/code/jonas/c64Demo/nineteen84.c:356
-$00 R0(I), $00 R1(I), $00 R2(I), $00 R3(C), 
+blink_row: C:/code/jonas/c64Demo/nineteen84.c:211
+$00 R0(I), $00 R1(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 348)		LOADG1	R0(C)[0..255]	<-	V(21 'blink_cnt')+0 	{}
-0001 ( 348)		BINOP1	R0(C)	<-	R0(CF)[0..255], CI:1	{}
-0002 ( 348)		STOREG1		<-	V(21 'blink_cnt')+0 , R0(C)	{}
-0003 ( 351)		LOADG1	R1(C)[0..255]	<-	V(22 'blink_phase')+0 	{}
-0004 ( 348)		RELOP25	R0(B)[0..1]	<-	R0(CF), CC:25	{}
-0005 ( 348)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 211)		LOADZ1	R0(C)[0..255]	<-	V(2 '')+0 	{S}
+0001 ( 213)		STOREC1		<-	V(0 '')+0 , R0(CF)[18..22]	{}
+0002 ( 203)		LOADG1	R0(C)[0..255]	<-	V(22 'blink_cnt')+0 	{}
+0003 ( 203)		BINOP1	R0(C)	<-	R0(CF)[0..255], CI:1	{}
+0004 ( 203)		STOREG1		<-	V(22 'blink_cnt')+0 , R0(C)	{}
+0005 ( 206)		LOADG1	R1(C)[0..255]	<-	V(23 'blink_phase')+0 	{}
+0006 ( 203)		RELOP25	R0(B)[0..1]	<-	R0(CF), CC:25	{}
+0007 ( 203)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 1
 		==> 2
 L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 350)		STOREG1		<-	V(21 'blink_cnt')+0 , CC:0	{}
-0001 ( 351)		RELOP19	R0(B)[0..1]	<-	R1(CF)[0..255], CC:0	{}
-0002 ( 351)		STOREG1		<-	V(22 'blink_phase')+0 , R0(C)[0..1]	{}
-0003 ( 353)		BRANCH		<-	R0(CF)[0..255]	{}
-		==> 5
-		==> 6
-L5: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 356)		LOADZ1	R0(C)[1..12]	<-	V(1 '')+0 	{S}
-0001 ( 356)		CONV37	R0(I)[1..12]	<-	R0(CF)[1..12]	{}
-0002 ( 358)		JUMP		<-		{}
-		==> 7
-L7: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 356)		LOADZ1	R1(C)[13..21]	<-	V(0 '')+0 	{S}
-0001 ( 356)		CONV37	R1(I)[13..21]	<-	R1(CF)[13..21]	{S}
-0002 ( 359)		BINOP3	R1(I)[520..840]	<-	R1(IF)[13..21], CI:40	{S}
-0003 ( 359)		LEAA	R1(P)[55816..56136]	<-	V(-1 '')+55296 , R1(IF)[520..840]	{S}
-0004 ( 360)		CONST	R3(C)[0..0]	<-	CI:0	{}
-0005 ( 361)		JUMP		<-		{}
-		==> 3
-L3: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 361)		CONV37	R2(I)[0..39]	<-	R3(C)[0..39]	{}
-0001 ( 361)		LEAI	R2(P)+0 {V(-1 'ABS')} [55816..56175]	<-	R1(P)+0 {V(-1 'ABS')} [55816..56136], R2(IF)[0..39]	{}
-0002 ( 361)		STOREI1		<-	R2(PF)+0 {V(-1 'ABS')} [55816..56175], R0(C)[0..12]	{}
-0003 ( 360)		BINOP1	R3(C)[1..40]	<-	R3(CF)[0..39], CI:1	{}
-0004 ( 360)		RELOP28	R2(B)[0..1]	<-	R3(C)[1..40], CC:40	{}
-0005 ( 360)		BRANCH		<-	R2(BF)[0..1]	{}
+0000 ( 205)		STOREG1		<-	V(22 'blink_cnt')+0 , CC:0	{}
+0001 ( 206)		RELOP19	R0(B)[0..1]	<-	R1(CF)[0..255], CC:0	{}
+0002 ( 206)		STOREG1		<-	V(23 'blink_phase')+0 , R0(C)[0..1]	{}
+0003 ( 208)		BRANCH		<-	R0(CF)[0..255]	{}
 		==> 3
 		==> 4
-L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 356)		RET		<-		{}
-L6: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 358)		CONST	R0(I)[0..0]	<-	CI:0	{}
-0001 ( 358)		JUMP		<-		{}
-		==> 7
-L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 351)		MOVE	R0(C)[0..255]	<-	R1(CF)[0..255]	{}
-0001 ( 358)		BRANCH		<-	R0(CF)[0..255]	{}
+L3: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 211)		LOADZ1	R0(C)[1..12]	<-	V(3 '')+0 	{S}
+0001 ( 211)		CONV37	R0(I)[1..12]	<-	R0(CF)[1..12]	{}
+0002 ( 213)		JUMP		<-		{}
 		==> 5
-		==> 6
+L5: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 213)		STOREC1		<-	V(1 '')+0 , R0(CF)[0..12]	{}
+0001 ( 213)		CALLN		<-	V(12 'rowcol')+0 	{}
+0002 ( 211)		RET		<-		{}
+L4: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 213)		CONST	R0(I)[0..0]	<-	CI:0	{}
+0001 ( 213)		JUMP		<-		{}
+		==> 5
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 206)		MOVE	R0(C)[0..255]	<-	R1(CF)[0..255]	{}
+0001 ( 213)		BRANCH		<-	R0(CF)[0..255]	{}
+		==> 3
+		==> 4
 --------------------------------------------------------------------
-fire_pressed: C:/code/jonas/c64Demo/nineteen84.c:310
+rowcol: C:/code/jonas/c64Demo/nineteen84.c:84
+$00 R0(I), $00 R1(I), $00 R2(C), $00 R3(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (  86)		LOADZ1	R0(C)[0..255]	<-	V(0 '')+0 	{S}
+0001 (  86)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{S}
+0002 (  86)		BINOP3	R0(I)[0..10200]	<-	R0(IF)[0..255], CI:40	{S}
+0003 (  86)		LEAA	R0(P)[55296..65496]	<-	V(-1 '')+55296 , R0(IF)[0..10200]	{S}
+0004 (  87)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0005 (  88)		LOADZ1	R3(C)[0..255]	<-	V(1 '')+0 	{IS}
+0006 (  88)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (  88)		CONV37	R1(I)[0..39]	<-	R2(C)[0..39]	{}
+0001 (  88)		LEAI	R1(P)+0 {V(-1 'ABS')} [55296..65535]	<-	R0(P)+0 {V(-1 'ABS')} [55296..65496], R1(IF)[0..39]	{}
+0002 (  88)		STOREI1		<-	R1(PF)+0 {V(-1 'ABS')} [55296..65535], R3(C)[0..255]	{}
+0003 (  87)		BINOP1	R2(C)[1..40]	<-	R2(CF)[0..39], CI:1	{}
+0004 (  87)		RELOP28	R1(B)[0..1]	<-	R2(C)[1..40], CC:40	{}
+0005 (  87)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 1
+		==> 2
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (  89)		RET		<-		{}
+--------------------------------------------------------------------
+any_key: C:/code/jonas/c64Demo/nineteen84.c:143
 $00 R0(I), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 313)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56320 	{V}
-0001 ( 313)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
-0002 ( 313)		BINOP9	R0(I)[0..16]	<-	R0(IF)[0..255], CI:16	{}
-0003 ( 313)		BRANCH		<-	R0(IF)[0..16]	{}
+0000 ( 146)		STOREA1		<-	V(-1 '')+56320 , CC:127	{V}
+0001 ( 147)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56321 	{V}
+0002 ( 147)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
+0003 ( 147)		BINOP9	R0(I)[0..16]	<-	R0(IF)[0..255], CI:16	{}
+0004 ( 147)		BRANCH		<-	R0(IF)[0..16]	{}
 		==> 2
 		==> 1
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 317)		STOREA1		<-	V(-1 '')+56320 , CC:-17	{V}
-0001 ( 318)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56321 	{V}
-0002 ( 319)		STOREA1		<-	V(-1 '')+56320 , CC:255	{V}
-0003 ( 318)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
-0004 ( 318)		BINOP9	R0(I)[0..128]	<-	R0(IF)[0..255], CI:128	{}
-0005 ( 318)		RELOP19	R0(B)[0..1]	<-	R0(IF)[0..128], CI:0	{}
-0006 ( 320)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 1
+0000 ( 154)		STOREA1		<-	V(-1 '')+56320 , CC:253	{V}
+0001 ( 155)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56321 	{V}
+0002 ( 155)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
+0003 ( 155)		BINOP9	R0(I)[0..1]	<-	R0(IF)[0..255], CI:1	{}
+0004 ( 155)		BRANCH		<-	R0(IF)[0..1]	{}
 		==> 3
-L1: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 314)		RETV		<-	CC:1	{}
+		==> 1
 L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 324)		STOREA1		<-	V(-1 '')+56320 , CC:-3	{V}
-0001 ( 325)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56321 	{V}
-0002 ( 326)		STOREA1		<-	V(-1 '')+56320 , CC:255	{V}
-0003 ( 325)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
-0004 ( 325)		BINOP9	R0(I)[0..2]	<-	R0(IF)[0..255], CI:2	{}
-0005 ( 325)		RELOP19	R0(B)[0..1]	<-	R0(IF)[0..2], CI:0	{}
-0006 ( 327)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 1
-		==> 4
-L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 330)		RETV		<-	CC:0	{}
---------------------------------------------------------------------
-fade_to_black: C:/code/jonas/c64Demo/nineteen84.c:368
-$00 R0(I), $00 R1(I), $00 R2(C), $00 R3(C), $00 R4(C), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 370)		CONST	R3(C)[0..0]	<-	CI:0	{}
-0001 ( 368)		LOADZ1	R4(C)[0..255]	<-	V(0 '')+0 	{}
-0002 ( 373)		JUMP		<-		{}
-		==> 2
-L2: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 373)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0001 ( 374)		RELOP28	R0(B)[0..1]	<-	R3(C)[0..25], CC:25	{}
-0002 ( 374)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 4
-		==> 1
-L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 374)		CONV37	R0(I)[0..24]	<-	R3(C)[0..24]	{}
-0001 ( 376)		BINOP3	R0(I)[0..960]	<-	R0(IF)[0..24], CI:40	{}
-0002 ( 376)		LEAA	R0(P)[55296..56256]	<-	V(-1 '')+55296 , R0(IF)[0..960]	{}
-0003 ( 377)		CONST	R2(C)[0..0]	<-	CI:0	{}
-0004 ( 378)		JUMP		<-		{}
+0000 ( 162)		STOREA1		<-	V(-1 '')+56320 , CC:254	{V}
+0001 ( 163)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56321 	{V}
+0002 ( 170)		STOREA1		<-	V(-1 '')+56320 , CC:255	{V}
+0003 ( 163)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
+0004 ( 163)		BINOP9	R0(I)[0..16]	<-	R0(IF)[0..255], CI:16	{}
+0005 ( 163)		BRANCH		<-	R0(IF)[0..16]	{}
 		==> 5
-L5: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 378)		CONV37	R1(I)[0..39]	<-	R2(C)[0..39]	{}
-0001 ( 378)		LEAI	R1(P)+0 {V(-1 'ABS')} [55296..56295]	<-	R0(P)+0 {V(-1 'ABS')} [55296..56256], R1(IF)[0..39]	{}
-0002 ( 378)		STOREI1		<-	R1(PF)+0 {V(-1 'ABS')} [55296..56295], CC:0	{}
-0003 ( 377)		BINOP1	R2(C)[1..40]	<-	R2(CF)[0..39], CI:1	{}
-0004 ( 377)		RELOP28	R1(B)[0..1]	<-	R2(C)[1..40], CC:40	{}
-0005 ( 377)		BRANCH		<-	R1(BF)[0..1]	{}
-		==> 5
+		==> 4
+L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 171)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+56320 	{V}
+0001 ( 171)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
+0002 ( 171)		BINOP9	R0(I)[0..16]	<-	R0(IF)[0..255], CI:16	{}
+0003 ( 171)		BRANCH		<-	R0(IF)[0..16]	{}
 		==> 6
+		==> 4
 L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 379)		BINOP1	R3(C)[1..25]	<-	R3(CF)[0..24], CI:1	{}
-0001 ( 371)		JUMP		<-		{}
-		==> 1
+0000 ( 174)		RETV		<-	CC:0	{}
+L4: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 166)		RETV		<-	CC:1	{}
 L1: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 371)		BINOP2	R4(C)[0..19]	<-	R4(CF)[1..20], CI:1	{}
-0001 ( 371)		RELOP27	R0(B)[0..1]	<-	R4(C)[0..19], CC:0	{}
-0002 ( 371)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 2
-		==> 3
-L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 382)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
-0001 ( 383)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
-0002 ( 368)		RET		<-		{}
+0000 ( 149)		STOREA1		<-	V(-1 '')+56320 , CC:255	{V}
+0001 ( 150)		RETV		<-	CC:1	{}
 --------------------------------------------------------------------
-wait_frames: C:/code/jonas/c64Demo/nineteen84.c:292
+wait_frames: C:/code/jonas/c64Demo/nineteen84.c:128
 $00 R0(C), $00 R1(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 292)		LOADZ1	R0(C)[10..80]	<-	V(0 '')+0 	{}
-0001 ( 294)		BINOP1	R0(C)[9..79]	<-	R0(CF)[10..80], CI:-1	{}
-0002 ( 294)		STOREZ1		<-	V(0 '')+0 , R0(CF)[9..79]	{}
-0003 ( 295)		JUMP		<-		{}
-		==> 1
-L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 295)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0001 ( 294)		LOADZ1	R0(C)[0..79]	<-	V(0 '')+0 	{}
-0002 ( 294)		BINOP1	R1(C)[-1..78]	<-	R0(C)[0..79], CI:-1	{}
-0003 ( 294)		STOREZ1		<-	V(0 '')+0 , R1(CF)[-1..78]	{}
-0004 ( 294)		BRANCH		<-	R0(CF)[0..79]	{}
-		==> 1
-		==> 2
-L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 292)		RET		<-		{}
---------------------------------------------------------------------
-scene2_run: C:/code/jonas/c64Demo/nineteen84.c:466
-$00 R0(P), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 469)		STOREC1		<-	V(0 '')+0 , CC:18	{}
-0001 ( 469)		STOREC1		<-	V(4 '')+0 , CC:11	{}
-0002 ( 468)		CALLN		<-	V(2 'cls')+0 	{}
-0003 ( 469)		CONST	R0(P)[0..0]	<-	CG21(9:0 's_title')	{S}
-0004 ( 469)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(9 's_title')} [0..0]	{}
-0005 ( 469)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0006 ( 471)		STOREC1		<-	V(0 '')+0 , CC:20	{}
-0007 ( 471)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0008 ( 472)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-0009 ( 472)		STOREC1		<-	V(4 '')+0 , CC:2	{}
-000a ( 472)		CONST	R0(P)[0..0]	<-	CG13(26:0 's_sl1')	{S}
-000b ( 472)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(26 's_sl1')} [0..0]	{}
-000c ( 472)		CALLN		<-	V(3 'print_centered')+0 	{E}
-000d ( 473)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-000e ( 473)		CALLN		<-	V(14 'glitch_row')+0 	{}
-000f ( 474)		STOREC1		<-	V(0 '')+0 , CC:30	{}
-0010 ( 474)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0011 ( 476)		STOREC1		<-	V(0 '')+0 , CC:12	{}
-0012 ( 476)		STOREC1		<-	V(4 '')+0 , CC:3	{}
-0013 ( 476)		CONST	R0(P)[0..0]	<-	CG19(29:0 's_sl2')	{S}
-0014 ( 476)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(29 's_sl2')} [0..0]	{}
-0015 ( 476)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0016 ( 477)		STOREC1		<-	V(0 '')+0 , CC:12	{}
-0017 ( 477)		CALLN		<-	V(14 'glitch_row')+0 	{}
-0018 ( 478)		STOREC1		<-	V(0 '')+0 , CC:30	{}
-0019 ( 478)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-001a ( 480)		STOREC1		<-	V(0 '')+0 , CC:14	{}
-001b ( 480)		STOREC1		<-	V(4 '')+0 , CC:13	{}
-001c ( 480)		CONST	R0(P)[0..0]	<-	CG22(30:0 's_sl3')	{S}
-001d ( 480)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(30 's_sl3')} [0..0]	{}
-001e ( 480)		CALLN		<-	V(3 'print_centered')+0 	{E}
-001f ( 481)		STOREC1		<-	V(0 '')+0 , CC:14	{}
-0020 ( 481)		CALLN		<-	V(14 'glitch_row')+0 	{}
-0021 ( 482)		STOREC1		<-	V(0 '')+0 , CC:50	{}
-0022 ( 482)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0023 ( 484)		STOREC1		<-	V(0 '')+0 , CC:20	{}
-0024 ( 484)		STOREC1		<-	V(4 '')+0 , CC:11	{}
-0025 ( 484)		CONST	R0(P)[0..0]	<-	CG35(31:0 's_tc')	{S}
-0026 ( 484)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(31 's_tc')} [0..0]	{}
-0027 ( 484)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0028 ( 485)		STOREC1		<-	V(0 '')+0 , CC:80	{}
-0029 ( 485)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-002a ( 487)		STOREC1		<-	V(0 '')+0 , CC:20	{}
-002b ( 487)		CALLN		<-	V(11 'fade_to_black')+0 	{}
-002c ( 488)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-002d ( 488)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-002e ( 489)		RET		<-		{}
---------------------------------------------------------------------
-glitch_row: C:/code/jonas/c64Demo/nineteen84.c:392
-$00 R0(I), $00 R1(P), $00 R2(C), $00 R3(C), $02 R4(C), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 392)		LOADZ1	R0(C)[10..14]	<-	V(0 '')+0 	{S}
-0001 ( 392)		CONV37	R0(I)[10..14]	<-	R0(CF)[10..14]	{S}
-0002 ( 394)		BINOP3	R0(I)[400..560]	<-	R0(IF)[10..14], CI:40	{S}
-0003 ( 394)		LEAA	R1(P)[55696..55856]	<-	V(-1 '')+55296 , R0(IF)[400..560]	{S}
-0004 ( 395)		CONST	R4(C)[0..0]	<-	CI:0	{}
-0005 ( 397)		JUMP		<-		{}
-		==> 1
-L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 397)		CONV37	R0(I)[0..5]	<-	R4(C)[0..5]	{}
-0001 ( 397)		LEAG	R0(P)[0..5]	<-	V(27 'glitch_pal')+0 , R0(IF)[0..5]	{}
-0002 ( 397)		LOADI1	R2(C)[0..11]	<-	R0(PF)+0 {V(27 'glitch_pal')} [0..5]	{}
-0003 ( 398)		CONST	R3(C)[0..0]	<-	CI:0	{}
-0004 ( 399)		JUMP		<-		{}
+0000 ( 130)		JUMP		<-		{}
 		==> 3
 L3: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 399)		CONV37	R0(I)[0..39]	<-	R3(C)[0..39]	{}
-0001 ( 399)		LEAI	R0(P)+0 {V(-1 'ABS')} [55696..55895]	<-	R1(P)+0 {V(-1 'ABS')} [55696..55856], R0(IF)[0..39]	{}
-0002 ( 399)		STOREI1		<-	R0(PF)+0 {V(-1 'ABS')} [55696..55895], R2(C)[0..11]	{}
-0003 ( 398)		BINOP1	R3(C)[1..40]	<-	R3(CF)[0..39], CI:1	{}
-0004 ( 398)		RELOP28	R0(B)[0..1]	<-	R3(C)[1..40], CC:40	{}
-0005 ( 398)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 3
-		==> 4
-L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 400)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0001 ( 395)		BINOP1	R4(C)[1..6]	<-	R4(CF)[0..5], CI:1	{}
-0002 ( 395)		RELOP28	R0(B)[0..1]	<-	R4(C)[1..6], CC:6	{}
-0003 ( 395)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 130)		LOADZ1	R0(C)[0..255]	<-	V(0 '')+0 	{}
+0001 ( 130)		BINOP1	R1(C)[-1..254]	<-	R0(C)[0..255], CI:-1	{}
+0002 ( 130)		STOREZ1		<-	V(0 '')+0 , R1(CF)[-1..254]	{}
+0003 ( 130)		BRANCH		<-	R0(CF)[0..255]	{}
 		==> 1
 		==> 2
+L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 131)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0001 ( 130)		JUMP		<-		{}
+		==> 3
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 392)		RET		<-		{}
+0000 ( 132)		RET		<-		{}
 --------------------------------------------------------------------
-scene3_run: C:/code/jonas/c64Demo/nineteen84.c:512
-$01 R0(P), $03 R1(B), $04 R2(C), $05 R3(C), 
+fade_to_black: C:/code/jonas/c64Demo/nineteen84.c:220
+$00 R0(B), $00 R1(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 515)		STOREC1		<-	V(0 '')+0 , CC:2	{}
-0001 ( 515)		STOREC1		<-	V(4 '')+0 , CC:11	{}
-0002 ( 514)		CALLN		<-	V(2 'cls')+0 	{}
-0003 ( 515)		CONST	R0(P)[0..0]	<-	CG21(9:0 's_title')	{S}
-0004 ( 515)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(9 's_title')} [0..0]	{}
-0005 ( 515)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0006 ( 518)		STOREC1		<-	V(0 '')+0 , CC:4	{}
-0007 ( 518)		STOREC1		<-	V(1 '')+0 , CC:2	{}
-0008 ( 518)		STOREC1		<-	V(4 '')+0 , CC:12	{}
-0009 ( 518)		CONST	R0(P)[0..0]	<-	CG5(32:0 'col_then')	{S}
-000a ( 518)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(32 'col_then')} [0..0]	{}
-000b ( 518)		CALLN		<-	V(4 'print_at')+0 	{E}
-000c ( 519)		STOREC1		<-	V(0 '')+0 , CC:4	{}
-000d ( 519)		STOREC1		<-	V(1 '')+0 , CC:24	{}
-000e ( 519)		STOREC1		<-	V(4 '')+0 , CC:12	{}
-000f ( 519)		CONST	R0(P)[0..0]	<-	CG4(33:0 'col_now')	{S}
-0010 ( 519)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(33 'col_now')} [0..0]	{}
-0011 ( 519)		CALLN		<-	V(4 'print_at')+0 	{E}
-0012 ( 524)		CONST	R0(P)[1164..1164]	<-	CA0(-1:1164 '')	{}
-0013 ( 524)		JUMP		<-		{}
+0000 ( 222)		CONST	R1(C)[0..0]	<-	CI:0	{}
+0001 ( 225)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 524)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1164..], CC:93	{}
-0001 ( 525)		STOREI1		<-	R0(P)+54272 {V(-1 'ABS')} [1164..], CC:11	{}
-0002 ( 524)		LEAI	R0(P)+0 {V(-1 'ABS')} [1204..1924]	<-	R0(PF)+0 {V(-1 'ABS')} [1164..1884], CI:40	{}
-0003 ( 522)		RELOP20	R1(B)[0..1]	<-	R0(P)+0 {V(-1 'ABS')} [1204..1924], V(-1 '')+1924 	{}
-0004 ( 522)		BRANCH		<-	R1(BF)[0..1]	{}
+0000 ( 225)		STOREC1		<-	V(0 '')+0 , R1(C)[0..24]	{}
+0001 ( 225)		STOREC1		<-	V(1 '')+0 , CC:0	{}
+0002 ( 224)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0003 ( 225)		CALLN		<-	V(12 'rowcol')+0 	{}
+0004 ( 222)		BINOP1	R1(C)[1..25]	<-	R1(CF)[0..24], CI:1	{}
+0005 ( 222)		RELOP28	R0(B)[0..1]	<-	R1(C)[1..25], CC:25	{}
+0006 ( 222)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 1
 		==> 2
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 528)		CALLN		<-	V(6 'scroll_init')+0 	{}
-0001 ( 343)		STOREG1		<-	V(22 'blink_phase')+0 , CC:0	{}
-0002 ( 342)		STOREG1		<-	V(21 'blink_cnt')+0 , CC:0	{}
-0003 ( 530)		CONST	R1(C)[0..0]	<-	CI:0	{}
-0004 ( 531)		CONST	R2(C)[0..0]	<-	CI:0	{}
-0005 ( 532)		CONST	R3(C)[0..0]	<-	CI:0	{}
-0006 ( 536)		JUMP		<-		{}
+0000 ( 227)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
+0001 ( 228)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
+0002 ( 229)		RET		<-		{}
+--------------------------------------------------------------------
+scene2_run: C:/code/jonas/c64Demo/nineteen84.c:863
+$00 R0(P), $06 R1(P), $07 R2(P), $08 R3(P), $0a R4(I), $0b R5(C), $0c R6(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 871)		STOREC1		<-	V(0 '')+0 , CC:1	{}
+0001 ( 871)		STOREC1		<-	V(4 '')+0 , CC:11	{}
+0002 ( 868)		CALLN		<-	V(2 'cls')+0 	{}
+0003 ( 869)		CALLN		<-	V(2 'cls')+0 	{}
+0004 ( 871)		CONST	R0(P)[0..0]	<-	CG14(33:0 's2_hdr')	{S}
+0005 ( 871)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(33 's2_hdr')} [0..0]	{}
+0006 ( 871)		CALLN		<-	V(6 'pcenter')+0 	{E}
+0007 ( 872)		STOREC1		<-	V(0 '')+0 , CC:2	{}
+0008 ( 872)		CALLN		<-	V(5 'hline')+0 	{E}
+0009 ( 874)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+000a ( 874)		STOREC1		<-	V(1 '')+0 , CC:1	{}
+000b ( 874)		STOREC1		<-	V(4 '')+0 , CC:11	{}
+000c ( 874)		CONST	R0(P)[0..0]	<-	CG7(34:0 's2_l1')	{S}
+000d ( 874)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(34 's2_l1')} [0..0]	{}
+000e ( 874)		CALLN		<-	V(7 'pat')+0 	{E}
+000f ( 875)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0010 ( 875)		STOREC1		<-	V(1 '')+0 , CC:1	{}
+0011 ( 875)		STOREC1		<-	V(4 '')+0 , CC:11	{}
+0012 ( 875)		CONST	R0(P)[0..0]	<-	CG10(35:0 's2_l2')	{S}
+0013 ( 875)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(35 's2_l2')} [0..0]	{}
+0014 ( 875)		CALLN		<-	V(7 'pat')+0 	{E}
+0015 ( 876)		STOREC1		<-	V(0 '')+0 , CC:14	{}
+0016 ( 876)		STOREC1		<-	V(1 '')+0 , CC:1	{}
+0017 ( 876)		STOREC1		<-	V(4 '')+0 , CC:11	{}
+0018 ( 876)		CONST	R0(P)[0..0]	<-	CG9(36:0 's2_l3')	{S}
+0019 ( 876)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(36 's2_l3')} [0..0]	{}
+001a ( 876)		CALLN		<-	V(7 'pat')+0 	{E}
+001b ( 878)		STOREC1		<-	V(0 '')+0 , CC:16	{}
+001c ( 878)		CALLN		<-	V(5 'hline')+0 	{E}
+001d ( 882)		STOREC1		<-	V(2 '')+0 , CC:10	{}
+001e ( 882)		STOREC1		<-	V(3 '')+0 , CC:6	{}
+001f ( 882)		STOREC1		<-	V(4 '')+0 , CC:0	{}
+0020 ( 882)		CONST	R0(P)[0..0]	<-	CG51(37:0 'scr' A)	{S}
+0021 ( 882)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(37 'scr' A)} [0..0]	{}
+0022 ( 882)		CONST	R0(P)[0..0]	<-	CG16(38:0 'wave_red')	{S}
+0023 ( 882)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(38 'wave_red')} [0..0]	{}
+0024 ( 882)		CONST	R0(P)[0..0]	<-	CG90(39:0 'smsg1')	{S}
+0025 ( 882)		STOREC2		<-	V(7 '')+0 , R0(PF)+0 {V(39 'smsg1')} [0..0]	{}
+0026 ( 882)		CALLN		<-	V(17 'scroller_init')+0 	{}
+0027 ( 883)		STOREC1		<-	V(2 '')+0 , CC:12	{}
+0028 ( 883)		STOREC1		<-	V(3 '')+0 , CC:6	{}
+0029 ( 883)		STOREC1		<-	V(4 '')+0 , CC:1	{}
+002a ( 883)		CONST	R0(P)[51..51]	<-	CG51(37:51 'scr' A)	{S}
+002b ( 883)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(37 'scr' A)} [51..51]	{}
+002c ( 883)		CONST	R0(P)[0..0]	<-	CG16(40:0 'wave_blue')	{S}
+002d ( 883)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(40 'wave_blue')} [0..0]	{}
+002e ( 883)		CONST	R0(P)[0..0]	<-	CG97(41:0 'smsg2')	{S}
+002f ( 883)		STOREC2		<-	V(7 '')+0 , R0(PF)+0 {V(41 'smsg2')} [0..0]	{}
+0030 ( 883)		CALLN		<-	V(17 'scroller_init')+0 	{}
+0031 ( 884)		STOREC1		<-	V(2 '')+0 , CC:14	{}
+0032 ( 884)		STOREC1		<-	V(3 '')+0 , CC:10	{}
+0033 ( 884)		STOREC1		<-	V(4 '')+0 , CC:0	{}
+0034 ( 884)		CONST	R0(P)[102..102]	<-	CG51(37:102 'scr' A)	{S}
+0035 ( 884)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(37 'scr' A)} [102..102]	{}
+0036 ( 884)		CONST	R0(P)[0..0]	<-	CG16(42:0 'wave_gray')	{S}
+0037 ( 884)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(42 'wave_gray')} [0..0]	{}
+0038 ( 884)		CONST	R0(P)[0..0]	<-	CG89(43:0 'smsg3')	{S}
+0039 ( 884)		STOREC2		<-	V(7 '')+0 , R0(PF)+0 {V(43 'smsg3')} [0..0]	{}
+003a ( 884)		CALLN		<-	V(17 'scroller_init')+0 	{}
+003b ( 198)		STOREG1		<-	V(23 'blink_phase')+0 , CC:0	{}
+003c ( 197)		STOREG1		<-	V(22 'blink_cnt')+0 , CC:0	{}
+003d ( 888)		CONST	R2(C)[0..0]	<-	CI:0	{}
+003e ( 889)		CONST	R1(C)[0..0]	<-	CI:0	{}
+003f ( 890)		CONST	R3(C)[2..2]	<-	CI:2	{}
+0040 ( 891)		CONST	R4(C)[2..2]	<-	CI:2	{}
+0041 ( 892)		CONST	R5(C)[0..0]	<-	CI:0	{}
+0042 ( 896)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (7) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 896)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0001 ( 897)		CONST	R0(P)[0..0]	<-	CG51(37:0 'scr' A)	{IS}
+0002 ( 897)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(37 'scr' A)} [0..0]	{}
+0003 ( 897)		CALLN		<-	V(18 'scroller_step')+0 	{}
+0004 ( 898)		CONST	R0(P)[51..51]	<-	CG51(37:51 'scr' A)	{IS}
+0005 ( 898)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(37 'scr' A)} [51..51]	{}
+0006 ( 898)		CALLN		<-	V(18 'scroller_step')+0 	{}
+0007 ( 899)		CONST	R0(P)[102..102]	<-	CG51(37:102 'scr' A)	{IS}
+0008 ( 899)		STOREC2		<-	V(0 '')+0 , R0(PF)+0 {V(37 'scr' A)} [102..102]	{}
+0009 ( 899)		CALLN		<-	V(18 'scroller_step')+0 	{}
+000a ( 900)		CALLN		<-	V(19 'scroller_crossflash')+0 	{}
+000b ( 901)		BINOP1	R2(C)[1..]	<-	R2(CF)[0..], CI:1	{}
+000c ( 904)		RELOP28	R0(B)[0..1]	<-	R1(C)[0..4], CC:4	{}
+000d ( 904)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 4
+		==> 13
+L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 904)		CONV37	R0(I)[0..3]	<-	R1(C)[0..3]	{}
+0001 ( 904)		BINOP3	R0(I)[0..300]	<-	R0(IF)[0..3], CI:100	{}
+0002 ( 904)		BINOP1	R0(I)[80..380]	<-	R0(IF)[0..300], CI:80	{}
+0003 ( 904)		RELOP25	R0(B)[0..1]	<-	R2(C)[1..], R0(CF)[80..380]	{}
+0004 ( 904)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 3
-L3: <= D-1: (5) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 536)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0001 ( 537)		CALLN		<-	V(16 'draw_bars')+0 	{}
-0002 ( 538)		BINOP1	R1(C)[1..8]	<-	R1(CF)[0..7], CI:1	{}
-0003 ( 538)		RELOP25	R0(B)[0..1]	<-	R1(C)[1..8], CC:8	{}
-0004 ( 538)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 1
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 906)		BRANCH		<-	R1(C)[0..3]	{}
+		==> 6
 		==> 5
-		==> 6
-L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 541)		CALLN		<-	V(17 'rotate_bars_left')+0 	{}
-0001 ( 540)		CONST	R1(C)[0..0]	<-	CI:0	{}
-0002 ( 538)		JUMP		<-		{}
-		==> 6
-L6: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 543)		CALLN		<-	V(8 'scroll_step')+0 	{}
-0001 ( 545)		BINOP1	R2(C)[1..]	<-	R2(CF)[0..], CI:1	{}
-0002 ( 547)		RELOP19	R0(B)[0..1]	<-	R2(C)[1..], CC:15	{}
-0003 ( 547)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 9
+L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 911)		RELOP19	R0(B)[0..1]	<-	R1(C)[0..3], CC:1	{}
+0001 ( 911)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 8
+		==> 9
+L8: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 913)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0001 ( 913)		STOREC1		<-	V(3 '')+0 , CC:11	{}
+0002 ( 913)		STOREC1		<-	V(4 '')+0 , R3(CF)	{}
+0003 ( 913)		CONST	R1(P)[0..0]	<-	CG4(48:0 'sw_dot')	{S}
+0004 ( 913)		STOREC2		<-	V(5 '')+0 , R1(P)+0 {V(48 'sw_dot')} [0..0]	{}
+0005 ( 913)		CALLN	R0(C)	<-	V(20 'reveal_word')+0 	{E}
+0006 ( 914)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0007 ( 914)		STOREC1		<-	V(3 '')+0 , CC:3	{}
+0008 ( 914)		STOREC1		<-	V(4 '')+0 , R0(CF)	{}
+0009 ( 914)		CONST	R0(P)[0..0]	<-	CG8(49:0 'sw_freedom')	{S}
+000a ( 914)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(49 'sw_freedom')} [0..0]	{}
+000b ( 914)		CALLN	R3(C)	<-	V(20 'reveal_word')+0 	{E}
+000c ( 915)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+000d ( 915)		STOREC1		<-	V(3 '')+0 , CC:11	{}
+000e ( 915)		STOREC1		<-	V(4 '')+0 , R4(CF)	{}
+000f ( 915)		STOREC2		<-	V(5 '')+0 , R1(PF)+0 {V(48 'sw_dot')} [0..0]	{}
+0010 ( 915)		CALLN	R0(C)	<-	V(20 'reveal_word')+0 	{E}
+0011 ( 916)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0012 ( 916)		STOREC1		<-	V(3 '')+0 , CC:14	{}
+0013 ( 916)		STOREC1		<-	V(4 '')+0 , R0(CF)	{}
+0014 ( 916)		CONST	R0(P)[0..0]	<-	CG5(50:0 'sw_data')	{S}
+0015 ( 916)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(50 'sw_data')} [0..0]	{}
+0016 ( 916)		CALLN	R4(C)	<-	V(20 'reveal_word')+0 	{E}
+0017 ( 932)		CONST	R1(C)[2..2]	<-	CI:2	{}
+0018 ( 936)		JUMP		<-		{}
+		==> 1
 L9: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 547)		CONST	R2(C)[1..]	<-	CI:15	{}
-0001 ( 547)		RELOP28	R0(B)[0..1]	<-	R3(C)[0..5], CC:1	{}
-0002 ( 547)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 7
+0000 ( 918)		RELOP19	R0(B)[0..1]	<-	R1(C)[0..3], CC:2	{}
+0001 ( 918)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 10
 		==> 11
-L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 549)		STOREC1		<-	V(0 '')+0 , CC:6	{}
-0001 ( 549)		STOREC1		<-	V(1 '')+0 , CC:1	{}
-0002 ( 549)		STOREC1		<-	V(4 '')+0 , CC:2	{}
-0003 ( 549)		CONST	R0(P)[0..0]	<-	CG13(26:0 's_sl1')	{S}
-0004 ( 549)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(26 's_sl1')} [0..0]	{}
-0005 ( 549)		CALLN		<-	V(4 'print_at')+0 	{E}
-0006 ( 550)		STOREC1		<-	V(0 '')+0 , CC:6	{}
-0007 ( 550)		STOREC1		<-	V(1 '')+0 , CC:22	{}
-0008 ( 550)		STOREC1		<-	V(4 '')+0 , CC:10	{}
-0009 ( 550)		CONST	R0(P)[0..0]	<-	CG22(35:0 's_ai3')	{S}
-000a ( 550)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(35 's_ai3')} [0..0]	{}
-000b ( 550)		CALLN		<-	V(4 'print_at')+0 	{E}
-000c ( 551)		CONST	R3(C)[1..1]	<-	CI:1	{}
-000d ( 553)		JUMP		<-		{}
+L10: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 920)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0001 ( 920)		STOREC1		<-	V(3 '')+0 , CC:11	{}
+0002 ( 920)		STOREC1		<-	V(4 '')+0 , R3(CF)	{}
+0003 ( 920)		CONST	R1(P)[0..0]	<-	CG4(48:0 'sw_dot')	{S}
+0004 ( 920)		STOREC2		<-	V(5 '')+0 , R1(P)+0 {V(48 'sw_dot')} [0..0]	{}
+0005 ( 920)		CALLN	R0(C)	<-	V(20 'reveal_word')+0 	{E}
+0006 ( 921)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0007 ( 921)		STOREC1		<-	V(3 '')+0 , CC:13	{}
+0008 ( 921)		STOREC1		<-	V(4 '')+0 , R0(CF)	{}
+0009 ( 921)		CONST	R0(P)[0..0]	<-	CG9(51:0 'sw_strength')	{S}
+000a ( 921)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(51 'sw_strength')} [0..0]	{}
+000b ( 921)		CALLN	R3(C)	<-	V(20 'reveal_word')+0 	{E}
+000c ( 922)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+000d ( 922)		STOREC1		<-	V(3 '')+0 , CC:11	{}
+000e ( 922)		STOREC1		<-	V(4 '')+0 , R4(CF)	{}
+000f ( 922)		STOREC2		<-	V(5 '')+0 , R1(PF)+0 {V(48 'sw_dot')} [0..0]	{}
+0010 ( 922)		CALLN	R0(C)	<-	V(20 'reveal_word')+0 	{E}
+0011 ( 923)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0012 ( 923)		STOREC1		<-	V(3 '')+0 , CC:7	{}
+0013 ( 923)		STOREC1		<-	V(4 '')+0 , R0(CF)	{}
+0014 ( 923)		CONST	R0(P)[0..0]	<-	CG3(52:0 'sw_ai')	{S}
+0015 ( 923)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(52 'sw_ai')} [0..0]	{}
+0016 ( 923)		CALLN	R4(C)	<-	V(20 'reveal_word')+0 	{E}
+0017 ( 932)		CONST	R1(C)[3..3]	<-	CI:3	{}
+0018 ( 936)		JUMP		<-		{}
+		==> 1
+L11: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 925)		RELOP19	R0(B)[0..1]	<-	R1(C)[0..3], CC:3	{}
+0001 ( 925)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 12
+		==> 7
+L12: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 927)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0001 ( 927)		STOREC1		<-	V(3 '')+0 , CC:11	{}
+0002 ( 927)		STOREC1		<-	V(4 '')+0 , R3(CF)	{}
+0003 ( 927)		CONST	R1(P)[0..0]	<-	CG4(48:0 'sw_dot')	{S}
+0004 ( 927)		STOREC2		<-	V(5 '')+0 , R1(P)+0 {V(48 'sw_dot')} [0..0]	{}
+0005 ( 927)		CALLN	R0(C)	<-	V(20 'reveal_word')+0 	{E}
+0006 ( 928)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0007 ( 928)		STOREC1		<-	V(3 '')+0 , CC:8	{}
+0008 ( 928)		STOREC1		<-	V(4 '')+0 , R0(CF)	{}
+0009 ( 928)		CONST	R0(P)[0..0]	<-	CG9(53:0 'sw_watching')	{S}
+000a ( 928)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(53 'sw_watching')} [0..0]	{}
+000b ( 928)		CALLN	R3(C)	<-	V(20 'reveal_word')+0 	{E}
+000c ( 929)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+000d ( 929)		STOREC1		<-	V(3 '')+0 , CC:11	{}
+000e ( 929)		STOREC1		<-	V(4 '')+0 , R4(CF)	{}
+000f ( 929)		STOREC2		<-	V(5 '')+0 , R1(PF)+0 {V(48 'sw_dot')} [0..0]	{}
+0010 ( 929)		CALLN	R0(C)	<-	V(20 'reveal_word')+0 	{E}
+0011 ( 930)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0012 ( 930)		STOREC1		<-	V(3 '')+0 , CC:4	{}
+0013 ( 930)		STOREC1		<-	V(4 '')+0 , R0(CF)	{}
+0014 ( 930)		CONST	R0(P)[0..0]	<-	CG10(54:0 'sw_listening')	{S}
+0015 ( 930)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(54 'sw_listening')} [0..0]	{}
+0016 ( 930)		CALLN	R4(C)	<-	V(20 'reveal_word')+0 	{E}
+0017 ( 932)		CONST	R1(C)[4..4]	<-	CI:4	{}
+0018 ( 936)		JUMP		<-		{}
+		==> 13
+L13: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 938)		BINOP1	R5(C)[1..150]	<-	R5(CF)[0..149], CI:1	{}
+0001 ( 939)		RELOP25	R0(B)[0..1]	<-	R5(C)[1..150], CC:150	{}
+0002 ( 939)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 2
+		==> 1
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 944)		STOREC1		<-	V(0 '')+0 , CC:5	{}
+0001 ( 944)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0002 ( 949)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
+0003 ( 950)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
+0004 ( 951)		CALLN		<-	V(22 'glitch_transition')+0 	{}
+0005 ( 952)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+0006 ( 952)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0007 ( 964)		STOREC1		<-	V(0 '')+0 , CC:8	{}
+0008 ( 964)		STOREC1		<-	V(4 '')+0 , CC:7	{}
+0009 ( 961)		CALLN		<-	V(2 'cls')+0 	{}
+000a ( 962)		CALLN		<-	V(2 'cls')+0 	{}
+000b ( 964)		CONST	R0(P)[0..0]	<-	CG35(56:0 's2_q')	{S}
+000c ( 964)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(56 's2_q')} [0..0]	{}
+000d ( 964)		CALLN		<-	V(6 'pcenter')+0 	{E}
+000e ( 965)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+000f ( 965)		CALLN		<-	V(5 'hline')+0 	{E}
+0010 ( 966)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0011 ( 966)		STOREC1		<-	V(1 '')+0 , CC:1	{}
+0012 ( 966)		STOREC1		<-	V(4 '')+0 , CC:15	{}
+0013 ( 966)		CONST	R0(P)[0..0]	<-	CG3(57:0 's2_pfx')	{S}
+0014 ( 966)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(57 's2_pfx')} [0..0]	{}
+0015 ( 966)		CALLN		<-	V(7 'pat')+0 	{E}
+0016 ( 967)		STOREC1		<-	V(0 '')+0 , CC:22	{}
+0017 ( 967)		STOREC1		<-	V(4 '')+0 , CC:11	{}
+0018 ( 967)		CONST	R0(P)[0..0]	<-	CG36(58:0 's2_hint')	{S}
+0019 ( 967)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(58 's2_hint')} [0..0]	{}
+001a ( 967)		CALLN		<-	V(6 'pcenter')+0 	{E}
+001b ( 970)		CONST	R1(C)[0..0]	<-	CI:0	{}
+001c ( 971)		JUMP		<-		{}
 		==> 14
-L14: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 565)		RELOP19	R0(B)[0..1]	<-	R2(C)[1..], CC:75	{}
-0001 ( 565)		BRANCH		<-	R0(BF)[0..1]	{}
+L14: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 971)		CONV37	R0(I)[0..38]	<-	R1(C)[0..38]	{}
+0001 ( 971)		LEAG	R0(P)[0..38]	<-	V(59 'input_buf' A)+0 , R0(IF)[0..38]	{}
+0002 ( 971)		STOREI1		<-	R0(PF)+0 {V(59 'input_buf' A)} [0..38], CC:32	{}
+0003 ( 970)		BINOP1	R1(C)[1..39]	<-	R1(CF)[0..38], CI:1	{}
+0004 ( 970)		RELOP28	R0(B)[0..1]	<-	R1(C)[1..39], CC:39	{}
+0005 ( 970)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 14
+		==> 15
+L15: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 972)		CALLN	R4(C)	<-	V(23 'input_line')+0 	{}
+0001 ( 976)		JUMP		<-		{}
+		==> 36
+L36: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 976)		RELOP27	R5(B)[0..1]	<-	R4(C), CC:0	{}
+0001 ( 976)		BRANCH		<-	R5(B)[0..1]	{}
 		==> 18
 		==> 17
 L18: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 565)		CONST	R2(C)[1..]	<-	CI:75	{}
-0001 ( 565)		RELOP28	R0(B)[0..1]	<-	R3(C)[0..5], CC:4	{}
-0002 ( 565)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 976)		CONV37	R0(I)[1..39]	<-	R4(C)[1..39]	{}
+0001 ( 976)		LEAG	R0(P)[0..38]	<-	V(59 'input_buf' A)+-1 , R0(IF)[1..39]	{}
+0002 ( 976)		LOADI1	R0(C)[0..255]	<-	R0(PF)+0 {V(59 'input_buf' A)} [0..38]	{}
+0003 ( 976)		RELOP19	R0(B)[0..1]	<-	R0(CF)[0..255], CC:32	{}
+0004 ( 976)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 16
-		==> 20
+		==> 17
 L16: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 567)		STOREC1		<-	V(0 '')+0 , CC:15	{}
-0001 ( 567)		STOREC1		<-	V(1 '')+0 , CC:1	{}
-0002 ( 567)		STOREC1		<-	V(4 '')+0 , CC:8	{}
-0003 ( 567)		CONST	R0(P)[0..0]	<-	CG24(16:0 's_bb')	{S}
-0004 ( 567)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(16 's_bb')} [0..0]	{}
-0005 ( 567)		CALLN		<-	V(4 'print_at')+0 	{E}
-0006 ( 568)		STOREC1		<-	V(0 '')+0 , CC:15	{}
-0007 ( 568)		STOREC1		<-	V(1 '')+0 , CC:22	{}
-0008 ( 568)		STOREC1		<-	V(4 '')+0 , CC:7	{}
-0009 ( 568)		CONST	R0(P)[0..0]	<-	CG19(38:0 's_ai1')	{S}
-000a ( 568)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(38 's_ai1')} [0..0]	{}
-000b ( 568)		CALLN		<-	V(4 'print_at')+0 	{E}
-000c ( 569)		CONST	R3(C)[4..4]	<-	CI:4	{}
-000d ( 571)		JUMP		<-		{}
-		==> 3
-L20: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 578)		RELOP25	R0(B)[0..1]	<-	R3(C)[0..5], CC:5	{}
-0001 ( 578)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 22
-		==> 3
-L22: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 579)		STOREC1		<-	V(0 '')+0 , CC:21	{}
-0001 ( 579)		STOREC1		<-	V(1 '')+0 , CC:12	{}
-0002 ( 579)		CALLN		<-	V(9 'blink_row')+0 	{}
-0003 ( 581)		CALLN	R0(C)	<-	V(10 'fire_pressed')+0 	{}
-0004 ( 581)		BRANCH		<-	R0(CF)	{}
-		==> 4
-		==> 3
-L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 585)		STOREC1		<-	V(0 '')+0 , CC:15	{}
-0001 ( 585)		CALLN		<-	V(11 'fade_to_black')+0 	{}
-0002 ( 586)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-0003 ( 586)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0004 ( 587)		RET		<-		{}
-L17: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 571)		RELOP19	R0(B)[0..1]	<-	R2(C)[1..], CC:100	{}
-0001 ( 571)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 21
-		==> 20
-L21: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 571)		CONST	R2(C)[1..]	<-	CI:100	{}
-0001 ( 571)		RELOP28	R0(B)[0..1]	<-	R3(C)[0..5], CC:5	{}
-0002 ( 571)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 977)		BINOP1	R4(C)[0..38]	<-	R4(CF)[1..39], CI:-1	{}
+0001 ( 976)		JUMP		<-		{}
+		==> 36
+L17: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 980)		CALLN		<-	V(2 'cls')+0 	{}
+0001 ( 981)		CALLN		<-	V(2 'cls')+0 	{}
+0002 ( 985)		CONST	R1(C)[8..8]	<-	CI:8	{}
+0003 ( 987)		JUMP		<-		{}
 		==> 19
+L19: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 987)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0001 ( 987)		STOREC1		<-	V(1 '')+0 , CC:18	{}
+0002 ( 987)		STOREC1		<-	V(2 '')+0 , CC:46	{}
+0003 ( 987)		STOREC1		<-	V(3 '')+0 , CC:12	{}
+0004 ( 987)		CALLN		<-	V(21 'pch')+0 	{E}
+0005 ( 988)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0006 ( 988)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0007 ( 989)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0008 ( 989)		STOREC1		<-	V(1 '')+0 , CC:20	{}
+0009 ( 989)		STOREC1		<-	V(2 '')+0 , CC:46	{}
+000a ( 989)		STOREC1		<-	V(3 '')+0 , CC:12	{}
+000b ( 989)		CALLN		<-	V(21 'pch')+0 	{E}
+000c ( 990)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+000d ( 990)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000e ( 991)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+000f ( 991)		STOREC1		<-	V(1 '')+0 , CC:22	{}
+0010 ( 991)		STOREC1		<-	V(2 '')+0 , CC:46	{}
+0011 ( 991)		STOREC1		<-	V(3 '')+0 , CC:12	{}
+0012 ( 991)		CALLN		<-	V(21 'pch')+0 	{E}
+0013 ( 992)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0014 ( 992)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0015 ( 993)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0016 ( 993)		STOREC1		<-	V(1 '')+0 , CC:18	{}
+0017 ( 993)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0018 ( 993)		STOREC1		<-	V(3 '')+0 , CC:0	{}
+0019 ( 993)		CALLN		<-	V(21 'pch')+0 	{E}
+001a ( 994)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+001b ( 994)		STOREC1		<-	V(1 '')+0 , CC:20	{}
+001c ( 994)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+001d ( 994)		STOREC1		<-	V(3 '')+0 , CC:0	{}
+001e ( 994)		CALLN		<-	V(21 'pch')+0 	{E}
+001f ( 995)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0020 ( 995)		STOREC1		<-	V(1 '')+0 , CC:22	{}
+0021 ( 995)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0022 ( 995)		STOREC1		<-	V(3 '')+0 , CC:0	{}
+0023 ( 995)		CALLN		<-	V(21 'pch')+0 	{E}
+0024 ( 996)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+0025 ( 996)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0026 ( 985)		BINOP2	R1(C)[0..7]	<-	R1(CF)[1..8], CI:1	{}
+0027 ( 985)		RELOP27	R0(B)[0..1]	<-	R1(C)[0..7], CC:0	{}
+0028 ( 985)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 19
+		==> 20
+L20: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1000)		CONST	R0(C)[0..0]	<-	CI:0	{}
+0001 (1001)		CONST	R6(C)[40..40]	<-	CI:40	{}
+0002 (1004)		JUMP		<-		{}
+		==> 21
+L21: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1004)		CONV37	R1(I)[0..39]	<-	R0(CF)[0..39]	{I}
+0001 (1004)		LEAA	R0(P)[55296..55335]	<-	V(-1 '')+55296 , R1(I)[0..39]	{}
+0002 (1003)		CONST	R2(C)[25..25]	<-	CI:25	{}
+0003 (1004)		JUMP		<-		{}
+		==> 23
+L23: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1004)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [55296..], CC:0	{}
+0001 (1004)		LEAI	R0(P)+0 {V(-1 'ABS')} [55336..]	<-	R0(PF)+0 {V(-1 'ABS')} [55296..], CI:40	{}
+0002 (1003)		BINOP2	R2(C)[0..24]	<-	R2(CF)[1..25], CI:1	{}
+0003 (1003)		RELOP27	R3(B)[0..1]	<-	R2(C)[0..24], CC:0	{}
+0004 (1003)		BRANCH		<-	R3(BF)[0..1]	{}
+		==> 23
+		==> 24
+L24: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1006)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0001 (1005)		BINOP1	R0(I)[7..46]	<-	R1(IF)[0..39], CI:7	{}
+0002 (1005)		BINOP6	R0(I)[0..39]	<-	R0(IF)[7..46], CI:40	{}
+0003 (1001)		BINOP2	R6(C)[0..39]	<-	R6(CF)[1..40], CI:1	{}
+0004 (1001)		RELOP27	R1(B)[0..1]	<-	R6(C)[0..39], CC:0	{}
+0005 (1001)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 21
 		==> 22
-L19: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 573)		STOREC1		<-	V(0 '')+0 , CC:19	{}
-0001 ( 573)		CALLN		<-	V(5 'hline')+0 	{E}
-0002 ( 574)		STOREC1		<-	V(0 '')+0 , CC:21	{}
-0003 ( 574)		STOREC1		<-	V(4 '')+0 , CC:12	{}
-0004 ( 574)		CONST	R0(P)[0..0]	<-	CG23(17:0 's_press')	{S}
-0005 ( 574)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(17 's_press')} [0..0]	{}
-0006 ( 574)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0007 ( 575)		CONST	R3(C)[5..5]	<-	CI:5	{}
-0008 ( 578)		JUMP		<-		{}
-		==> 22
-L11: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 559)		RELOP19	R0(B)[0..1]	<-	R2(C)[1..], CC:55	{}
-0001 ( 559)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 15
-		==> 14
-L15: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 559)		CONST	R2(C)[1..]	<-	CI:55	{}
-0001 ( 559)		RELOP28	R0(B)[0..1]	<-	R3(C)[0..5], CC:3	{}
-0002 ( 559)		BRANCH		<-	R0(BF)[0..1]	{}
+L22: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1008)		STOREC1		<-	V(0 '')+0 , CC:15	{}
+0001 (1008)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0002 (1011)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0003 (1009)		CALLN		<-	V(2 'cls')+0 	{}
+0004 (1010)		CALLN		<-	V(2 'cls')+0 	{}
+0005 (1011)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0006 (1020)		STOREC1		<-	V(0 '')+0 , R4(C)[0..39]	{}
+0007 (1018)		CONST	R0(P)[0..0]	<-	CG2(209:0 'match_l1' A)	{S}
+0008 (1020)		STOREC2		<-	V(1 '')+0 , R0(PF)+0 {V(209 'match_l1' A)} [0..0]	{}
+0009 (1019)		CONST	R0(P)[0..0]	<-	CG2(210:0 'match_l2' A)	{S}
+000a (1020)		STOREC2		<-	V(3 '')+0 , R0(PF)+0 {V(210 'match_l2' A)} [0..0]	{}
+000b (1020)		CALLN		<-	V(26 'find_response')+0 	{}
+000c (1028)		STOREC1		<-	V(4 '')+0 , CC:7	{}
+000d (1028)		STOREC1		<-	V(5 '')+0 , CC:13	{}
+000e (1028)		STOREC1		<-	V(8 '')+0 , CC:11	{}
+000f (1028)		STOREC1		<-	V(9 '')+0 , CC:3	{}
+0010 (1023)		CONST	R0(P)[0..0]	<-	CG15(199:0 'r_hdr')	{S}
+0011 (1028)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(199 'r_hdr')} [0..0]	{}
+0012 (1028)		CALLN		<-	V(27 'typeout')+0 	{}
+0013 (1029)		STOREC1		<-	V(0 '')+0 , CC:15	{}
+0014 (1029)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0015 (1032)		BRANCH		<-	R5(BF)[0..1]	{}
+		==> 25
+		==> 26
+L25: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1032)		CONV37	R0(I)[1..39]	<-	R4(C)[1..39]	{}
+0001 (1034)		BINOP2	R0(I)[1..39]	<-	CI:40, R0(IF)[1..39]	{}
+0002 (1034)		BINOP17	R0(I)[0..19]	<-	R0(IF)[1..39], CI:1	{}
+0003 (1035)		CONST	R3(C)[0..0]	<-	CI:0	{}
+0004 (1037)		JUMP		<-		{}
+		==> 27
+L27: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1037)		CONV37	R1(I)[0..38]	<-	R3(C)[0..38]	{}
+0001 (1037)		LEAG	R2(P)[0..38]	<-	V(59 'input_buf' A)+0 , R1(I)[0..38]	{}
+0002 (1037)		LOADI1	R2(C)[0..255]	<-	R2(PF)+0 {V(59 'input_buf' A)} [0..38]	{}
+0003 (1037)		BINOP1	R1(I)[0..57]	<-	R0(I)[0..19], R1(IF)[0..38]	{}
+0004 (1037)		LEAA	R1(P)[1344..1401]	<-	V(-1 '')+1344 , R1(IF)[0..57]	{}
+0005 (1037)		STOREI1		<-	R1(P)+0 {V(-1 'ABS')} [1344..1401], R2(CF)[0..255]	{}
+0006 (1038)		LEAI	R1(P)+0 {V(-1 'ABS')} [55616..55673]	<-	R1(PF)+0 {V(-1 'ABS')} [1344..1401], CI:54272	{}
+0007 (1038)		STOREI1		<-	R1(PF)+0 {V(-1 'ABS')} [55616..55673], CC:1	{}
+0008 (1035)		BINOP1	R3(C)[1..39]	<-	R3(CF)[0..38], CI:1	{}
+0009 (1035)		RELOP28	R1(B)[0..1]	<-	R3(C)[1..39], R4(C)[1..39]	{}
+000a (1035)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 27
+		==> 26
+L26: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1041)		STOREC1		<-	V(0 '')+0 , CC:40	{}
+0001 (1041)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0002 (1043)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+0003 (1043)		CALLN		<-	V(5 'hline')+0 	{E}
+0004 (1044)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0005 (1044)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0006 (1046)		STOREC1		<-	V(4 '')+0 , CC:12	{}
+0007 (1046)		STOREC1		<-	V(5 '')+0 , CC:12	{}
+0008 (1046)		STOREC1		<-	V(8 '')+0 , CC:11	{}
+0009 (1046)		STOREC1		<-	V(9 '')+0 , CC:3	{}
+000a (1046)		CONST	R0(P)[0..0]	<-	CG17(200:0 'r_sys')	{S}
+000b (1046)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(200 'r_sys')} [0..0]	{}
+000c (1046)		CALLN		<-	V(27 'typeout')+0 	{}
+000d (1047)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+000e (1047)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000f (1050)		CONST	R3(C)[0..0]	<-	CI:0	{}
+0010 (1051)		LOADG2	R0(P)	<-	V(209 'match_l1' A)+0 	{I}
+0011 (1051)		JUMP		<-		{}
+		==> 28
+L28: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1051)		CONV37	R1(I)[0..255]	<-	R3(C)[0..]	{}
+0001 (1051)		LEAI	R2(P)+0	<-	R0(P)+0, R1(I)[0..255]	{}
+0002 (1051)		LOADI1	R2(C)[0..255]	<-	R2(PF)+0	{}
+0003 (1051)		BRANCH		<-	R2(CF)[0..255]	{}
+		==> 29
+		==> 30
+L29: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1052)		BINOP1	R3(C)[1..]	<-	R3(CF)[0..], CI:1	{}
+0001 (1051)		JUMP		<-		{}
+		==> 28
+L30: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1053)		CONST	R5(C)[0..0]	<-	CI:0	{}
+0001 (1054)		LOADG2	R3(P)	<-	V(210 'match_l2' A)+0 	{I}
+0002 (1054)		JUMP		<-		{}
+		==> 31
+L31: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1054)		CONV37	R4(I)[0..255]	<-	R5(C)[0..]	{}
+0001 (1054)		LEAI	R2(P)+0	<-	R3(P)+0, R4(I)[0..255]	{}
+0002 (1054)		LOADI1	R2(C)[0..255]	<-	R2(PF)+0	{}
+0003 (1054)		BRANCH		<-	R2(CF)[0..255]	{}
+		==> 32
+		==> 33
+L32: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1055)		BINOP1	R5(C)[1..]	<-	R5(CF)[0..], CI:1	{}
+0001 (1054)		JUMP		<-		{}
+		==> 31
+L33: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1056)		STOREC1		<-	V(4 '')+0 , CC:13	{}
+0001 (1056)		STOREC2		<-	V(6 '')+0 , R0(PF)	{}
+0002 (1056)		STOREC1		<-	V(8 '')+0 , CC:10	{}
+0003 (1056)		STOREC1		<-	V(9 '')+0 , CC:3	{}
+0004 (1056)		BINOP2	R1(I)[-215..40]	<-	CI:40, R1(IF)[0..255]	{}
+0005 (1056)		BINOP18	R1(I)[-108..20]	<-	R1(IF)[-215..40], CI:1	{}
+0006 (1056)		STOREC1		<-	V(5 '')+0 , R1(CF)[-108..20]	{}
+0007 (1056)		CALLN		<-	V(27 'typeout')+0 	{}
+0008 (1057)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+0009 (1057)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000a (1058)		STOREC1		<-	V(4 '')+0 , CC:14	{}
+000b (1058)		STOREC2		<-	V(6 '')+0 , R3(PF)	{}
+000c (1058)		STOREC1		<-	V(8 '')+0 , CC:10	{}
+000d (1058)		STOREC1		<-	V(9 '')+0 , CC:3	{}
+000e (1058)		BINOP2	R0(I)[-215..40]	<-	CI:40, R4(IF)[0..255]	{}
+000f (1058)		BINOP18	R0(I)[-108..20]	<-	R0(IF)[-215..40], CI:1	{}
+0010 (1058)		STOREC1		<-	V(5 '')+0 , R0(CF)[-108..20]	{}
+0011 (1058)		CALLN		<-	V(27 'typeout')+0 	{}
+0012 (1059)		STOREC1		<-	V(0 '')+0 , CC:30	{}
+0013 (1059)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0014 (1061)		STOREC1		<-	V(0 '')+0 , CC:16	{}
+0015 (1061)		CALLN		<-	V(5 'hline')+0 	{E}
+0016 (1062)		STOREC1		<-	V(0 '')+0 , CC:30	{}
+0017 (1062)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0018 (1064)		STOREC1		<-	V(4 '')+0 , CC:18	{}
+0019 (1064)		STOREC1		<-	V(5 '')+0 , CC:8	{}
+001a (1064)		STOREC1		<-	V(8 '')+0 , CC:12	{}
+001b (1064)		STOREC1		<-	V(9 '')+0 , CC:4	{}
+001c (1064)		CONST	R0(P)[0..0]	<-	CG25(201:0 'r_end')	{S}
+001d (1064)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(201 'r_end')} [0..0]	{}
+001e (1064)		CALLN		<-	V(27 'typeout')+0 	{}
+001f (1066)		STOREC1		<-	V(0 '')+0 , CC:120	{}
+0020 (1066)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0021 (1067)		CALLN		<-	V(15 'fade_to_black')+0 	{}
+0022 (1068)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0023 (1068)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0024 (1077)		STOREC1		<-	V(0 '')+0 , CC:30	{}
+0025 (1074)		CALLN		<-	V(2 'cls')+0 	{}
+0026 (1075)		CALLN		<-	V(2 'cls')+0 	{}
+0027 (1077)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0028 (1078)		STOREC1		<-	V(4 '')+0 , CC:6	{}
+0029 (1078)		STOREC1		<-	V(5 '')+0 , CC:8	{}
+002a (1078)		STOREC1		<-	V(8 '')+0 , CC:15	{}
+002b (1078)		STOREC1		<-	V(9 '')+0 , CC:2	{}
+002c (1078)		CONST	R0(P)[0..0]	<-	CG25(202:0 's2_by1')	{S}
+002d (1078)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(202 's2_by1')} [0..0]	{}
+002e (1078)		CALLN		<-	V(27 'typeout')+0 	{}
+002f (1079)		STOREC1		<-	V(0 '')+0 , CC:15	{}
+0030 (1079)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0031 (1080)		STOREC1		<-	V(4 '')+0 , CC:8	{}
+0032 (1080)		STOREC1		<-	V(5 '')+0 , CC:6	{}
+0033 (1080)		STOREC1		<-	V(8 '')+0 , CC:1	{}
+0034 (1080)		STOREC1		<-	V(9 '')+0 , CC:2	{}
+0035 (1080)		CONST	R0(P)[0..0]	<-	CG28(203:0 's2_by2')	{S}
+0036 (1080)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(203 's2_by2')} [0..0]	{}
+0037 (1080)		CALLN		<-	V(27 'typeout')+0 	{}
+0038 (1081)		STOREC1		<-	V(0 '')+0 , CC:15	{}
+0039 (1081)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+003a (1082)		STOREC1		<-	V(4 '')+0 , CC:10	{}
+003b (1082)		STOREC1		<-	V(5 '')+0 , CC:11	{}
+003c (1082)		STOREC1		<-	V(8 '')+0 , CC:11	{}
+003d (1082)		STOREC1		<-	V(9 '')+0 , CC:2	{}
+003e (1082)		CONST	R0(P)[0..0]	<-	CG19(204:0 's2_by3')	{S}
+003f (1082)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(204 's2_by3')} [0..0]	{}
+0040 (1082)		CALLN		<-	V(27 'typeout')+0 	{}
+0041 (1083)		STOREC1		<-	V(0 '')+0 , CC:30	{}
+0042 (1083)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0043 (1084)		STOREC1		<-	V(0 '')+0 , CC:13	{}
+0044 (1084)		CALLN		<-	V(5 'hline')+0 	{E}
+0045 (1085)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0046 (1085)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0047 (1086)		STOREC1		<-	V(4 '')+0 , CC:16	{}
+0048 (1086)		STOREC1		<-	V(5 '')+0 , CC:7	{}
+0049 (1086)		STOREC1		<-	V(8 '')+0 , CC:12	{}
+004a (1086)		STOREC1		<-	V(9 '')+0 , CC:3	{}
+004b (1086)		CONST	R0(P)[0..0]	<-	CG26(205:0 's2_m1')	{S}
+004c (1086)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(205 's2_m1')} [0..0]	{}
+004d (1086)		CALLN		<-	V(27 'typeout')+0 	{}
+004e (1087)		STOREC1		<-	V(0 '')+0 , CC:10	{}
+004f (1087)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0050 (1088)		STOREC1		<-	V(4 '')+0 , CC:17	{}
+0051 (1088)		STOREC1		<-	V(5 '')+0 , CC:6	{}
+0052 (1088)		STOREC1		<-	V(8 '')+0 , CC:12	{}
+0053 (1088)		STOREC1		<-	V(9 '')+0 , CC:3	{}
+0054 (1088)		CONST	R0(P)[0..0]	<-	CG28(206:0 's2_m2')	{S}
+0055 (1088)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(206 's2_m2')} [0..0]	{}
+0056 (1088)		CALLN		<-	V(27 'typeout')+0 	{}
+0057 (1089)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0058 (1089)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0059 (1090)		STOREC1		<-	V(4 '')+0 , CC:18	{}
+005a (1090)		STOREC1		<-	V(5 '')+0 , CC:9	{}
+005b (1090)		STOREC1		<-	V(8 '')+0 , CC:1	{}
+005c (1090)		STOREC1		<-	V(9 '')+0 , CC:4	{}
+005d (1090)		CONST	R0(P)[0..0]	<-	CG22(207:0 's2_m3')	{S}
+005e (1090)		STOREC2		<-	V(6 '')+0 , R0(PF)+0 {V(207 's2_m3')} [0..0]	{}
+005f (1090)		CALLN		<-	V(27 'typeout')+0 	{}
+0060 (1093)		STOREC1		<-	V(0 '')+0 , CC:60	{}
+0061 (1093)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0062 (1095)		CONST	R1(C)[10..10]	<-	CI:10	{}
+0063 (1097)		JUMP		<-		{}
+		==> 34
+L34: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1097)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0001 (1097)		STOREC1		<-	V(1 '')+0 , CC:30	{}
+0002 (1097)		STOREC1		<-	V(2 '')+0 , CC:160	{}
+0003 (1097)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0004 (1097)		CALLN		<-	V(21 'pch')+0 	{E}
+0005 (1098)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0006 (1098)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0007 (1099)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0008 (1099)		STOREC1		<-	V(1 '')+0 , CC:30	{}
+0009 (1099)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+000a (1099)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+000b (1099)		CALLN		<-	V(21 'pch')+0 	{E}
+000c (1100)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+000d (1100)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000e (1095)		BINOP2	R1(C)[0..9]	<-	R1(CF)[1..10], CI:1	{}
+000f (1095)		RELOP27	R0(B)[0..1]	<-	R1(C)[0..9], CC:0	{}
+0010 (1095)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 34
+		==> 35
+L35: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 (1103)		CALLN		<-	V(15 'fade_to_black')+0 	{}
+0001 (1104)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0002 (1104)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+0003 (1105)		RET		<-		{}
+L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 932)		BINOP1	R1(C)[1..4]	<-	R1(CF)[0..3], CI:1	{}
+0001 ( 936)		RELOP25	R0(B)[0..1]	<-	R1(C)[1..4], CC:4	{}
+0002 ( 936)		BRANCH		<-	R0(BF)[0..1]	{}
 		==> 13
-		==> 17
-L13: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 561)		STOREC1		<-	V(0 '')+0 , CC:12	{}
-0001 ( 561)		STOREC1		<-	V(1 '')+0 , CC:1	{}
-0002 ( 561)		STOREC1		<-	V(4 '')+0 , CC:13	{}
-0003 ( 561)		CONST	R0(P)[0..0]	<-	CG22(30:0 's_sl3')	{S}
-0004 ( 561)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(30 's_sl3')} [0..0]	{}
-0005 ( 561)		CALLN		<-	V(4 'print_at')+0 	{E}
-0006 ( 562)		STOREC1		<-	V(0 '')+0 , CC:12	{}
-0007 ( 562)		STOREC1		<-	V(1 '')+0 , CC:22	{}
-0008 ( 562)		STOREC1		<-	V(4 '')+0 , CC:5	{}
-0009 ( 562)		CONST	R0(P)[0..0]	<-	CG23(37:0 's_ai4')	{S}
-000a ( 562)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(37 's_ai4')} [0..0]	{}
-000b ( 562)		CALLN		<-	V(4 'print_at')+0 	{E}
-000c ( 563)		CONST	R3(C)[3..3]	<-	CI:3	{}
-000d ( 565)		JUMP		<-		{}
-		==> 3
-L8: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 553)		RELOP19	R0(B)[0..1]	<-	R2(C)[1..], CC:35	{}
-0001 ( 553)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 12
-		==> 11
-L12: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 553)		CONST	R2(C)[1..]	<-	CI:35	{}
-0001 ( 553)		RELOP28	R0(B)[0..1]	<-	R3(C)[0..5], CC:2	{}
-0002 ( 553)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 10
-		==> 14
-L10: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 555)		STOREC1		<-	V(0 '')+0 , CC:9	{}
-0001 ( 555)		STOREC1		<-	V(1 '')+0 , CC:1	{}
-0002 ( 555)		STOREC1		<-	V(4 '')+0 , CC:3	{}
-0003 ( 555)		CONST	R0(P)[0..0]	<-	CG19(29:0 's_sl2')	{S}
-0004 ( 555)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(29 's_sl2')} [0..0]	{}
-0005 ( 555)		CALLN		<-	V(4 'print_at')+0 	{E}
-0006 ( 556)		STOREC1		<-	V(0 '')+0 , CC:9	{}
-0007 ( 556)		STOREC1		<-	V(1 '')+0 , CC:22	{}
-0008 ( 556)		STOREC1		<-	V(4 '')+0 , CC:14	{}
-0009 ( 556)		CONST	R0(P)[0..0]	<-	CG29(36:0 's_ai2')	{S}
-000a ( 556)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(36 's_ai2')} [0..0]	{}
-000b ( 556)		CALLN		<-	V(4 'print_at')+0 	{E}
-000c ( 557)		CONST	R3(C)[2..2]	<-	CI:2	{}
-000d ( 559)		JUMP		<-		{}
-		==> 17
+		==> 1
+L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 908)		STOREC1		<-	V(0 '')+0 , CC:18	{}
+0001 ( 908)		STOREC1		<-	V(3 '')+0 , CC:2	{}
+0002 ( 908)		STOREC1		<-	V(4 '')+0 , R3(CF)	{}
+0003 ( 908)		CONST	R0(P)[0..0]	<-	CG4(46:0 'sw_war')	{S}
+0004 ( 908)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(46 'sw_war')} [0..0]	{}
+0005 ( 908)		CALLN	R3(C)	<-	V(20 'reveal_word')+0 	{E}
+0006 ( 909)		STOREC1		<-	V(0 '')+0 , CC:20	{}
+0007 ( 909)		STOREC1		<-	V(3 '')+0 , CC:10	{}
+0008 ( 909)		STOREC1		<-	V(4 '')+0 , R4(CF)	{}
+0009 ( 909)		CONST	R0(P)[0..0]	<-	CG13(47:0 'sw_surveillance')	{S}
+000a ( 909)		STOREC2		<-	V(5 '')+0 , R0(PF)+0 {V(47 'sw_surveillance')} [0..0]	{}
+000b ( 909)		CALLN	R4(C)	<-	V(20 'reveal_word')+0 	{E}
+000c ( 932)		CONST	R1(C)[1..1]	<-	CI:1	{}
+000d ( 936)		JUMP		<-		{}
+		==> 1
 --------------------------------------------------------------------
-draw_bars: C:/code/jonas/c64Demo/nineteen84.c:182
-$00 R0(I), $00 R1(I), $00 R2(C), 
+scroller_init: C:/code/jonas/c64Demo/nineteen84.c:641
+$00 R0(P), $00 R1(P), $00 R2(C), 
 L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 184)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
-0001 ( 185)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
-0002 ( 188)		CONST	R0(I)[0..0]	<-	CI:0	{}
-0003 ( 188)		JUMP		<-		{}
+0000 ( 644)		LOADZ2	R0(P)	<-	V(0 '')+0 	{S}
+0001 ( 649)		STOREI2		<-	R0(P)+40, CI:0	{}
+0002 ( 650)		STOREI1		<-	R0(P)+42, CC:0	{}
+0003 ( 641)		LOADZ1	R1(C)[0..255]	<-	V(3 '')+0 	{S}
+0004 ( 645)		STOREI1		<-	R0(P)+43, R1(CF)[6..10]	{}
+0005 ( 651)		STOREI1		<-	R0(P)+44, CC:0	{}
+0006 ( 641)		LOADZ1	R1(C)[0..255]	<-	V(4 '')+0 	{S}
+0007 ( 646)		STOREI1		<-	R0(P)+45, R1(CF)[0..1]	{}
+0008 ( 641)		LOADZ1	R1(C)[0..255]	<-	V(2 '')+0 	{S}
+0009 ( 644)		STOREI1		<-	R0(P)+46, R1(CF)[10..14]	{}
+000a ( 647)		LOADZ2	R1(P)	<-	V(5 '')+0 	{S}
+000b ( 647)		STOREI2		<-	R0(P)+47, R1(PF)	{}
+000c ( 648)		LOADZ2	R1(P)	<-	V(7 '')+0 	{S}
+000d ( 648)		STOREI2		<-	R0(P)+49, R1(PF)	{}
+000e ( 652)		CONST	R2(C)[0..0]	<-	CI:0	{}
+000f ( 653)		JUMP		<-		{}
 		==> 1
 L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 188)		BINOP16	R1(I)[0..56]	<-	R0(I)[0..7], CI:3	{}
-0001 ( 188)		BINOP1	R1(I)[51..107]	<-	R1(IF)[0..56], CI:51	{}
-0002 ( 189)		JUMP		<-		{}
-		==> 2
-L2: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 189)		LOADA1	R2(C)[0..255]	<-	V(-1 '')+53266 	{V}
-0001 ( 189)		RELOP20	R2(B)[0..1]	<-	R2(CF)[0..255], R1(C)[51..107]	{}
-0002 ( 189)		BRANCH		<-	R2(BF)[0..1]	{}
-		==> 2
-		==> 3
-L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 191)		LEAG	R1(P)[0..7]	<-	V(6 'bar_pal' A)+0 , R0(I)[0..7]	{}
-0001 ( 191)		LOADI1	R1(C)[0..255]	<-	R1(PF)+0 {V(6 'bar_pal' A)} [0..7]	{}
-0002 ( 191)		STOREA1		<-	V(-1 '')+53280 , R1(C)[0..255]	{V}
-0003 ( 192)		STOREA1		<-	V(-1 '')+53281 , R1(CF)[0..255]	{V}
-0004 ( 188)		BINOP1	R0(I)[1..8]	<-	R0(IF)[0..7], CI:1	{}
-0005 ( 186)		RELOP20	R1(B)[0..1]	<-	R0(I)[1..8], CI:8	{}
-0006 ( 186)		BRANCH		<-	R1(BF)[0..1]	{}
+0000 ( 653)		CONV37	R1(I)[0..39]	<-	R2(C)[0..39]	{}
+0001 ( 653)		LEAI	R1(P)+0	<-	R0(P)+0, R1(IF)[0..39]	{}
+0002 ( 653)		STOREI1		<-	R1(PF)+0, CC:32	{}
+0003 ( 652)		BINOP1	R2(C)[1..40]	<-	R2(CF)[0..39], CI:1	{}
+0004 ( 652)		RELOP28	R1(B)[0..1]	<-	R2(C)[1..40], CC:40	{}
+0005 ( 652)		BRANCH		<-	R1(BF)[0..1]	{}
 		==> 1
+		==> 2
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 641)		RET		<-		{}
+--------------------------------------------------------------------
+scroller_step: C:/code/jonas/c64Demo/nineteen84.c:656
+$00 R0(P), $00 R1(I), $00 R2(I), $00 R3(I), $00 R4(P), $00 R5(C), $00 R6(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 658)		LOADZ2	R0(P)	<-	V(0 '')+0 	{S}
+0001 ( 658)		LOADI1	R1(C)[0..255]	<-	R0(P)+42	{}
+0002 ( 658)		BINOP1	R1(C)	<-	R1(CF)[0..255], CI:1	{}
+0003 ( 658)		STOREI1		<-	R0(P)+42, R1(C)	{}
+0004 ( 659)		LOADI1	R2(C)[0..255]	<-	R0(P)+43	{}
+0005 ( 659)		RELOP25	R1(B)[0..1]	<-	R1(CF), R2(CF)[0..255]	{}
+0006 ( 659)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 1
+		==> 2
+L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 661)		STOREI1		<-	R0(P)+42, CC:0	{}
+0001 ( 662)		LOADI2	R1(I)[0..65535]	<-	R0(P)+40	{}
+0002 ( 662)		BINOP1	R2(I)	<-	R1(I)[0..65535], CI:1	{}
+0003 ( 662)		STOREI2		<-	R0(P)+40, R2(IF)	{}
+0004 ( 662)		LOADI2	R2(P)	<-	R0(P)+49	{}
+0005 ( 662)		LEAI	R1(P)+0	<-	R2(P)+0, R1(IF)[0..65535]	{}
+0006 ( 662)		LOADI1	R3(C)[0..255]	<-	R1(PF)+0	{}
+0007 ( 663)		RELOP19	R1(B)[0..1]	<-	R3(C)[0..255], CC:255	{}
+0008 ( 663)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 3
+		==> 15
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 665)		STOREI2		<-	R0(P)+40, CI:0	{}
+0001 ( 666)		LOADI1	R3(C)[0..255]	<-	R2(PF)+0	{}
+0002 ( 668)		JUMP		<-		{}
+		==> 15
+L15: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 668)		LOADI1	R1(C)[0..255]	<-	R0(P)+45	{}
+0001 ( 668)		BRANCH		<-	R1(CF)[0..255]	{}
+		==> 5
+		==> 4
+L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 679)		CONST	R1(I)[39..39]	<-	CI:39	{}
+0001 ( 679)		JUMP		<-		{}
+		==> 8
+L8: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 679)		BINOP2	R2(I)[0..38]	<-	R1(I)[1..39], CI:1	{}
+0001 ( 679)		LEAI	R2(P)+0	<-	R0(P)+0, R2(IF)[0..38]	{}
+0002 ( 679)		LOADI1	R4(C)[0..255]	<-	R2(PF)+0	{}
+0003 ( 679)		LEAI	R2(P)+0	<-	R0(P)+0, R1(I)[1..39]	{}
+0004 ( 679)		STOREI1		<-	R2(PF)+0, R4(CF)[0..255]	{}
+0005 ( 679)		BINOP1	R1(I)[0..38]	<-	R1(IF)[1..39], CI:-1	{}
+0006 ( 678)		RELOP20	R2(B)[0..1]	<-	R1(I)[0..38], CI:0	{}
+0007 ( 678)		BRANCH		<-	R2(BF)[0..1]	{}
+		==> 8
+		==> 9
+L9: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 680)		STOREI1		<-	R0(P)+0, R3(CF)[0..255]	{}
+0001 ( 668)		JUMP		<-		{}
+		==> 2
+L2: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 683)		LOADI1	R1(C)[0..255]	<-	R0(P)+44	{}
+0001 ( 683)		CONV37	R1(I)[0..255]	<-	R1(CF)[0..255]	{}
+0002 ( 683)		BINOP1	R1(I)[1..256]	<-	R1(IF)[0..255], CI:1	{}
+0003 ( 683)		BINOP9	R1(I)[0..15]	<-	R1(IF)[1..256], CI:15	{}
+0004 ( 683)		STOREI1		<-	R0(P)+44, R1(CF)[0..15]	{}
+0005 ( 684)		LOADI1	R1(C)[0..255]	<-	R0(P)+46	{}
+0006 ( 684)		CONV37	R1(I)[0..255]	<-	R1(CF)[0..255]	{}
+0007 ( 684)		BINOP3	R1(I)[0..10200]	<-	R1(IF)[0..255], CI:40	{}
+0008 ( 689)		LEAA	R1(P)[1024..11224]	<-	V(-1 '')+1024 , R1(IF)[0..10200]	{}
+0009 ( 687)		CONST	R5(C)[0..0]	<-	CI:0	{}
+000a ( 691)		LOADI2	R2(P)	<-	R0(P)+47	{I}
+000b ( 689)		JUMP		<-		{}
+		==> 10
+L10: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 689)		CONV37	R3(I)[0..39]	<-	R5(C)[0..39]	{}
+0001 ( 689)		LEAI	R4(P)+0	<-	R0(P)+0, R3(I)[0..39]	{}
+0002 ( 689)		LOADI1	R4(C)[0..255]	<-	R4(PF)+0	{}
+0003 ( 689)		STOREI1		<-	R1(P)+0 {V(-1 'ABS')} [1024..11263], R4(CF)[0..255]	{}
+0004 ( 690)		LOADI1	R4(C)[0..255]	<-	R0(P)+44	{}
+0005 ( 690)		CONV37	R4(I)[0..255]	<-	R4(CF)[0..255]	{}
+0006 ( 690)		LOADI1	R6(C)[0..255]	<-	R0(P)+45	{}
+0007 ( 690)		BRANCH		<-	R6(CF)[0..255]	{}
+		==> 13
+		==> 12
+L13: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 690)		BINOP2	R3(I)[0..39]	<-	CI:39, R3(IF)[0..39]	{}
+0001 ( 690)		BINOP1	R3(I)[0..294]	<-	R3(IF)[0..39], R4(IF)[0..255]	{}
+0002 ( 690)		JUMP		<-		{}
+		==> 14
+L14: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 690)		BINOP9	R3(I)[0..15]	<-	R3(IF)[0..294], CI:15	{}
+0001 ( 691)		LEAI	R3(P)+0	<-	R2(P)+0, R3(IF)[0..15]	{}
+0002 ( 691)		LOADI1	R3(C)[0..255]	<-	R3(PF)+0	{}
+0003 ( 691)		STOREI1		<-	R1(P)+54272 {V(-1 'ABS')} [1024..11263], R3(CF)[0..255]	{}
+0004 ( 689)		LEAI	R1(P)+0 {V(-1 'ABS')} [1025..11264]	<-	R1(PF)+0 {V(-1 'ABS')} [1024..11263], CI:1	{}
+0005 ( 687)		BINOP1	R5(C)[1..40]	<-	R5(CF)[0..39], CI:1	{}
+0006 ( 687)		RELOP28	R3(B)[0..1]	<-	R5(C)[1..40], CC:40	{}
+0007 ( 687)		BRANCH		<-	R3(BF)[0..1]	{}
+		==> 10
+		==> 11
+L11: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 693)		RET		<-		{}
+L12: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 690)		BINOP1	R3(I)[0..294]	<-	R4(IF)[0..255], R3(IF)[0..39]	{}
+0001 ( 690)		JUMP		<-		{}
+		==> 14
+L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 671)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0001 ( 672)		JUMP		<-		{}
+		==> 6
+L6: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 672)		CONV37	R1(I)[0..38]	<-	R2(C)[0..38]	{}
+0001 ( 672)		LEAI	R1(P)+0	<-	R0(P)+0, R1(IF)[0..38]	{}
+0002 ( 672)		LOADI1	R4(C)[0..255]	<-	R1(P)+1	{}
+0003 ( 672)		STOREI1		<-	R1(PF)+0, R4(CF)[0..255]	{}
+0004 ( 671)		BINOP1	R2(C)[1..39]	<-	R2(CF)[0..38], CI:1	{}
+0005 ( 671)		RELOP28	R1(B)[0..1]	<-	R2(C)[1..39], CC:39	{}
+0006 ( 671)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 6
+		==> 7
+L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 673)		STOREI1		<-	R0(P)+39, R3(CF)[0..255]	{}
+0001 ( 668)		JUMP		<-		{}
+		==> 2
+--------------------------------------------------------------------
+scroller_crossflash: C:/code/jonas/c64Demo/nineteen84.c:696
+$00 R0(I), $00 R1(I), $00 R2(I), $00 R3(P), $00 R4(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 698)		LOADG1	R0(C)[0..255]	<-	V(37 'scr' A)+20 	{}
+0001 ( 698)		RELOP20	R0(B)[0..1]	<-	R0(CF)[0..255], CC:32	{}
+0002 ( 698)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 3
+		==> 2
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 698)		LOADG1	R0(C)[0..255]	<-	V(37 'scr' A)+70 	{}
+0001 ( 698)		RELOP20	R0(B)[0..1]	<-	R0(CF)[0..255], CC:32	{}
+0002 ( 698)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 1
+		==> 2
+L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 701)		LOADG1	R0(C)[0..255]	<-	V(37 'scr' A)+97 	{}
+0001 ( 701)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
+0002 ( 701)		BINOP3	R0(I)[0..10200]	<-	R0(IF)[0..255], CI:40	{}
+0003 ( 701)		LEAA	R0(P)[55296..65496]	<-	V(-1 '')+55296 , R0(IF)[0..10200]	{}
+0004 ( 700)		LOADG1	R1(C)[0..255]	<-	V(37 'scr' A)+46 	{}
+0005 ( 700)		CONV37	R1(I)[0..255]	<-	R1(CF)[0..255]	{}
+0006 ( 700)		BINOP3	R1(I)[0..10200]	<-	R1(IF)[0..255], CI:40	{}
+0007 ( 700)		LEAA	R1(P)[55296..65496]	<-	V(-1 '')+55296 , R1(IF)[0..10200]	{}
+0008 ( 702)		CONST	R4(C)[16..16]	<-	CI:16	{}
+0009 ( 704)		JUMP		<-		{}
 		==> 4
 L4: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 195)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+53266 	{V}
-0001 ( 195)		RELOP20	R0(B)[0..1]	<-	R0(CF)[0..255], CC:115	{}
-0002 ( 195)		BRANCH		<-	R0(BF)[0..1]	{}
+0000 ( 704)		CONV37	R2(I)[16..23]	<-	R4(C)[16..23]	{}
+0001 ( 704)		LEAI	R3(P)+0 {V(-1 'ABS')} [55312..65519]	<-	R1(P)+0 {V(-1 'ABS')} [55296..65496], R2(I)[16..23]	{}
+0002 ( 704)		STOREI1		<-	R3(PF)+0 {V(-1 'ABS')} [55312..65519], CC:1	{}
+0003 ( 705)		LEAI	R2(P)+0 {V(-1 'ABS')} [55312..65519]	<-	R0(P)+0 {V(-1 'ABS')} [55296..65496], R2(IF)[16..23]	{}
+0004 ( 705)		STOREI1		<-	R2(PF)+0 {V(-1 'ABS')} [55312..65519], CC:1	{}
+0005 ( 702)		BINOP1	R4(C)[17..24]	<-	R4(CF)[16..23], CI:1	{}
+0006 ( 702)		RELOP28	R2(B)[0..1]	<-	R4(C)[17..24], CC:24	{}
+0007 ( 702)		BRANCH		<-	R2(BF)[0..1]	{}
+		==> 4
+		==> 2
+L2: <= D-1: (3)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 708)		RET		<-		{}
+--------------------------------------------------------------------
+reveal_word: C:/code/jonas/c64Demo/nineteen84.c:852
+$00 R0(P), $00 R1(P), $00 R2(C), $00 R3(C), $00 R4(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 854)		LOADZ2	R0(P)	<-	V(5 '')+0 	{}
+0001 ( 854)		LOADI1	R0(C)[0..255]	<-	R0(PF)+0	{}
+0002 ( 852)		LOADZ1	R2(C)[0..255]	<-	V(3 '')+0 	{S}
+0003 ( 852)		LOADZ1	R3(C)[0..255]	<-	V(0 '')+0 	{S}
+0004 ( 856)		JUMP		<-		{}
+		==> 3
+L3: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 856)		LOADZ1	R4(C)[0..255]	<-	V(4 '')+0 	{}
+0001 ( 854)		BRANCH		<-	R0(CF)[0..255]	{}
+		==> 1
+		==> 2
+L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 856)		STOREC1		<-	V(0 '')+0 , R3(C)[18..20]	{}
+0001 ( 856)		STOREC1		<-	V(1 '')+0 , R4(C)[0..255]	{}
+0002 ( 856)		STOREC1		<-	V(3 '')+0 , R2(C)[2..14]	{}
+0003 ( 856)		LOADZ2	R1(P)	<-	V(5 '')+0 	{}
+0004 ( 856)		LOADI1	R0(C)[0..255]	<-	R1(P)+0	{}
+0005 ( 856)		STOREC1		<-	V(2 '')+0 , R0(CF)[0..255]	{}
+0006 ( 856)		CALLN		<-	V(21 'pch')+0 	{E}
+0007 ( 857)		BINOP1	R0(C)	<-	R4(CF)[0..255], CI:1	{}
+0008 ( 857)		STOREZ1		<-	V(4 '')+0 , R0(CF)	{}
+0009 ( 858)		LEAI	R0(P)+0	<-	R1(P)+0, CI:1	{}
+000a ( 858)		STOREZ2		<-	V(5 '')+0 , R0(PF)	{}
+000b ( 854)		LOADI1	R0(C)[0..255]	<-	R1(PF)+1	{}
+000c ( 854)		JUMP		<-		{}
+		==> 3
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 860)		RETV		<-	R4(CF)[0..255]	{}
+--------------------------------------------------------------------
+pch: C:/code/jonas/c64Demo/nineteen84.c:103
+$00 R0(I), $00 R1(I), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 105)		LOADZ1	R0(C)[0..255]	<-	V(1 '')+0 	{S}
+0001 ( 105)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{S}
+0002 ( 105)		LOADZ1	R1(C)[0..255]	<-	V(0 '')+0 	{S}
+0003 ( 105)		CONV37	R1(I)[0..255]	<-	R1(CF)[0..255]	{S}
+0004 ( 105)		BINOP3	R1(I)[0..10200]	<-	R1(IF)[0..255], CI:40	{S}
+0005 ( 105)		LEAA	R1(P)[1024..11224]	<-	V(-1 '')+1024 , R1(IF)[0..10200]	{S}
+0006 ( 106)		LEAI	R1(P)+0 {V(-1 'ABS')} [1024..11479]	<-	R1(PF)+0 {V(-1 'ABS')} [1024..11224], R0(IF)[0..255]	{S}
+0007 ( 106)		LOADZ1	R0(C)[0..255]	<-	V(2 '')+0 	{S}
+0008 ( 106)		STOREI1		<-	R1(P)+0 {V(-1 'ABS')} [1024..11479], R0(CF)[0..255]	{}
+0009 ( 107)		LOADZ1	R0(C)[0..255]	<-	V(3 '')+0 	{S}
+000a ( 107)		STOREI1		<-	R1(PF)+54272 {V(-1 'ABS')} [1024..11479], R0(CF)[0..255]	{}
+000b ( 108)		RET		<-		{}
+--------------------------------------------------------------------
+glitch_transition: C:/code/jonas/c64Demo/nineteen84.c:711
+$00 R0(P), $00 R1(I), $02 R2(I), $00 R3(I), $00 R4(I), $03 R5(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 713)		CONST	R2(C)[172..172]	<-	CI:172	{}
+0001 ( 714)		CONST	R5(C)[18..18]	<-	CI:18	{}
+0002 ( 720)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 720)		CONST	R0(P)[1024..1024]	<-	CA0(-1:1024 '')	{}
+0001 ( 718)		JUMP		<-		{}
+		==> 3
+L3: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 718)		CONV37	R1(I)[0..255]	<-	R2(CF)[0..255]	{}
+0001 ( 719)		BINOP16	R2(I)[0..510]	<-	R1(I)[0..255], CI:1	{}
+0002 ( 718)		BINOP17	R3(I)[0..1]	<-	R1(I)[0..255], CI:7	{}
+0003 ( 718)		BINOP17	R4(I)[0..7]	<-	R1(I)[0..255], CI:5	{}
+0004 ( 718)		BINOP10	R3(I)[0..7]	<-	R4(IF)[0..7], R3(IF)[0..1]	{}
+0005 ( 718)		BINOP17	R4(I)[0..15]	<-	R1(I)[0..255], CI:4	{}
+0006 ( 718)		BINOP10	R3(I)[0..15]	<-	R4(IF)[0..15], R3(IF)[0..7]	{}
+0007 ( 718)		BINOP17	R1(I)[0..31]	<-	R1(IF)[0..255], CI:3	{}
+0008 ( 718)		BINOP10	R1(I)[0..31]	<-	R1(IF)[0..31], R3(IF)[0..15]	{}
+0009 ( 718)		BINOP9	R1(I)[0..1]	<-	R1(IF)[0..31], CI:1	{}
+000a ( 719)		BINOP8	R1(I)[0..511]	<-	R1(IF)[0..1], R2(IF)[0..510]	{}
+000b ( 720)		CONV37	R2(I)[0..255]	<-	R1(C)[0..511]	{}
+000c ( 720)		BINOP9	R3(I)[0..63]	<-	R2(I)[0..255], CI:63	{}
+000d ( 720)		STOREI1		<-	R0(P)+0 {V(-1 'ABS')} [1024..2023], R3(CF)[0..63]	{}
+000e ( 721)		BINOP17	R2(I)[0..15]	<-	R2(IF)[0..255], CI:4	{}
+000f ( 721)		STOREI1		<-	R0(P)+54272 {V(-1 'ABS')} [1024..2023], R2(CF)[0..15]	{}
+0010 ( 719)		MOVE	R2(C)[0..255]	<-	R1(CF)[0..511]	{}
+0011 ( 720)		LEAA	R0(P)[1025..2023]	<-	R0(PF)[1024..2023], CI:1	{}
+0012 ( 716)		RELOP20	R1(B)[0..1]	<-	R0(P)[1025..2023], V(-1 '')+2024 	{}
+0013 ( 716)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 3
+		==> 4
+L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 723)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0001 ( 724)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0002 ( 714)		BINOP2	R5(C)[0..17]	<-	R5(CF)[1..18], CI:1	{}
+0003 ( 714)		RELOP27	R0(B)[0..1]	<-	R5(C)[0..17], CC:0	{}
+0004 ( 714)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 1
+		==> 2
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 728)		CONST	R1(P)[55296..55296]	<-	CA0(-1:55296 '')	{}
+0001 ( 729)		JUMP		<-		{}
+		==> 5
+L5: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 729)		CONST	R2(C)[0..0]	<-	CI:0	{}
+0001 ( 730)		JUMP		<-		{}
+		==> 7
+L7: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 730)		CONV37	R0(I)[0..39]	<-	R2(C)[0..39]	{}
+0001 ( 730)		LEAI	R0(P)+0 {V(-1 'ABS')} [55296..56295]	<-	R1(P)+0 {V(-1 'ABS')} [55296..56256], R0(IF)[0..39]	{}
+0002 ( 730)		STOREI1		<-	R0(PF)+0 {V(-1 'ABS')} [55296..56295], CC:0	{}
+0003 ( 729)		BINOP1	R2(C)[1..40]	<-	R2(CF)[0..39], CI:1	{}
+0004 ( 729)		RELOP28	R0(B)[0..1]	<-	R2(C)[1..40], CC:40	{}
+0005 ( 729)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 7
+		==> 8
+L8: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 731)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0001 ( 728)		LEAA	R1(P)[55336..56256]	<-	R1(PF)[55296..56256], CI:40	{}
+0002 ( 726)		RELOP20	R0(B)[0..1]	<-	R1(P)[55336..56256], V(-1 '')+56296 	{}
+0003 ( 726)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 5
+		==> 6
+L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 733)		CALLN		<-	V(2 'cls')+0 	{}
+0001 ( 734)		RET		<-		{}
+--------------------------------------------------------------------
+input_line: C:/code/jonas/c64Demo/nineteen84.c:763
+$00 R0(I), $00 R1(I), $02 R2(C), $00 R3(B), $03 R4(C), $04 R5(C), $05 R6(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 767)		CONST	R1(C)[3..3]	<-	CI:3	{}
+0001 ( 765)		CONST	R4(C)[0..0]	<-	CI:0	{}
+0002 ( 765)		CONST	R5(C)[0..0]	<-	CI:0	{}
+0003 ( 765)		CONST	R6(C)[1..1]	<-	CI:1	{}
+0004 ( 767)		JUMP		<-		{}
+		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 767)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0001 ( 767)		STOREC1		<-	V(1 '')+0 , R1(C)[3..39]	{}
+0002 ( 767)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0003 ( 767)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0004 ( 767)		CALLN		<-	V(21 'pch')+0 	{E}
+0005 ( 767)		BINOP1	R1(C)[4..40]	<-	R1(CF)[3..39], CC:1	{}
+0006 ( 766)		RELOP20	R0(B)[0..1]	<-	R1(C)[4..40], CC:40	{}
+0007 ( 766)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 1
+		==> 2
+L2: <= D-1: (6) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 770)		CALLN		<-	V(9 'wait_frame')+0 	{E}
+0001 ( 771)		BINOP1	R5(C)[1..20]	<-	R5(CF)[0..19], CI:1	{}
+0002 ( 771)		RELOP25	R0(B)[0..1]	<-	R5(C)[1..20], CC:20	{}
+0003 ( 771)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 4
+		==> 5
+L4: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 774)		RELOP19	R6(B)[0..1]	<-	R6(CF)[0..1], CC:0	{}
+0001 ( 773)		CONST	R5(C)[0..0]	<-	CI:0	{}
+0002 ( 771)		JUMP		<-		{}
+		==> 5
+L5: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 776)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0001 ( 776)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0002 ( 776)		BRANCH		<-	R6(C)[0..1]	{}
+		==> 13
+		==> 14
+L13: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 776)		STOREC1		<-	V(2 '')+0 , CC:160	{}
+0001 ( 776)		JUMP		<-		{}
+		==> 15
+L15: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 776)		CONV37	R0(I)[0..36]	<-	R4(C)[0..36]	{}
+0001 ( 776)		BINOP1	R1(I)[3..39]	<-	R0(I)[0..36], CI:3	{}
+0002 ( 776)		STOREC1		<-	V(1 '')+0 , R1(C)[3..39]	{}
+0003 ( 776)		CALLN		<-	V(21 'pch')+0 	{E}
+0004 ( 777)		CALLN	R2(C)	<-	V(24 'read_key')+0 	{}
+0005 ( 778)		BRANCH		<-	R2(C)	{}
+		==> 6
+		==> 2
+L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 780)		RELOP19	R3(B)[0..1]	<-	R2(C), CC:13	{}
+0001 ( 780)		BRANCH		<-	R3(BF)[0..1]	{}
+		==> 3
+		==> 7
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 802)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0001 ( 802)		STOREC1		<-	V(1 '')+0 , R1(CF)[3..39]	{}
+0002 ( 802)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0003 ( 802)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0004 ( 802)		CALLN		<-	V(21 'pch')+0 	{E}
+0005 ( 803)		LEAG	R0(P)[0..36]	<-	V(59 'input_buf' A)+0 , R0(IF)[0..36]	{}
+0006 ( 803)		STOREI1		<-	R0(PF)+0 {V(59 'input_buf' A)} [0..36], CC:0	{}
+0007 ( 804)		RETV		<-	R4(CF)[0..36]	{}
+L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 782)		RELOP19	R3(B)[0..1]	<-	R2(C), CC:20	{}
+0001 ( 782)		BRANCH		<-	R3(BF)[0..1]	{}
+		==> 8
+		==> 9
+L8: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 784)		RELOP27	R2(B)[0..1]	<-	R4(C)[0..36], CC:0	{}
+0001 ( 784)		BRANCH		<-	R2(BF)[0..1]	{}
+		==> 10
+		==> 2
+L10: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 786)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0001 ( 786)		STOREC1		<-	V(1 '')+0 , R1(CF)[3..39]	{}
+0002 ( 786)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0003 ( 786)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0004 ( 786)		CALLN		<-	V(21 'pch')+0 	{E}
+0005 ( 788)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0006 ( 788)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0007 ( 788)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0008 ( 787)		BINOP1	R2(C)[0..35]	<-	R4(CF)[1..36], CI:-1	{}
+0009 ( 788)		BINOP1	R1(C)[3..38]	<-	R2(C)[0..35], CI:3	{}
+000a ( 788)		STOREC1		<-	V(1 '')+0 , R1(CF)[3..38]	{}
+000b ( 788)		CALLN		<-	V(21 'pch')+0 	{E}
+000c ( 789)		LEAG	R0(P)[0..35]	<-	V(59 'input_buf' A)+-1 , R0(IF)[1..36]	{}
+000d ( 789)		STOREI1		<-	R0(PF)+0 {V(59 'input_buf' A)} [0..35], CC:0	{}
+000e ( 784)		JUMP		<-		{}
+		==> 16
+L16: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 798)		MOVE	R4(C)[0..36]	<-	R2(CF)[0..36]	{}
+0001 ( 794)		JUMP		<-		{}
+		==> 2
+L9: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 793)		STOREC1		<-	V(0 '')+0 , R2(CF)	{}
+0001 ( 793)		CALLN	R2(C)	<-	V(25 'petscii_to_sc')+0 	{EC}
+0002 ( 794)		BRANCH		<-	R2(C)	{}
+		==> 12
+		==> 2
+L12: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 794)		RELOP28	R3(B)[0..1]	<-	R4(C)[0..36], CC:36	{}
+0001 ( 794)		BRANCH		<-	R3(BF)[0..1]	{}
+		==> 11
+		==> 2
+L11: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 797)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0001 ( 797)		STOREC1		<-	V(1 '')+0 , R1(CF)[3..39]	{}
+0002 ( 797)		STOREC1		<-	V(2 '')+0 , R2(C)	{}
+0003 ( 797)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+0004 ( 796)		LEAG	R0(P)[0..35]	<-	V(59 'input_buf' A)+0 , R0(IF)[0..35]	{}
+0005 ( 796)		STOREI1		<-	R0(PF)+0 {V(59 'input_buf' A)} [0..35], R2(CF)	{}
+0006 ( 797)		CALLN		<-	V(21 'pch')+0 	{E}
+0007 ( 799)		STOREC1		<-	V(0 '')+0 , CC:12	{}
+0008 ( 799)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0009 ( 799)		STOREC1		<-	V(3 '')+0 , CC:1	{}
+000a ( 798)		BINOP1	R2(C)[1..36]	<-	R4(CF)[0..35], CI:1	{}
+000b ( 799)		BINOP1	R0(C)[4..39]	<-	R2(C)[1..36], CI:3	{}
+000c ( 799)		STOREC1		<-	V(1 '')+0 , R0(CF)[4..39]	{}
+000d ( 799)		CALLN		<-	V(21 'pch')+0 	{E}
+000e ( 794)		JUMP		<-		{}
+		==> 16
+L14: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 776)		STOREC1		<-	V(2 '')+0 , CC:32	{}
+0001 ( 776)		JUMP		<-		{}
+		==> 15
+--------------------------------------------------------------------
+read_key: C:/code/jonas/c64Demo/nineteen84.c:740
+$00 R0(I), $00 R1(I), $00 R2(P), $00 R3(C), $00 R4(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 742)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+198 	{V}
+0001 ( 742)		BRANCH		<-	R0(CF)[0..255]	{}
+		==> 2
+		==> 1
+L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 744)		LOADA1	R3(C)[0..255]	<-	V(-1 '')+631 	{V}
+0001 ( 745)		LOADA1	R0(C)[0..255]	<-	V(-1 '')+198 	{V}
+0002 ( 745)		CONV37	R0(I)[0..255]	<-	R0(CF)[0..255]	{}
+0003 ( 745)		BINOP2	R0(I)[-1..254]	<-	R0(IF)[0..255], CI:1	{}
+0004 ( 746)		RELOP28	R1(B)[0..1]	<-	CC:0, R0(C)[-1..254]	{}
+0005 ( 746)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 5
+		==> 4
+L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 746)		CONST	R4(C)[0..0]	<-	CI:0	{}
+0001 ( 747)		JUMP		<-		{}
+		==> 3
+L3: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 747)		CONV37	R1(I)[0..253]	<-	R4(C)[0..253]	{}
+0001 ( 747)		LEAA	R2(P)[632..885]	<-	V(-1 '')+632 , R1(I)[0..253]	{}
+0002 ( 747)		LOADI1	R2(C)[0..255]	<-	R2(PF)+0 {V(-1 'ABS')} [632..885]	{V}
+0003 ( 747)		LEAA	R1(P)[631..884]	<-	V(-1 '')+631 , R1(IF)[0..253]	{}
+0004 ( 747)		STOREI1		<-	R1(PF)+0 {V(-1 'ABS')} [631..884], R2(CF)[0..255]	{V}
+0005 ( 746)		BINOP1	R4(C)[1..254]	<-	R4(CF)[0..253], CI:1	{}
+0006 ( 746)		RELOP28	R1(B)[0..1]	<-	R4(C)[1..254], R0(C)[1..254]	{}
+0007 ( 746)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 3
+		==> 4
+L4: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 748)		STOREA1		<-	V(-1 '')+198 , R0(CF)[-1..254]	{V}
+0001 ( 749)		RETV		<-	R3(CF)[0..255]	{}
+L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 743)		RETV		<-	CC:0	{}
+--------------------------------------------------------------------
+petscii_to_sc: C:/code/jonas/c64Demo/nineteen84.c:752
+$00 R0(I), $00 R1(B), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 754)		LOADZ1	R0(C)[0..255]	<-	V(0 '')+0 	{S}
+0001 ( 754)		RELOP25	R1(B)[0..1]	<-	R0(C)[0..255], CC:65	{S}
+0002 ( 754)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 3
+		==> 2
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 754)		RELOP26	R1(B)[0..1]	<-	R0(C)[65..255], CC:90	{S}
+0001 ( 754)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 1
+		==> 9
+L1: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 754)		CONV37	R0(I)[65..90]	<-	R0(CF)[65..90]	{S}
+0001 ( 755)		BINOP2	R0(I)[1..26]	<-	R0(IF)[65..90], CI:64	{S}
+0002 ( 755)		RETV		<-	R0(CF)[1..26]	{}
+L9: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 756)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..255], CC:46	{S}
+0001 ( 756)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 4
+		==> 8
+L4: <= D-1: (6)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 757)		RETV		<-	R0(CF)[32..63]	{}
+L8: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 756)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..255], CC:33	{S}
+0001 ( 756)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 4
+		==> 7
+L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 756)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..255], CC:63	{S}
+0001 ( 756)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 4
+		==> 6
+L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 756)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..255], CC:45	{S}
+0001 ( 756)		BRANCH		<-	R1(BF)[0..1]	{}
 		==> 4
 		==> 5
 L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 197)		STOREA1		<-	V(-1 '')+53280 , CC:0	{V}
-0001 ( 198)		STOREA1		<-	V(-1 '')+53281 , CC:0	{V}
-0002 ( 182)		RET		<-		{}
---------------------------------------------------------------------
-rotate_bars_left: C:/code/jonas/c64Demo/nineteen84.c:174
-$00 R0(I), $00 R1(P), $00 R2(C), $00 R3(C), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 177)		CONST	R2(C)[0..0]	<-	CI:0	{}
-0001 ( 176)		LOADG1	R3(C)[0..255]	<-	V(6 'bar_pal' A)+0 	{}
-0002 ( 178)		JUMP		<-		{}
-		==> 1
-L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 178)		CONV37	R0(I)[0..6]	<-	R2(C)[0..6]	{}
-0001 ( 178)		LEAG	R1(P)[1..7]	<-	V(6 'bar_pal' A)+1 , R0(I)[0..6]	{}
-0002 ( 178)		LOADI1	R1(C)[0..255]	<-	R1(PF)+0 {V(6 'bar_pal' A)} [1..7]	{}
-0003 ( 178)		LEAG	R0(P)[0..6]	<-	V(6 'bar_pal' A)+0 , R0(IF)[0..6]	{}
-0004 ( 178)		STOREI1		<-	R0(PF)+0 {V(6 'bar_pal' A)} [0..6], R1(CF)[0..255]	{}
-0005 ( 177)		BINOP1	R2(C)[1..7]	<-	R2(CF)[0..6], CI:1	{}
-0006 ( 177)		RELOP28	R0(B)[0..1]	<-	R2(C)[1..7], CC:7	{}
-0007 ( 177)		BRANCH		<-	R0(BF)[0..1]	{}
-		==> 1
-		==> 2
+0000 ( 758)		RELOP25	R1(B)[0..1]	<-	R0(C)[0..255], CC:48	{S}
+0001 ( 758)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 11
+		==> 10
+L11: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 758)		RELOP26	R1(B)[0..1]	<-	R0(C)[48..255], CC:57	{S}
+0001 ( 758)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 4
+		==> 10
+L10: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 760)		RETV		<-	CC:0	{}
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 179)		STOREG1		<-	V(6 'bar_pal' A)+7 , R3(CF)[0..255]	{}
-0001 ( 180)		RET		<-		{}
+0000 ( 756)		RELOP19	R1(B)[0..1]	<-	R0(C)[0..64], CC:32	{S}
+0001 ( 756)		BRANCH		<-	R1(BF)[0..1]	{}
+		==> 4
+		==> 9
 --------------------------------------------------------------------
-scene4_run: C:/code/jonas/c64Demo/nineteen84.c:598
-$00 R0(P), $01 R1(C), 
-L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 602)		STOREC1		<-	V(0 '')+0 , CC:30	{}
-0001 ( 600)		CALLN		<-	V(2 'cls')+0 	{}
-0002 ( 602)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0003 ( 603)		STOREC1		<-	V(0 '')+0 , CC:10	{}
-0004 ( 603)		STOREC1		<-	V(4 '')+0 , CC:1	{}
-0005 ( 603)		CONST	R0(P)[0..0]	<-	CG33(39:0 's_q1')	{S}
-0006 ( 603)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(39 's_q1')} [0..0]	{}
-0007 ( 603)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0008 ( 604)		STOREC1		<-	V(0 '')+0 , CC:40	{}
-0009 ( 604)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-000a ( 605)		STOREC1		<-	V(0 '')+0 , CC:12	{}
-000b ( 605)		STOREC1		<-	V(4 '')+0 , CC:10	{}
-000c ( 605)		CONST	R0(P)[0..0]	<-	CG32(40:0 's_q2')	{S}
-000d ( 605)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(40 's_q2')} [0..0]	{}
-000e ( 605)		CALLN		<-	V(3 'print_centered')+0 	{E}
-000f ( 606)		STOREC1		<-	V(0 '')+0 , CC:40	{}
-0010 ( 606)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0011 ( 620)		STOREC1		<-	V(0 '')+0 , CC:18	{}
-0012 ( 620)		STOREC1		<-	V(4 '')+0 , CC:12	{}
-0013 ( 343)		STOREG1		<-	V(22 'blink_phase')+0 , CC:0	{}
-0014 ( 342)		STOREG1		<-	V(21 'blink_cnt')+0 , CC:0	{}
-0015 ( 609)		STOREG1		<-	V(6 'bar_pal' A)+0 , CC:2	{}
-0016 ( 610)		STOREG1		<-	V(6 'bar_pal' A)+1 , CC:10	{}
-0017 ( 611)		STOREG1		<-	V(6 'bar_pal' A)+2 , CC:8	{}
-0018 ( 612)		STOREG1		<-	V(6 'bar_pal' A)+3 , CC:2	{}
-0019 ( 613)		STOREG1		<-	V(6 'bar_pal' A)+4 , CC:11	{}
-001a ( 614)		STOREG1		<-	V(6 'bar_pal' A)+5 , CC:0	{}
-001b ( 615)		STOREG1		<-	V(6 'bar_pal' A)+6 , CC:0	{}
-001c ( 616)		STOREG1		<-	V(6 'bar_pal' A)+7 , CC:0	{}
-001d ( 620)		CONST	R0(P)[0..0]	<-	CG23(17:0 's_press')	{S}
-001e ( 620)		STOREC2		<-	V(2 '')+0 , R0(PF)+0 {V(17 's_press')} [0..0]	{}
-001f ( 620)		CALLN		<-	V(3 'print_centered')+0 	{E}
-0020 ( 619)		CONST	R1(C)[0..0]	<-	CI:0	{}
-0021 ( 631)		JUMP		<-		{}
+find_response: C:/code/jonas/c64Demo/responses.h:238
+$00 R0(I), $00 R1(P), $00 R2(I), $00 R3(P), $00 R4(I), $00 R5(I), $00 R6(C), $00 R7(C), $00 R8(C), $01 R9(C), $02 R10(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 241)		CONST	R6(C)[0..0]	<-	CI:0	{}
+0001 ( 244)		JUMP		<-		{}
 		==> 1
-L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 631)		STOREC1		<-	V(0 '')+0 , CC:18	{}
-0001 ( 631)		STOREC1		<-	V(1 '')+0 , CC:12	{}
-0002 ( 624)		CALLN		<-	V(7 'wait_frame')+0 	{E}
-0003 ( 625)		CALLN		<-	V(16 'draw_bars')+0 	{}
-0004 ( 626)		BINOP1	R1(C)[1..10]	<-	R1(CF)[0..9], CI:1	{}
-0005 ( 626)		RELOP25	R0(B)[0..1]	<-	R1(C)[1..10], CC:10	{}
-0006 ( 626)		BRANCH		<-	R0(BF)[0..1]	{}
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 244)		CONST	R7(C)[0..0]	<-	CI:0	{}
+0001 ( 243)		CONV37	R0(I)[0..41]	<-	R6(C)[0..41]	{}
+0002 ( 243)		BINOP16	R0(I)[0..82]	<-	R0(IF)[0..41], CI:1	{}
+0003 ( 243)		LEAG	R1(P)[0..82]	<-	V(67 '_kw_table')+0 , R0(I)[0..82]	{}
+0004 ( 243)		LOADI2	R1(P)	<-	R1(PF)+0 {V(67 '_kw_table')} [0..82]	{}
+0005 ( 245)		JUMP		<-		{}
+		==> 4
+L4: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 245)		CONV37	R2(I)[0..255]	<-	R7(C)[0..]	{}
+0001 ( 245)		LEAI	R3(P)+0	<-	R1(P)+0, R2(I)[0..255]	{}
+0002 ( 245)		LOADI1	R3(C)[0..255]	<-	R3(PF)+0	{}
+0003 ( 245)		BRANCH		<-	R3(CF)[0..255]	{}
+		==> 5
+		==> 6
+L5: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 245)		BINOP1	R7(C)[1..]	<-	R7(CF)[0..], CI:1	{}
+0001 ( 245)		JUMP		<-		{}
+		==> 4
+L6: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 246)		LOADZ1	R8(C)[0..255]	<-	V(0 '')+0 	{S}
+0001 ( 246)		RELOP27	R3(B)[0..1]	<-	R7(C)[0..], R8(C)[0..255]	{}
+0002 ( 246)		BRANCH		<-	R3(BF)[0..1]	{}
+		==> 2
+		==> 7
+L2: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 241)		BINOP1	R6(C)[1..42]	<-	R6(CF)[0..41], CI:1	{}
+0001 ( 241)		RELOP28	R0(B)[0..1]	<-	R6(C)[1..42], CC:42	{}
+0002 ( 241)		BRANCH		<-	R0(BF)[0..1]	{}
+		==> 1
 		==> 3
-		==> 4
-L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 629)		CALLN		<-	V(17 'rotate_bars_left')+0 	{}
-0001 ( 628)		CONST	R1(C)[0..0]	<-	CI:0	{}
-0002 ( 626)		JUMP		<-		{}
-		==> 4
-L4: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 631)		CALLN		<-	V(9 'blink_row')+0 	{}
-0001 ( 632)		CALLN	R0(C)	<-	V(10 'fire_pressed')+0 	{}
-0002 ( 632)		BRANCH		<-	R0(CF)	{}
+L3: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 264)		LOADZ2	R0(P)	<-	V(1 '')+0 	{S}
+0001 ( 264)		CONST	R1(P)[0..0]	<-	CG30(196:0 '_resp_default_1')	{S}
+0002 ( 264)		STOREI2		<-	R0(PF)+0, R1(PF)+0 {V(196 '_resp_default_1')} [0..0]	{}
+0003 ( 265)		LOADZ2	R0(P)	<-	V(3 '')+0 	{S}
+0004 ( 265)		CONST	R1(P)[0..0]	<-	CG26(197:0 '_resp_default_2')	{S}
+0005 ( 265)		STOREI2		<-	R0(PF)+0, R1(PF)+0 {V(197 '_resp_default_2')} [0..0]	{}
+0006 ( 238)		RET		<-		{}
+L7: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 248)		CONST	R9(C)[0..0]	<-	CI:0	{}
+0001 ( 248)		JUMP		<-		{}
+		==> 8
+L8: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 248)		CONV37	R3(I)[0..255]	<-	R9(C)[0..]	{}
+0001 ( 248)		BINOP1	R4(I)[0..510]	<-	R3(I)[0..255], R2(I)[0..255]	{}
+0002 ( 248)		CONV37	R5(I)[0..255]	<-	R8(C)[0..255]	{S}
+0003 ( 248)		RELOP26	R4(B)[0..1]	<-	R4(IF)[0..510], R5(IF)[0..255]	{}
+0004 ( 248)		BRANCH		<-	R4(BF)[0..1]	{}
+		==> 9
 		==> 2
+L9: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 251)		RELOP28	R4(B)[0..1]	<-	CC:0, R7(C)[0..]	{}
+0001 ( 251)		BRANCH		<-	R4(BF)[0..1]	{}
+		==> 14
+		==> 13
+L14: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 251)		CONST	R10(C)[0..0]	<-	CI:0	{}
+0001 ( 253)		JUMP		<-		{}
+		==> 11
+L11: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 253)		CONV37	R4(I)[0..38]	<-	R10(C)[0..38]	{}
+0001 ( 253)		LEAI	R5(P)+0	<-	R1(P)+0, R4(I)[0..38]	{}
+0002 ( 253)		LOADI1	R5(C)[0..255]	<-	R5(PF)+0	{}
+0003 ( 253)		BINOP1	R4(I)[0..38]	<-	R3(I)[0..38], R4(IF)[0..38]	{}
+0004 ( 253)		LEAG	R4(P)[0..76]	<-	V(59 'input_buf' A)+0 , R4(IF)[0..38]	{}
+0005 ( 253)		LOADI1	R4(C)[0..255]	<-	R4(PF)+0 {V(59 'input_buf' A)} [0..76]	{}
+0006 ( 253)		RELOP20	R4(B)[0..1]	<-	R4(CF)[0..255], R5(CF)[0..255]	{}
+0007 ( 253)		BRANCH		<-	R4(BF)[0..1]	{}
+		==> 10
+		==> 12
+L10: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 248)		BINOP1	R9(C)[1..]	<-	R9(CF)[0..], CI:1	{}
+0001 ( 248)		JUMP		<-		{}
+		==> 8
+L12: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 251)		BINOP1	R10(C)[1..39]	<-	R10(CF)[0..38], CI:1	{}
+0001 ( 251)		RELOP28	R4(B)[0..1]	<-	R10(C)[1..39], R7(C)[1..]	{}
+0002 ( 251)		BRANCH		<-	R4(BF)[0..1]	{}
+		==> 11
+		==> 13
+L13: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/responses.h
+0000 ( 257)		LEAG	R1(P)[0..82]	<-	V(110 '_r1_table')+0 , R0(I)[0..82]	{}
+0001 ( 257)		LOADI2	R1(P)	<-	R1(PF)+0 {V(110 '_r1_table')} [0..82]	{}
+0002 ( 257)		LOADZ2	R2(P)	<-	V(1 '')+0 	{S}
+0003 ( 257)		STOREI2		<-	R2(PF)+0, R1(PF)	{}
+0004 ( 258)		LEAG	R0(P)[0..82]	<-	V(153 '_r2_table')+0 , R0(IF)[0..82]	{}
+0005 ( 258)		LOADI2	R0(P)	<-	R0(PF)+0 {V(153 '_r2_table')} [0..82]	{}
+0006 ( 258)		LOADZ2	R1(P)	<-	V(3 '')+0 	{S}
+0007 ( 258)		STOREI2		<-	R1(PF)+0, R0(PF)	{}
+0008 ( 259)		RET		<-		{}
+--------------------------------------------------------------------
+typeout: C:/code/jonas/c64Demo/nineteen84.c:807
+$00 R0(P), $00 R1(C), $00 R2(C), $00 R3(C), $00 R4(C), 
+L0: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 807)		LOADZ1	R2(C)[0..255]	<-	V(9 '')+0 	{S}
+0001 ( 807)		LOADZ1	R3(C)[0..255]	<-	V(8 '')+0 	{S}
+0002 ( 807)		LOADZ1	R4(C)[0..255]	<-	V(4 '')+0 	{S}
+0003 ( 809)		JUMP		<-		{}
 		==> 1
+L1: <= D-1: (2) Head P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 809)		LOADZ2	R0(P)	<-	V(6 '')+0 	{}
+0001 ( 809)		LOADI1	R1(C)[0..255]	<-	R0(P)+0	{}
+0002 ( 809)		BRANCH		<-	R1(C)[0..255]	{}
+		==> 2
+		==> 3
 L2: <= D-1: (1)  P-1 C:/code/jonas/c64Demo/nineteen84.c
-0000 ( 636)		STOREC1		<-	V(0 '')+0 , CC:20	{}
-0001 ( 636)		CALLN		<-	V(11 'fade_to_black')+0 	{}
-0002 ( 637)		STOREC1		<-	V(0 '')+0 , CC:20	{}
-0003 ( 637)		CALLN		<-	V(12 'wait_frames')+0 	{E}
-0004 ( 638)		RET		<-		{}
+0000 ( 811)		STOREC1		<-	V(0 '')+0 , R4(C)[6..18]	{}
+0001 ( 811)		STOREC1		<-	V(2 '')+0 , R1(CF)[0..255]	{}
+0002 ( 811)		STOREC1		<-	V(3 '')+0 , R3(C)[1..15]	{}
+0003 ( 811)		LOADZ1	R1(C)[0..255]	<-	V(5 '')+0 	{}
+0004 ( 811)		STOREC1		<-	V(1 '')+0 , R1(C)[0..255]	{}
+0005 ( 811)		CALLN		<-	V(21 'pch')+0 	{E}
+0006 ( 814)		STOREC1		<-	V(0 '')+0 , R2(C)[2..4]	{}
+0007 ( 812)		LEAI	R0(P)+0	<-	R0(PF)+0, CI:1	{}
+0008 ( 812)		STOREZ2		<-	V(6 '')+0 , R0(PF)	{}
+0009 ( 813)		BINOP1	R0(C)	<-	R1(CF)[0..255], CI:1	{}
+000a ( 813)		STOREZ1		<-	V(5 '')+0 , R0(CF)	{}
+000b ( 814)		CALLN		<-	V(14 'wait_frames')+0 	{E}
+000c ( 815)		CALLN	R0(C)	<-	V(13 'any_key')+0 	{}
+000d ( 815)		BRANCH		<-	R0(CF)	{}
+		==> 3
+		==> 1
+L3: <= D-1: (2)  P-1 C:/code/jonas/c64Demo/nineteen84.c
+0000 ( 807)		RET		<-		{}

@@ -1,22 +1,16 @@
 @echo off
 REM ============================================================
-REM  NINETEEN84 - C64 Demo Build Script
-REM  Requires oscar64 installed (Windows installer)
+REM  NINETEEN84 — build and launch
+REM  Double-click this from Explorer to build and run.
+REM  Uses "start" so VICE opens in its own window immediately.
 REM ============================================================
 
-SET OSCAR="%ProgramFiles(x86)%\oscar64\bin\oscar64.exe"
+SET OSCAR="%ProgramFiles%\oscar64\bin\oscar64.exe"
+SET SRC=nineteen84.c
+SET PRG=nineteen84.prg
 
-IF NOT EXIST %OSCAR% (
-    echo ERROR: oscar64 not found at %OSCAR%
-    echo Please install from: https://github.com/drmortalwombat/oscar64/releases
-    pause
-    exit /b 1
-)
-
-echo Building nineteen84.c ...
-
-REM --- Build only (produces nineteen84.prg) ---
-%OSCAR% -tm=c64 -O2 -o nineteen84.prg nineteen84.c
+echo Building %SRC% ...
+%OSCAR% -tm=c64 -O2 %SRC%
 
 IF ERRORLEVEL 1 (
     echo.
@@ -25,13 +19,8 @@ IF ERRORLEVEL 1 (
     exit /b 1
 )
 
-echo.
-echo Build successful: nineteen84.prg
-echo.
-echo To run in the built-in emulator:
-echo   oscar64 -tm=c64 -O2 -e nineteen84.c
-echo.
-echo To run in VICE:
-echo   x64sc.exe nineteen84.prg
-echo.
-pause
+echo Build OK: %PRG%
+echo Launching VICE...
+
+REM "start" launches VICE in its own window without blocking this script
+start x64sc.exe -autostart %PRG%
